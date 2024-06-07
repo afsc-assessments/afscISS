@@ -10,6 +10,12 @@
     <loc>/index.html</loc>
   </url>
   <url>
+    <loc>/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>/reference/afscISS-package.html</loc>
+  </url>
+  <url>
     <loc>/reference/get_bias.html</loc>
   </url>
   <url>
@@ -20,5 +26,8 @@
   </url>
   <url>
     <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pipe.html</loc>
   </url>
 </urlset>

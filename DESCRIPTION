@@ -1,6 +1,6 @@
 Package: afscISS
 Title: Retrieve composition data ISS
-Version: 0.0.0.9000
+Version: 1.0.0
 Authors@R: 
     c(person(given = "Pete", 
              family = "Hulson",
@@ -30,6 +30,7 @@ Imports:
     here,
     DBI,
     afscdata,
+    surveyISS,
     dplyr
 LazyData: true
 Depends: 
