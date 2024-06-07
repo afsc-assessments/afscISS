@@ -22,10 +22,10 @@ Imports:
     magrittr,
     tidytable,
     vroom,
-    data.table,
     here
 LazyData: true
 Depends: 
+    data.table,
     R (>= 3.5.0)
 Roxygen: list(markdown = TRUE)
 Suggests: 
