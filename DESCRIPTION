@@ -1,0 +1,42 @@
+Package: afscISS
+Title: Retrieve composition data ISS
+Version: 0.0.0.9000
+Authors@R: 
+    c(person(given = "Pete", 
+             family = "Hulson",
+             email = "pete.hulson@noaa.gov", 
+             role = c("aut", "cre"),
+           comment = c(ORCID = "000-0001-5651-2740")),
+      person(given = "Ben", 
+             family = "Williams",
+             email = "ben.williams@noaa.gov", 
+             role = "aut",
+           comment = c(ORCID = "000-0001-7295-2076")))
+Description: Retrieve bootstrap estimates of age/length/conditional age-at-length input sample size produced by the surveyISS package.
+License: MIT + file LICENSE
+URL: https://github.com/afsc-assessments/afscISS/, https://benwilliams-noaa.github.io/surveyISS/
+BugReports: https://github.com/afsc-assessments/afscISS/issues
+Encoding: UTF-8
+RoxygenNote: 7.3.1
+Remotes: 
+    git::https://github.com/afsc-assessments/afscdata
+    git::https://github.com/BenWilliams-NOAA/surveyISS
+Imports: 
+    magrittr,
+    psych,
+    purrr,
+    tidytable,
+    vroom,
+    here,
+    DBI,
+    afscdata,
+    dplyr
+LazyData: true
+Depends: 
+    data.table,
+    R (>= 3.5.0)
+Roxygen: list(markdown = TRUE)
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
