@@ -16,7 +16,7 @@ library(devtools)
 devtools::install_github("afsc-assessments/afscISS")
 ```
 
-### Website: [asfscISS](https://benwilliams-noaa.github.io/surveyISS/)
+### Website: [afscISS](https://afsc-assessments.github.io/afscISS/)
 
 ### NOAA README
 

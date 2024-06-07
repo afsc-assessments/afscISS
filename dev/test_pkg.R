@@ -3,27 +3,20 @@
 # load packages ----
 # devtools::unload('afscISS')
 # devtools::install_github("afsc-assessments/afscISS", force = TRUE)
-# now install surveyISS:
-# devtools::install_github("BenWilliams-NOAA/surveyISS", force = TRUE)
-library(surveyISS)
+library(afscISS)
 
-# set iterations ----
-# set number of desired bootstrap iterations (suggested here: 10 for testing, 500 for running)
-# iters = 500
-iters = 10
+# get iss for goa pcod ----
 
-# get data ----
-# if query = TRUE then will run data queries, if FALSE will read previously run data
-# set = TRUE if first time running, or if data has changed
+afscISS::get_ISS(species = 21720,
+                 region = 'goa',
+                 type = 'age',
+                 sex_cat = 4)
 
-data <- surveyISS::query_data_t3(query = FALSE)
 
-data_goa <- data$data_goa
-data_ai <- data$data_ai
-data_ebs <- data$data_ebs
-data_ebss <- data$data_ebss
-data_nbs <- data$data_nbs
-data_nebs <- data$data_nebs
+afscISS::get_ISS(region = 'goa',
+                 type = 'length',
+                 sex_cat = 4,
+                 spec_case = 'dr')
 
 # for testing run time
 if(iters < 100){
