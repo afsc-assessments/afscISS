@@ -1,6 +1,7 @@
 # script to obtain age/length input sample size from production run
 
 # load packages ----
+devtools::unload('afscISS')
 devtools::install_github("afsc-assessments/afscISS", force = TRUE)
 # now install surveyISS:
 # devtools::install_github("BenWilliams-NOAA/surveyISS", force = TRUE)

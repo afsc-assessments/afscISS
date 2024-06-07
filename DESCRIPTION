@@ -14,7 +14,7 @@ Authors@R:
            comment = c(ORCID = "000-0001-7295-2076")))
 Description: Retrieve bootstrap estimates of age/length/conditional age-at-length input sample size produced by the surveyISS package.
 License: MIT + file LICENSE
-URL: https://github.com/afsc-assessments/afscISS/, https://benwilliams-noaa.github.io/surveyISS/
+URL: https://github.com/afsc-assessments/afscISS/, https://afsc-assessments.github.io/afscISS/
 BugReports: https://github.com/afsc-assessments/afscISS/issues
 Encoding: UTF-8
 RoxygenNote: 7.3.1
