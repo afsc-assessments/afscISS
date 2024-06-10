@@ -13,6 +13,33 @@ afscISS::get_ISS(species = 21720,
                  sex_cat = 4)
 
 
+species = 21720
+region = 'goa'
+type = 'age'
+sex_cat = 4
+spec_case = NULL
+
+if(type == 'age'){
+  if(is.null(spec_case)){
+    vroom::vroom(here::here('output', region, 'prod_iss_ag.csv')) %>% 
+      tidytable::filter(species_code %in% species,
+                        sex %in% sex_cat)
+  } else{
+    if(spec_case %in% c('bsre', 'dr', 'rebs')){
+      vroom::vroom(here::here('output', region, paste0('prod_iss_ag_', spec_case, '.csv'))) %>% 
+        tidytable::filter(sex %in% sex_cat)
+    } else{
+      vroom::vroom(here::here('output', region, paste0('prod_iss_ag_', spec_case, '.csv'))) %>% 
+        tidytable::filter(species_code %in% species,
+                          sex %in% sex_cat)
+    }
+  }
+}
+
+
+
+
+
 afscISS::get_ISS(region = 'goa',
                  type = 'length',
                  sex_cat = 4,
