@@ -2,4 +2,10 @@
 .Rhistory
 .RData
 .Ruserdata
-data/
+output/
+data/ai/
+data/ebs/
+data/ebs_slope/
+data/goa/
+data/nbs/
+data/nebs/

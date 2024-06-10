@@ -55,6 +55,7 @@ surveyISS::srvy_iss(iters = iters,
                     al_var_ann = TRUE, 
                     age_err = TRUE,
                     region = 'goa', 
+                    save_interm = TRUE,
                     save_stats = TRUE,
                     save = 'prod')
 
@@ -69,6 +70,7 @@ surveyISS::srvy_iss_caal(iters = iters,
                          al_var_ann = TRUE, 
                          age_err = TRUE,
                          region = 'goa', 
+                         save_interm = TRUE,
                          save_stats = TRUE,
                          save = 'prod')
 
@@ -86,6 +88,7 @@ surveyISS::srvy_iss_goa_w_c_e(iters = iters,
                               al_var_ann = TRUE,
                               age_err = TRUE,
                               region = 'goa', 
+                              save_interm = TRUE,
                               save_stats = TRUE,
                               save = 'prod')
 
@@ -103,6 +106,7 @@ surveyISS::srvy_iss_goa_wc_e(iters = iters,
                              al_var_ann = TRUE,
                              age_err = TRUE,
                              region = 'goa', 
+                             save_interm = TRUE,
                              save_stats = TRUE,
                              save = 'prod')
 
@@ -127,7 +131,8 @@ surveyISS::srvy_iss_w140(iters = iters,
                          al_var = TRUE, 
                          al_var_ann = TRUE, 
                          age_err = TRUE,
-                         region = 'goa',  
+                         region = 'goa',
+                         save_interm = TRUE,  
                          save_stats = TRUE,
                          save = 'prod')
 
@@ -153,7 +158,8 @@ surveyISS::srvy_iss_goa_cmplx(iters = iters,
                               age_err = TRUE,
                               cmplx_code = 3005012,
                               cmplx = 'rebs',
-                              region = 'goa', 
+                              region = 'goa',
+                              save_interm = TRUE, 
                               save_stats = TRUE, 
                               save = 'prod')
 
@@ -179,7 +185,8 @@ surveyISS::srvy_iss_goa_cmplx(iters = iters,
                               age_err = TRUE,
                               cmplx_code = 301502,
                               cmplx = 'dr',
-                              region = 'goa',  
+                              region = 'goa',
+                              save_interm = TRUE,  
                               save_stats = TRUE, 
                               save = 'prod')
 
@@ -208,6 +215,7 @@ surveyISS::srvy_iss(iters = iters,
                     al_var_ann = TRUE, 
                     age_err = TRUE,
                     region = 'ai',  
+                    save_interm = TRUE,
                     save_stats = TRUE, 
                     save = 'prod')
 
@@ -222,6 +230,7 @@ surveyISS::srvy_iss_caal(iters = iters,
                          al_var_ann = TRUE, 
                          age_err = TRUE,
                          region = 'ai', 
+                         save_interm = TRUE,
                          save_stats = TRUE,
                          save = 'prod')
 
@@ -238,7 +247,8 @@ surveyISS::srvy_iss_ai_subreg(iters = iters,
                               al_var = TRUE, 
                               al_var_ann = TRUE, 
                               age_err = TRUE,
-                              region = 'ai',   
+                              region = 'ai',  
+                              save_interm = TRUE, 
                               save_stats = TRUE, 
                               save = 'prod')
 
@@ -266,6 +276,7 @@ surveyISS::srvy_iss_ai_cmplx(iters = iters,
                              cmplx_code = 3005012,
                              cmplx = 'bsre',
                              region = 'ai',  
+                             save_interm = TRUE,
                              save_stats = TRUE,  
                              save = 'prod')
 
@@ -283,7 +294,8 @@ surveyISS::srvy_iss(iters = iters,
                     al_var = TRUE, 
                     al_var_ann = TRUE, 
                     age_err = TRUE,
-                    region = 'ebs',   
+                    region = 'ebs',  
+                    save_interm = TRUE, 
                     save_stats = TRUE,
                     save = 'prod')
 
@@ -298,6 +310,7 @@ surveyISS::srvy_iss_caal(iters = iters,
                          al_var_ann = TRUE, 
                          age_err = TRUE,
                          region = 'ebs', 
+                         save_interm = TRUE,
                          save_stats = TRUE,
                          save = 'prod')
 
@@ -315,7 +328,8 @@ surveyISS::srvy_iss(iters = iters,
                     al_var = TRUE, 
                     al_var_ann = TRUE, 
                     age_err = TRUE,
-                    region = 'ebs_slope',   
+                    region = 'ebs_slope', 
+                    save_interm = TRUE,  
                     save_stats = TRUE,
                     save = 'prod')
 
@@ -330,6 +344,7 @@ surveyISS::srvy_iss_caal(iters = iters,
                          al_var_ann = TRUE, 
                          age_err = TRUE,
                          region = 'ebs_slope', 
+                         save_interm = TRUE,
                          save_stats = TRUE,
                          save = 'prod')
 
@@ -348,7 +363,8 @@ surveyISS::srvy_iss(iters = iters,
                     al_var = TRUE, 
                     al_var_ann = TRUE, 
                     age_err = TRUE,
-                    region = 'nebs',    
+                    region = 'nebs',   
+                    save_interm = TRUE, 
                     save_stats = TRUE,
                     save = 'prod')
 
@@ -363,6 +379,7 @@ surveyISS::srvy_iss_caal(iters = iters,
                          al_var_ann = TRUE, 
                          age_err = TRUE,
                          region = 'nebs', 
+                         save_interm = TRUE,
                          save_stats = TRUE,
                          save = 'prod')
 
