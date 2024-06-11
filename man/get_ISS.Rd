@@ -27,5 +27,5 @@ get_ISS(
 a dataframe of composition ISS
 }
 \description{
-Function that retrieves composition ISS results for AFSC stock assessents
+Function that retrieves composition ISS results for AFSC stock assessments
 }

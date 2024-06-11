@@ -22,8 +22,12 @@ Imports:
     magrittr,
     tidytable,
     vroom,
+    purrr,
+    stringr,
+    usethis,
     here
 LazyData: true
+LazyDataCompression: xz
 Depends: 
     data.table,
     R (>= 3.5.0)
