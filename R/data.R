@@ -44,7 +44,7 @@ pkg_dta <- function(append = TRUE) {
     
     data_iss <- list(ai, ebs, ebs_slope, goa, nebs)
     names(data_iss) <- c('ai', 'ebs', 'ebs_slope', 'goa', 'nebs')
-    usethis::use_data(data_iss)
+    usethis::use_data(data_iss, overwrite = TRUE)
   }
 
 }
