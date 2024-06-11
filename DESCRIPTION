@@ -29,7 +29,6 @@ Imports:
 LazyData: true
 LazyDataCompression: xz
 Depends: 
-    data.table,
     R (>= 3.5.0)
 Roxygen: list(markdown = TRUE)
 Suggests: 

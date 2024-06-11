@@ -7,16 +7,12 @@ library(afscISS)
 
 # get iss for goa pcod ----
 
+t <- afscISS::get_ISS(species = c(21720),
+                      region = 'goa',
+                      type = 'age',
+                      sex_cat = c(4))
 
-region = 'goa'
-
-data_iss[['ai']]
-
-afscISS::get_ISS(species = 21720,
-                 region = 'goa',
-                 type = 'age',
-                 sex_cat = 4)
-
+t <- afscISS::get_ISS()
 
 species = 21720
 region = 'goa'
@@ -26,15 +22,15 @@ spec_case = NULL
 
 if(type == 'age'){
   if(is.null(spec_case)){
-    vroom::vroom(here::here('output', region, 'prod_iss_ag.csv')) %>% 
+    data_iss[[region]]$prod_iss_ag %>% 
       tidytable::filter(species_code %in% species,
                         sex %in% sex_cat)
   } else{
     if(spec_case %in% c('bsre', 'dr', 'rebs')){
-      vroom::vroom(here::here('output', region, paste0('prod_iss_ag_', spec_case, '.csv'))) %>% 
+      data_iss[[region]][[paste0('prod_iss_ag_', spec_case)]] %>% 
         tidytable::filter(sex %in% sex_cat)
     } else{
-      vroom::vroom(here::here('output', region, paste0('prod_iss_ag_', spec_case, '.csv'))) %>% 
+      data_iss[[region]][[paste0('prod_iss_ag_', spec_case)]] %>% 
         tidytable::filter(species_code %in% species,
                           sex %in% sex_cat)
     }
