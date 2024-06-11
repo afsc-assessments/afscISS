@@ -22,15 +22,15 @@ get_ISS <- function(species = 21720,
   # age comp iss ----
   if(type == 'age'){
     if(is.null(spec_case)){
-      vroom::vroom(here::here('output', region, 'prod_iss_ag.csv')) %>% 
+      data_iss[[region]]$prod_iss_ag %>% 
         tidytable::filter(species_code %in% species,
                           sex %in% sex_cat)
     } else{
       if(spec_case %in% c('bsre', 'dr', 'rebs')){
-        vroom::vroom(here::here('output', region, paste0('prod_iss_ag_', spec_case, '.csv'))) %>% 
+        data_iss[[region]][[paste0('prod_iss_ag_', spec_case)]] %>% 
           tidytable::filter(sex %in% sex_cat)
       } else{
-        vroom::vroom(here::here('output', region, paste0('prod_iss_ag_', spec_case, '.csv'))) %>% 
+        data_iss[[region]][[paste0('prod_iss_ag_', spec_case)]] %>% 
           tidytable::filter(species_code %in% species,
                             sex %in% sex_cat)
       }
@@ -40,26 +40,28 @@ get_ISS <- function(species = 21720,
   # length comp iss ----
   if(type == 'length'){
     if(is.null(spec_case)){
-      vroom::vroom(here::here('output', region, 'prod_iss_ln.csv')) %>% 
+      data_iss[[region]]$prod_iss_ln %>% 
         tidytable::filter(species_code %in% species,
                           sex %in% sex_cat)
     } else{
       if(spec_case %in% c('bsre', 'dr', 'rebs')){
-        vroom::vroom(here::here('output', region, paste0('prod_iss_ln_', spec_case, '.csv'))) %>% 
+        data_iss[[region]][[paste0('prod_iss_ln_', spec_case)]] %>% 
           tidytable::filter(sex %in% sex_cat)
       } else{
-        vroom::vroom(here::here('output', region, paste0('prod_iss_ln_', spec_case, '.csv'))) %>% 
+        data_iss[[region]][[paste0('prod_iss_ln_', spec_case)]] %>% 
           tidytable::filter(species_code %in% species,
                             sex %in% sex_cat)
       }
     }
   }
-  
+
   # caal iss ----
   if(type == 'caal'){
-    vroom::vroom(here::here('output', region, 'prod_iss_caal.csv')) %>% 
-      tidytable::filter(species_code %in% species,
-                        sex %in% sex_cat)
+    if(is.null(spec_case)){
+      data_iss[[region]]$prod_iss_caal %>% 
+        tidytable::filter(species_code %in% species,
+                          sex %in% sex_cat)
+    }
   }
 
 }

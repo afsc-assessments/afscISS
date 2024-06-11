@@ -7,6 +7,11 @@ library(afscISS)
 
 # get iss for goa pcod ----
 
+
+region = 'goa'
+
+data_iss[['ai']]
+
 afscISS::get_ISS(species = 21720,
                  region = 'goa',
                  type = 'age',
