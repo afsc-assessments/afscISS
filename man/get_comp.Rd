@@ -27,5 +27,5 @@ get_comp(
 a dataframe of age-length pop'n numbers or conditional age-at-length
 }
 \description{
-Function that retrieves age and length pop'n numbers and conditional age-at-length for AFSC stock assessents
+Function that retrieves age and length pop'n numbers and conditional age-at-length for AFSC stock assessments
 }
