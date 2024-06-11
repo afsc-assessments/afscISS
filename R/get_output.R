@@ -1,7 +1,7 @@
 #' function to get stock-specific ISS results
 #' 
 #' @description
-#' Function that retrieves composition ISS results for AFSC stock assessents
+#' Function that retrieves composition ISS results for AFSC stock assessments
 #' 
 #' @param species AFSC species code (default = 21720, pacific cod)
 #' @param region survey region. options are 'ai', 'ebs', 'ebs_slope', 'goa', and 'nebs' (default = 'goa')
@@ -68,7 +68,7 @@ get_ISS <- function(species = 21720,
 #' function to get stock-specific composition results
 #' 
 #' @description
-#' Function that retrieves age and length pop'n numbers and conditional age-at-length for AFSC stock assessents
+#' Function that retrieves age and length pop'n numbers and conditional age-at-length for AFSC stock assessments
 #' 
 #' @param species AFSC species code (default = 21720, pacific cod)
 #' @param region survey region. options are 'ai', 'ebs', 'ebs_slope', 'goa', and 'nebs' (default = 'goa')
