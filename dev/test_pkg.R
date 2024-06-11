@@ -1,18 +1,20 @@
 # script to obtain age/length input sample size from production run
 
 # load packages ----
-# devtools::unload('afscISS')
-# devtools::install_github("afsc-assessments/afscISS", force = TRUE)
+devtools::unload('afscISS')
+devtools::install_github("afsc-assessments/afscISS", force = TRUE)
 library(afscISS)
 
 # get iss for goa pcod ----
 
-t <- afscISS::get_ISS(species = c(21720),
-                      region = 'goa',
-                      type = 'age',
-                      sex_cat = c(4))
+afscISS::get_ISS(species = 21720,
+                 region = 'goa',
+                 type = 'age',
+                 sex_cat = 4)
 
-t <- afscISS::get_ISS()
+afscISS::get_ISS()
+
+afscISS::pkg_dta(append = FALSE)
 
 species = 21720
 region = 'goa'
