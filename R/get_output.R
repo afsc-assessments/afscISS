@@ -22,9 +22,10 @@ get_ISS <- function(species = 21720,
   # age comp iss ----
   if(type == 'age'){
     if(is.null(spec_case)){
-      data_iss[[region]]$prod_iss_ag %>% 
-        tidytable::filter(species_code %in% species,
-                          sex %in% sex_cat)
+      data_iss[[region]]$prod_iss_ag
+      # %>% 
+      #   tidytable::filter(species_code %in% species,
+      #                     sex %in% sex_cat)
     } else{
       if(spec_case %in% c('bsre', 'dr', 'rebs')){
         data_iss[[region]][[paste0('prod_iss_ag_', spec_case)]] %>% 
@@ -57,11 +58,9 @@ get_ISS <- function(species = 21720,
 
   # caal iss ----
   if(type == 'caal'){
-    if(is.null(spec_case)){
-      data_iss[[region]]$prod_iss_caal %>% 
-        tidytable::filter(species_code %in% species,
-                          sex %in% sex_cat)
-    }
+    data_iss[[region]]$prod_iss_caal %>% 
+      tidytable::filter(species_code %in% species,
+                        sex %in% sex_cat)
   }
 
 }
