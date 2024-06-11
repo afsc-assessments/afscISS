@@ -22,7 +22,7 @@ get_ISS <- function(species = 21720,
   # age comp iss ----
   # if(type == 'age'){
   #   if(is.null(spec_case)){
-      data_iss[[region]]$prod_iss_ag %>%
+  tidytable::as_tidytable(data_iss[[region]]$prod_iss_ag) %>%
         tidytable::filter(species_code %in% species,
                           sex %in% sex_cat)
   #   } else{
