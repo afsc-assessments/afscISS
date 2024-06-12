@@ -143,7 +143,7 @@ get_comp <- function(species = 21720,
 #' 
 #' @param species AFSC species code (default = 21720, pacific cod)
 #' @param region survey region. options are 'ai', 'ebs', 'ebs_slope', 'goa', and 'nebs' (default = 'goa')
-#' @param type type of composition for which ISS desired. options are 'age', 'length', and 'caal'
+#' @param comp type of composition for which ISS desired. options are 'age', 'length', and 'caal'
 #' @param sex_cat sex category for which composition ISS desired. options are 0, 1, 2, 12, and 4 (default = 4)
 #' @param spec_case description string if getting ISS for special case. options are 'ai_subreg', 'bsre', 'dr', 'rebs', 'w_c_egoa', 'w140', 'wc_egoa' (default = NULL)
 #'
@@ -153,51 +153,53 @@ get_comp <- function(species = 21720,
 #'
 get_bias <- function(species = 21720,
                      region = 'goa',
-                     type = 'age',
+                     comp = 'age',
                      sex_cat = 4,
                      spec_case = NULL) {
   
-  # age pop'n ----
-  if(type == 'age'){
+  # age bias ----
+  if(comp == 'age'){
     if(is.null(spec_case)){
-      vroom::vroom(here::here('output', region, 'prod_bias_age.csv')) %>% 
+      tidytable::as_tidytable(data_iss[[region]]$prod_bias_age) %>%
         tidytable::filter(species_code %in% species,
-                          sex %in% sex_cat)
+                          sex %in% sex_cat) -> res
     } else{
       if(spec_case %in% c('bsre', 'dr', 'rebs')){
-        vroom::vroom(here::here('output', region, paste0('prod_bias_age_', spec_case, '.csv'))) %>% 
-          tidytable::filter(sex %in% sex_cat)
+        tidytable::as_tidytable(data_iss[[region]][[paste0('prod_bias_age_', spec_case)]]) %>%
+          tidytable::filter(sex %in% sex_cat) -> res
       } else{
-        vroom::vroom(here::here('output', region, paste0('prod_bias_age_', spec_case, '.csv'))) %>% 
+        tidytable::as_tidytable(data_iss[[region]][[paste0('prod_bias_age_', spec_case)]]) %>%
           tidytable::filter(species_code %in% species,
-                            sex %in% sex_cat)
+                            sex %in% sex_cat) -> res
       }
     }
   }
   
-  # length comp iss ----
-  if(type == 'length'){
+  # length bias ----
+  if(comp == 'length'){
     if(is.null(spec_case)){
-      vroom::vroom(here::here('output', region, 'prod_bias_length.csv')) %>% 
+      tidytable::as_tidytable(data_iss[[region]]$prod_bias_length) %>%
         tidytable::filter(species_code %in% species,
-                          sex %in% sex_cat)
+                          sex %in% sex_cat) -> res
     } else{
       if(spec_case %in% c('bsre', 'dr', 'rebs')){
-        vroom::vroom(here::here('output', region, paste0('prod_bias_length_', spec_case, '.csv'))) %>% 
-          tidytable::filter(sex %in% sex_cat)
+        tidytable::as_tidytable(data_iss[[region]][[paste0('prod_bias_length_', spec_case)]]) %>%
+          tidytable::filter(sex %in% sex_cat) -> res
       } else{
-        vroom::vroom(here::here('output', region, paste0('prod_bias_length_', spec_case, '.csv'))) %>% 
+        tidytable::as_tidytable(data_iss[[region]][[paste0('prod_bias_length_', spec_case)]]) %>%
           tidytable::filter(species_code %in% species,
-                            sex %in% sex_cat)
+                            sex %in% sex_cat) -> res
       }
     }
-  }
+  } 
   
-  # caal iss ----
-  if(type == 'caal'){
-    vroom::vroom(here::here('output', region, 'prod_bias_caal.csv')) %>% 
+  # caal bias ----
+  if(comp == 'caal'){
+    tidytable::as_tidytable(data_iss[[region]]$prod_bias_caal) %>%
       tidytable::filter(species_code %in% species,
-                        sex %in% sex_cat)
+                        sex %in% sex_cat) -> res
   }
+  
+  res
   
 }
