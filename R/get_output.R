@@ -19,41 +19,50 @@ get_ISS <- function(species = 21720,
                     sex_cat = 4,
                     spec_case = NULL) {
   
-  if(comp == 'age'){ # age comp iss ----
+  # age comp iss ----
+  if(comp == 'age'){
     if(is.null(spec_case)){
       tidytable::as_tidytable(data_iss[[region]]$prod_iss_ag) %>%
         tidytable::filter(species_code %in% species,
-                          sex %in% sex_cat)
+                          sex %in% sex_cat) -> res
     } else{
       if(spec_case %in% c('bsre', 'dr', 'rebs')){
         tidytable::as_tidytable(data_iss[[region]][[paste0('prod_iss_ag_', spec_case)]]) %>%
-          tidytable::filter(sex %in% sex_cat)
+          tidytable::filter(sex %in% sex_cat) -> res
       } else{
         tidytable::as_tidytable(data_iss[[region]][[paste0('prod_iss_ag_', spec_case)]]) %>%
           tidytable::filter(species_code %in% species,
-                            sex %in% sex_cat)
+                            sex %in% sex_cat) -> res
       }
     }
-  } else if(comp == 'length'){ # length comp iss ----
+  }
+  
+  # length comp iss ----
+  if(comp == 'length'){
     if(is.null(spec_case)){
       tidytable::as_tidytable(data_iss[[region]]$prod_iss_ln) %>%
         tidytable::filter(species_code %in% species,
-                          sex %in% sex_cat)
+                          sex %in% sex_cat) -> res
     } else{
       if(spec_case %in% c('bsre', 'dr', 'rebs')){
         tidytable::as_tidytable(data_iss[[region]][[paste0('prod_iss_ln_', spec_case)]]) %>%
-          tidytable::filter(sex %in% sex_cat)
+          tidytable::filter(sex %in% sex_cat) -> res
       } else{
         tidytable::as_tidytable(data_iss[[region]][[paste0('prod_iss_ln_', spec_case)]]) %>%
           tidytable::filter(species_code %in% species,
-                            sex %in% sex_cat)
+                            sex %in% sex_cat) -> res
       }
     }
-  } else if(comp == 'caal'){ # caal iss ----
+  } 
+  
+  # caal iss ----
+  if(comp == 'caal'){
     tidytable::as_tidytable(data_iss[[region]]$prod_iss_caal) %>%
       tidytable::filter(species_code %in% species,
-                        sex %in% sex_cat)
+                        sex %in% sex_cat) -> res
   }
+  
+  res
   
 }
 
