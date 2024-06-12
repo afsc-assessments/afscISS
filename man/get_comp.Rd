@@ -7,7 +7,7 @@
 get_comp(
   species = 21720,
   region = "goa",
-  type = "age",
+  comp = "age",
   sex_cat = 4,
   spec_case = NULL
 )
@@ -17,7 +17,7 @@ get_comp(
 
 \item{region}{survey region. options are 'ai', 'ebs', 'ebs_slope', 'goa', and 'nebs' (default = 'goa')}
 
-\item{type}{type of composition for which ISS desired. options are 'age', 'length', and 'caal'}
+\item{comp}{type of composition for which ISS desired. options are 'age', 'length', and 'caal'}
 
 \item{sex_cat}{sex category for which composition ISS desired. options are 0, 1, 2, 12, and 4 (default = 4)}
 
