@@ -19,8 +19,7 @@ get_ISS <- function(species = 21720,
                     sex_cat = 4,
                     spec_case = NULL) {
   
-  # age comp iss ----
-  if(comp == 'age'){
+  if(comp == 'age'){ # age comp iss ----
     if(is.null(spec_case)){
       tidytable::as_tidytable(data_iss[[region]]$prod_iss_ag) %>%
         tidytable::filter(species_code %in% species,
@@ -35,10 +34,7 @@ get_ISS <- function(species = 21720,
                             sex %in% sex_cat)
       }
     }
-  }
-
-  # # length comp iss ----
-  if(comp == 'length'){
+  } else if(comp == 'length'){ # length comp iss ----
     if(is.null(spec_case)){
       tidytable::as_tidytable(data_iss[[region]]$prod_iss_ln) %>%
         tidytable::filter(species_code %in% species,
@@ -53,15 +49,12 @@ get_ISS <- function(species = 21720,
                             sex %in% sex_cat)
       }
     }
-  }
-
-  # # caal iss ----
-  if(comp == 'caal'){
+  } else if(comp == 'caal'){ # caal iss ----
     tidytable::as_tidytable(data_iss[[region]]$prod_iss_caal) %>%
       tidytable::filter(species_code %in% species,
                         sex %in% sex_cat)
   }
-
+  
 }
 
 

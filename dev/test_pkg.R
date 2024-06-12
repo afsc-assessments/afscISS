@@ -1,7 +1,7 @@
 # script to obtain age/length input sample size from production run
 
 # load packages ----
-# devtools::unload('afscISS')
+devtools::unload('afscISS')
 devtools::install_github("afsc-assessments/afscISS", force = TRUE)
 library(afscISS)
 
@@ -19,14 +19,14 @@ afscISS::get_ISS(species = 21720,
 
 afscISS::get_ISS(species = 21720,
                  region = 'goa',
-                 comp = 'age',
+                 comp = 'length',
                  sex_cat = 4,
                  spec_case = 'w_c_egoa')
 
 
 afscISS::get_ISS(species = 21720,
                  region = 'ai',
-                 comp = 'age',
+                 comp = 'length',
                  sex_cat = 4,
                  spec_case = 'ai_subreg')
 
