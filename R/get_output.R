@@ -5,7 +5,7 @@
 #' 
 #' @param species AFSC species code (default = 21720, pacific cod)
 #' @param region survey region. options are 'ai', 'ebs', 'ebs_slope', 'goa', and 'nebs' (default = 'goa')
-#' @param type type of composition for which ISS desired. options are 'age', 'length', and 'caal'
+#' @param comp type of composition for which ISS desired. options are 'age', 'length', and 'caal'
 #' @param sex_cat sex category for which composition ISS desired. options are 0, 1, 2, 12, and 4 (default = 4)
 #' @param spec_case description string if getting ISS for special case. options are 'ai_subreg', 'bsre', 'dr', 'rebs', 'w_c_egoa', 'w140', 'wc_egoa' (default = NULL)
 #'
@@ -15,16 +15,16 @@
 #'
 get_ISS <- function(species = 21720,
                     region = 'goa',
-                    type = 'age',
+                    comp = 'age',
                     sex_cat = 4,
                     spec_case = NULL) {
   
   # age comp iss ----
-  if(type == 'age'){
+  if(comp == 'age'){
     if(is.null(spec_case)){
-  tidytable::as_tidytable(data_iss[[region]]$prod_iss_ag) %>%
-    tidytable::filter(species_code %in% species,
-                      sex %in% sex_cat)
+      tidytable::as_tidytable(data_iss[[region]]$prod_iss_ag) %>%
+        tidytable::filter(species_code %in% species,
+                          sex %in% sex_cat)
     } else{
       if(spec_case %in% c('bsre', 'dr', 'rebs')){
         tidytable::as_tidytable(data_iss[[region]][[paste0('prod_iss_ag_', spec_case)]]) %>%
@@ -38,7 +38,7 @@ get_ISS <- function(species = 21720,
   }
 
   # # length comp iss ----
-  if(type == 'length'){
+  if(comp == 'length'){
     if(is.null(spec_case)){
       tidytable::as_tidytable(data_iss[[region]]$prod_iss_ln) %>%
         tidytable::filter(species_code %in% species,
@@ -56,7 +56,7 @@ get_ISS <- function(species = 21720,
   }
 
   # # caal iss ----
-  if(type == 'caal'){
+  if(comp == 'caal'){
     tidytable::as_tidytable(data_iss[[region]]$prod_iss_caal) %>%
       tidytable::filter(species_code %in% species,
                         sex %in% sex_cat)
