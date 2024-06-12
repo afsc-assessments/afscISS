@@ -25,12 +25,12 @@ Imports:
     purrr,
     stringr,
     usethis,
+    data.table,
     here
 LazyData: true
 LazyDataCompression: xz
 Depends: 
-    R (>= 3.5.0),
-    data.table
+    R (>= 3.5.0)
 Roxygen: list(markdown = TRUE)
 Suggests: 
     knitr,
