@@ -2,8 +2,10 @@
 
 export("%>%")
 export(get_ISS)
+export(get_RSS)
 export(get_bias)
 export(get_comp)
+export(get_res_comp)
 export(pkg_dta)
 import(data.table)
 importFrom(magrittr,"%>%")

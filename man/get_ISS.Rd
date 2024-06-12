@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_output.R
 \name{get_ISS}
 \alias{get_ISS}
-\title{function to get stock-specific ISS results}
+\title{Get stock-specific ISS results}
 \usage{
 get_ISS(
   species = 21720,
@@ -27,5 +27,5 @@ get_ISS(
 a dataframe of composition ISS
 }
 \description{
-Function that retrieves composition ISS results for AFSC stock assessments
+Function that retrieves composition Input Sample Size results for AFSC stock assessments
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_output.R
 \name{get_comp}
 \alias{get_comp}
-\title{function to get stock-specific composition results}
+\title{Get stock-specific composition results}
 \usage{
 get_comp(
   species = 21720,

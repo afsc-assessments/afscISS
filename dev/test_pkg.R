@@ -5,101 +5,51 @@ devtools::unload('afscISS')
 devtools::install_github("afsc-assessments/afscISS", force = TRUE)
 library(afscISS)
 
-# get iss for goa pcod ----
+# set inputs ----
 
-afscISS::get_ISS(species = 21720,
-                 region = 'goa',
-                 comp = 'age',
-                 sex_cat = 4)
+species = 21720
+region = 'goa'
+comp = 'age'
+sex_cat = 4
+spec_case = NULL
 
-afscISS::get_ISS(species = 21720,
-                 region = 'goa',
-                 comp = 'length',
-                 sex_cat = 4)
-
-afscISS::get_ISS(species = 21720,
-                 region = 'goa',
-                 comp = 'length',
-                 sex_cat = 4,
-                 spec_case = 'w_c_egoa')
+# test get iss ----
+afscISS::get_ISS(species,
+                 region,
+                 comp,
+                 sex_cat,
+                 spec_case)
 
 
-afscISS::get_ISS(species = 21720,
-                 region = 'ai',
-                 comp = 'length',
-                 sex_cat = 4,
-                 spec_case = 'ai_subreg')
+# test get comps ----
+afscISS::get_comp(species,
+                  region,
+                  comp,
+                  sex_cat,
+                  spec_case)
 
+# test get bias ----
+afscISS::get_bias(species,
+                  region,
+                  comp,
+                  sex_cat,
+                  spec_case)
 
-afscISS::get_ISS(species = 21720,
-                 region = 'goa',
-                 comp = 'caal',
-                 sex_cat = 0)
+# test get rss ----
+afscISS::get_RSS(species,
+                 region,
+                 comp,
+                 sex_cat,
+                 spec_case)
 
+# test get resampled comps ----
+afscISS::get_res_comp(species,
+                      region,
+                      comp,
+                      sex_cat,
+                      spec_case)
 
-# get comps for goa pcod ----
-
-afscISS::get_comp(species = 21720,
-                  region = 'goa',
-                  comp = 'age',
-                  sex_cat = 4)
-
-afscISS::get_comp(species = 21720,
-                  region = 'goa',
-                  comp = 'length',
-                  sex_cat = 4)
-
-afscISS::get_comp(species = 21720,
-                  region = 'goa',
-                  comp = 'length',
-                  sex_cat = 4,
-                  spec_case = 'w_c_egoa')
-
-
-afscISS::get_comp(species = 21720,
-                  region = 'ai',
-                  comp = 'length',
-                  sex_cat = 4,
-                  spec_case = 'ai_subreg')
-
-
-afscISS::get_comp(species = 21720,
-                  region = 'goa',
-                  comp = 'caal',
-                  sex_cat = 0)
-
-# get bias for goa pcod ----
-
-afscISS::get_bias(species = 21720,
-                  region = 'goa',
-                  comp = 'age',
-                  sex_cat = 4)
-
-afscISS::get_bias(species = 21720,
-                  region = 'goa',
-                  comp = 'length',
-                  sex_cat = 4)
-
-afscISS::get_bias(species = 21720,
-                  region = 'goa',
-                  comp = 'length',
-                  sex_cat = 4,
-                  spec_case = 'w_c_egoa')
-
-
-afscISS::get_bias(species = 21720,
-                  region = 'ai',
-                  comp = 'length',
-                  sex_cat = 4,
-                  spec_case = 'ai_subreg')
-
-
-afscISS::get_bias(species = 21720,
-                  region = 'goa',
-                  comp = 'caal',
-                  sex_cat = 0)
-
-
-
-
+# notes:
+# caal doesn't have sex cat 4
+# resampled comps doesn't have sex cat 4 either...
 
