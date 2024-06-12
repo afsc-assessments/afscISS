@@ -20,47 +20,47 @@ get_ISS <- function(species = 21720,
                     spec_case = NULL) {
   
   # age comp iss ----
-  # if(type == 'age'){
-  #   if(is.null(spec_case)){
+  if(type == 'age'){
+    if(is.null(spec_case)){
   tidytable::as_tidytable(data_iss[[region]]$prod_iss_ag) %>%
     tidytable::filter(species_code %in% species,
                       sex %in% sex_cat)
-  #   } else{
-  #     if(spec_case %in% c('bsre', 'dr', 'rebs')){
-  #       data_iss[[region]][[paste0('prod_iss_ag_', spec_case)]] %>% 
-  #         tidytable::filter(sex %in% sex_cat)
-  #     } else{
-  #       data_iss[[region]][[paste0('prod_iss_ag_', spec_case)]] %>% 
-  #         tidytable::filter(species_code %in% species,
-  #                           sex %in% sex_cat)
-  #     }
-  #   }
-  # }
-  
+    } else{
+      if(spec_case %in% c('bsre', 'dr', 'rebs')){
+        tidytable::as_tidytable(data_iss[[region]][[paste0('prod_iss_ag_', spec_case)]]) %>%
+          tidytable::filter(sex %in% sex_cat)
+      } else{
+        tidytable::as_tidytable(data_iss[[region]][[paste0('prod_iss_ag_', spec_case)]]) %>%
+          tidytable::filter(species_code %in% species,
+                            sex %in% sex_cat)
+      }
+    }
+  }
+
   # # length comp iss ----
-  # if(type == 'length'){
-  #   if(is.null(spec_case)){
-  #     data_iss[[region]]$prod_iss_ln %>% 
-  #       tidytable::filter(species_code %in% species,
-  #                         sex %in% sex_cat)
-  #   } else{
-  #     if(spec_case %in% c('bsre', 'dr', 'rebs')){
-  #       data_iss[[region]][[paste0('prod_iss_ln_', spec_case)]] %>% 
-  #         tidytable::filter(sex %in% sex_cat)
-  #     } else{
-  #       data_iss[[region]][[paste0('prod_iss_ln_', spec_case)]] %>% 
-  #         tidytable::filter(species_code %in% species,
-  #                           sex %in% sex_cat)
-  #     }
-  #   }
-  # }
-  # 
+  if(type == 'length'){
+    if(is.null(spec_case)){
+      tidytable::as_tidytable(data_iss[[region]]$prod_iss_ln) %>%
+        tidytable::filter(species_code %in% species,
+                          sex %in% sex_cat)
+    } else{
+      if(spec_case %in% c('bsre', 'dr', 'rebs')){
+        tidytable::as_tidytable(data_iss[[region]][[paste0('prod_iss_ln_', spec_case)]]) %>%
+          tidytable::filter(sex %in% sex_cat)
+      } else{
+        tidytable::as_tidytable(data_iss[[region]][[paste0('prod_iss_ln_', spec_case)]]) %>%
+          tidytable::filter(species_code %in% species,
+                            sex %in% sex_cat)
+      }
+    }
+  }
+
   # # caal iss ----
-  # if(type == 'caal'){
-  #   data_iss[[region]]$prod_iss_caal %>% 
-  #     tidytable::filter(species_code %in% species,
-  #                       sex %in% sex_cat)
-  # }
+  if(type == 'caal'){
+    tidytable::as_tidytable(data_iss[[region]]$prod_iss_caal) %>%
+      tidytable::filter(species_code %in% species,
+                        sex %in% sex_cat)
+  }
 
 }
 
