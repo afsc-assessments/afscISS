@@ -7,7 +7,7 @@
 \format{
 A list
 \describe{
-A list of ISS, age/length pop'n numbers, bootstrap bias, mean length-at-age, replicated rss, replicated age/length pop'n numbers
+A list of ISS, age/length pop'n numbers, bootstrap bias, mean length-at-age, bootstrap summary statistics for replicated rss and age/length pop'n numbers
 }
 }
 \usage{

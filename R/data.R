@@ -4,14 +4,12 @@
 #' Function that creates package data for afscISS (NOTE: this is not a user fcn, this is a developer/maintainer fcn)
 #' 
 #' @param append boolean. whether to append results to previous results (default = TRUE)
-#' @param remove boolean. whether to remove surveyISS output after writing package data (default = TRUE)
 #'
 #' @return .rda files within /data folder
 #' 
 #' @export
 #'
-pkg_data <- function(append = TRUE,
-                     remove = TRUE) {
+pkg_data <- function(append = TRUE) {
 
   # pull surveyISS results ----
   ## ai results ----
@@ -123,11 +121,6 @@ pkg_data <- function(append = TRUE,
     data_iss <- list(ai, ebs, ebs_slope, goa, nebs)
     names(data_iss) <- c('ai', 'ebs', 'ebs_slope', 'goa', 'nebs')
     usethis::use_data(data_iss, overwrite = TRUE)
-  }
-
-  # if desired, remove surveyISS output (recommended so that duplicated results don't occur)
-  if(isTRUE(remove)){
-    unlink(here::here('output'), recursive = TRUE, force = TRUE)
   }
 }
 

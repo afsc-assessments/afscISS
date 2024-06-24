@@ -17,5 +17,5 @@ get_stats(data, grp, column)
 dataframe with summary bootstrap statistics
 }
 \description{
-Function that computes mean and percentiles for iterated (comps and rss) results from the surveyISS package.
+Function that computes mean and percentiles for iterated (comps and rss) results from the surveyISS package (NOTE: this is not a user fcn, this is a developer/maintainer fcn)
 }

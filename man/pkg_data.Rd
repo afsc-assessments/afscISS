@@ -4,16 +4,14 @@
 \alias{pkg_data}
 \title{function to get surveyISS results transferred to data package}
 \usage{
-pkg_data(append = TRUE, remove = TRUE)
+pkg_data(append = TRUE)
 }
 \arguments{
 \item{append}{boolean. whether to append results to previous results (default = TRUE)}
-
-\item{remove}{boolean. whether to remove surveyISS output after writing package data (default = TRUE)}
 }
 \value{
 .rda files within /data folder
 }
 \description{
-Function that retrieves composition ISS results for AFSC stock assessments
+Function that creates package data for afscISS (NOTE: this is not a user fcn, this is a developer/maintainer fcn)
 }

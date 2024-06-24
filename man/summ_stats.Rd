@@ -19,5 +19,5 @@ summ_stats(data, iter, tot, reg)
 dataframe with summary bootstrap statistics
 }
 \description{
-Function that tests whether summary statistics should be performed on results, and computes statistics with get_stats function
+Function that tests whether summary statistics should be performed on results, and computes statistics with get_stats function (NOTE: this is not a user fcn, this is a developer/maintainer fcn)
 }

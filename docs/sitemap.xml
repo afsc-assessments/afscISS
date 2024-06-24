@@ -16,6 +16,9 @@
     <loc>/reference/afscISS-package.html</loc>
   </url>
   <url>
+    <loc>/reference/data_iss.html</loc>
+  </url>
+  <url>
     <loc>/reference/get_bias.html</loc>
   </url>
   <url>
@@ -25,9 +28,24 @@
     <loc>/reference/get_ISS.html</loc>
   </url>
   <url>
+    <loc>/reference/get_res_comp.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_RSS.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_stats.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
     <loc>/reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pkg_data.html</loc>
+  </url>
+  <url>
+    <loc>/reference/summ_stats.html</loc>
   </url>
 </urlset>
