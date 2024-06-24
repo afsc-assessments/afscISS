@@ -1,7 +1,7 @@
 #' function to get surveyISS results transferred to data package
 #' 
 #' @description
-#' Function that retrieves composition ISS results for AFSC stock assessments
+#' Function that creates package data for afscISS (NOTE: this is not a user fcn, this is a developer/maintainer fcn)
 #' 
 #' @param append boolean. whether to append results to previous results (default = TRUE)
 #' @param remove boolean. whether to remove surveyISS output after writing package data (default = TRUE)
@@ -127,14 +127,14 @@ pkg_data <- function(append = TRUE,
 
   # if desired, remove surveyISS output (recommended so that duplicated results don't occur)
   if(isTRUE(remove)){
-    unlink(here::here('output'), recursive = TRUE)
+    unlink(here::here('output'), recursive = TRUE, force = TRUE)
   }
 }
 
 #' function to summarize bootstrap results
 #' 
 #' @description
-#' Function that computes mean and percentiles for iterated (comps and rss) results from the surveyISS package.
+#' Function that computes mean and percentiles for iterated (comps and rss) results from the surveyISS package (NOTE: this is not a user fcn, this is a developer/maintainer fcn)
 #' 
 #' @param data dataframe to be summarized
 #' @param grp grouping for summarization
@@ -159,7 +159,7 @@ get_stats <- function(data, grp, column){
 #' wrapper function to perform summary statistics
 #' 
 #' @description
-#' Function that tests whether summary statistics should be performed on results, and computes statistics with get_stats function
+#' Function that tests whether summary statistics should be performed on results, and computes statistics with get_stats function (NOTE: this is not a user fcn, this is a developer/maintainer fcn)
 #' 
 #' @param data dataframe to be summarized
 #' @param iter which dataframe is being summarized (for print message)
@@ -242,6 +242,6 @@ summ_stats <- function(data, iter, tot, reg){
 #'
 #' @format A list
 #' \describe{
-#' A list of ISS, age/length pop'n numbers, bootstrap bias, mean length-at-age, replicated rss, replicated age/length pop'n numbers
+#' A list of ISS, age/length pop'n numbers, bootstrap bias, mean length-at-age, bootstrap summary statistics for replicated rss and age/length pop'n numbers
 #' }
 "data_iss"
