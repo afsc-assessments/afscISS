@@ -4,82 +4,131 @@
 #' Function that retrieves composition ISS results for AFSC stock assessments
 #' 
 #' @param append boolean. whether to append results to previous results (default = TRUE)
+#' @param remove boolean. whether to remove surveyISS output after writing package data (default = TRUE)
 #'
 #' @return .rda files within /data folder
 #' 
 #' @export
 #'
-pkg_data <- function(append = TRUE) {
+pkg_data <- function(append = TRUE,
+                     remove = TRUE) {
 
   # pull surveyISS results ----
   ## ai results ----
+  if(length(list.files(here::here('output', 'ai'))) > 0){
   ai <- purrr::map(list.files(here::here('output', 'ai')), ~ vroom::vroom(here::here('output', 'ai', .)))
   ai <- purrr::map(1:length(ai), ~ summ_stats(ai[[.]], ., length(ai), 'ai'))
   names(ai) <- list.files(here::here('output', 'ai')) %>% 
     stringr::str_replace(., '.csv', "")
+  } else{ai <- NULL}
   
-
   ## ebs results ----
+  if(length(list.files(here::here('output', 'ebs'))) > 0){
   ebs <- purrr::map(list.files(here::here('output', 'ebs')), ~ vroom::vroom(here::here('output', 'ebs', .)))
   ebs <- purrr::map(1:length(ebs), ~ summ_stats(ebs[[.]], ., length(ebs), 'ebs'))
   names(ebs) <- list.files(here::here('output', 'ebs')) %>% 
     stringr::str_replace(., '.csv', "")
+  } else{ebs <- NULL}
 
   ## ebs_slope results ----
+  if(length(list.files(here::here('output', 'ebs_slope'))) > 0){
   ebs_slope <- purrr::map(list.files(here::here('output', 'ebs_slope')), ~ vroom::vroom(here::here('output', 'ebs_slope', .)))
   ebs_slope <- purrr::map(1:length(ebs_slope), ~ summ_stats(ebs_slope[[.]], ., length(ebs_slope), 'ebs_slope'))
   names(ebs_slope) <- list.files(here::here('output', 'ebs_slope')) %>% 
     stringr::str_replace(., '.csv', "")
+  } else{ebs_slope <- NULL}
   
-
   ## goa results ----
+  if(length(list.files(here::here('output', 'goa'))) > 0){
   goa <- purrr::map(list.files(here::here('output', 'goa')), ~ vroom::vroom(here::here('output', 'goa', .)))
   goa <- purrr::map(1:length(goa), ~ summ_stats(goa[[.]], ., length(goa), 'goa'))
   names(goa) <- list.files(here::here('output', 'goa')) %>% 
     stringr::str_replace(., '.csv', "")
+  } else{goa <- NULL}
   
   ## nebs results ----
+  if(length(list.files(here::here('output', 'nebs'))) > 0){
   nebs <- purrr::map(list.files(here::here('output', 'nebs')), ~ vroom::vroom(here::here('output', 'nebs', .)))
   nebs <- purrr::map(1:length(nebs), ~ summ_stats(nebs[[.]], ., length(nebs), 'nebs'))
   names(nebs) <- list.files(here::here('output', 'nebs')) %>% 
     stringr::str_replace(., '.csv', "")
+  } else{nebs <- NULL}
 
   # when appending a year to pre-existing data ----
   if(isTRUE(append)){
 
-    ## write out results as package data ----
+    # util fcn
+    bind_new <- function(data_new, data_old){
+      if(length(data_new) > 0){
+        new <- data_old %>% 
+          tidytable::bind_rows(data_new)
+      } else{
+        new <- data_old
+      }
+      new
+    }
     
-    data_old <- load(here::here('data', 'data_iss.rda'))
-    
-    
-    
-    data_iss <- list(ai, ebs, ebs_slope, goa, nebs)
-    names(data_iss) <- c('ai', 'ebs', 'ebs_slope', 'goa', 'nebs')
-    
-    
-    
-    
-    
-    
-    
-    
-    usethis::use_data(data_iss, overwrite = TRUE)
-    
-    
-    
+    ## load old results ----
+    load(file = here::here('data', 'data_iss.rda'))
 
+    ## append ai ----
+    if(length(ai) > 0){
+      ai_new <- purrr::map(1:length(data_iss$ai),
+                           ~ bind_new(ai[[names(data_iss$ai)[.]]], 
+                                      data_iss$ai[[names(data_iss$ai)[.]]]))
+    }
+    names(ai_new) <- names(data_iss$ai)
+
+    ## append ebs ----
+    if(length(ebs) > 0){
+      ebs_new <- purrr::map(1:length(data_iss$ebs),
+                            ~ bind_new(ebs[[names(data_iss$ebs)[.]]], 
+                                       data_iss$ebs[[names(data_iss$ebs)[.]]]))
+    }
+    names(ebs_new) <- names(data_iss$ebs)
     
+    ## append ebs_slope ----
+    if(length(ebs_slope) > 0){
+      ebs_slope_new <- purrr::map(1:length(data_iss$ebs_slope),
+                                  ~ bind_new(ebs_slope[[names(data_iss$ebs_slope)[.]]], 
+                                             data_iss$ebs_slope[[names(data_iss$ebs_slope)[.]]]))
+    }
+    names(ebs_slope_new) <- names(data_iss$ebs_slope)
     
+    ## append goa ----
+    if(length(goa) > 0){
+      goa_new <- purrr::map(1:length(data_iss$goa),
+                            ~ bind_new(goa[[names(data_iss$goa)[.]]], 
+                                       data_iss$goa[[names(data_iss$goa)[.]]]))
+    }
+    names(goa_new) <- names(data_iss$goa)
+    
+    ## append nebs ----
+    if(length(nebs) > 0){
+      nebs_new <- purrr::map(1:length(data_iss$nebs),
+                             ~ bind_new(nebs[[names(data_iss$nebs)[.]]], 
+                                        data_iss$nebs[[names(data_iss$nebs)[.]]]))
+    }
+    names(nebs_new) <- names(data_iss$nebs)
+    
+    ## write out results as package data ----
+    data_iss <- list(ai_new, ebs_new, ebs_slope_new, goa_new, nebs_new)
+    names(data_iss) <- c('ai', 'ebs', 'ebs_slope', 'goa', 'nebs')
+    usethis::use_data(data_iss, overwrite = TRUE)
+
   } else{
     # when full run occurs ----
        
     ## write out results as package data ----
-    
     data_iss <- list(ai, ebs, ebs_slope, goa, nebs)
     names(data_iss) <- c('ai', 'ebs', 'ebs_slope', 'goa', 'nebs')
     usethis::use_data(data_iss, overwrite = TRUE)
   }
 
+  # if desired, remove surveyISS output (recommended so that duplicated results don't occur)
+  if(isTRUE(remove)){
+    unlink(here::here('output'), recursive = TRUE)
+  }
 }
 
 #' function to summarize bootstrap results
@@ -182,9 +231,8 @@ summ_stats <- function(data, iter, tot, reg){
     summ <- data
   }
   
-  summ
-  
   print(paste(iter, "of", tot, reg, "objects summarized"))
+  summ
   
 }
 

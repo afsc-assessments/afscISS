@@ -4,10 +4,12 @@
 \alias{pkg_data}
 \title{function to get surveyISS results transferred to data package}
 \usage{
-pkg_data(append = TRUE)
+pkg_data(append = TRUE, remove = TRUE)
 }
 \arguments{
 \item{append}{boolean. whether to append results to previous results (default = TRUE)}
+
+\item{remove}{boolean. whether to remove surveyISS output after writing package data (default = TRUE)}
 }
 \value{
 .rda files within /data folder
