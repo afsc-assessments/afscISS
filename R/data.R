@@ -219,7 +219,7 @@ summ_stats <- function(data, iter, tot, reg){
     summ <- data
   }
   
-  print(paste(iter, "of", tot, reg, "objects summarized"))
+  cat(red(iter), "of", green(bold(tot)), blue(bold(toupper(reg))), "objects summarized")
   summ
   
 }

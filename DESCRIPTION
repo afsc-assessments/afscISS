@@ -26,6 +26,7 @@ Imports:
     stringr,
     usethis,
     data.table,
+    crayon,
     here
 LazyData: true
 LazyDataCompression: xz
