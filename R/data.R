@@ -57,13 +57,8 @@ pkg_data <- function(append = TRUE) {
 
     # util fcn
     bind_new <- function(data_new, data_old){
-      if(length(data_new) > 0){
-        new <- data_old %>% 
-          tidytable::bind_rows(data_new)
-      } else{
-        new <- data_old
-      }
-      new
+      data_old %>% 
+        tidytable::bind_rows(data_new)
     }
     
     ## load old results ----
@@ -74,40 +69,40 @@ pkg_data <- function(append = TRUE) {
       ai_new <- purrr::map(1:length(data_iss$ai),
                            ~ bind_new(ai[[names(data_iss$ai)[.]]], 
                                       data_iss$ai[[names(data_iss$ai)[.]]]))
-    }
-    names(ai_new) <- names(data_iss$ai)
+      names(ai_new) <- names(data_iss$ai)
+    } else{ai_new <- data_iss$ai}
 
     ## append ebs ----
     if(length(ebs) > 0){
       ebs_new <- purrr::map(1:length(data_iss$ebs),
                             ~ bind_new(ebs[[names(data_iss$ebs)[.]]], 
                                        data_iss$ebs[[names(data_iss$ebs)[.]]]))
-    }
-    names(ebs_new) <- names(data_iss$ebs)
+      names(ebs_new) <- names(data_iss$ebs)
+    } else{ebs_new <- data_iss$ebs}
     
     ## append ebs_slope ----
     if(length(ebs_slope) > 0){
       ebs_slope_new <- purrr::map(1:length(data_iss$ebs_slope),
                                   ~ bind_new(ebs_slope[[names(data_iss$ebs_slope)[.]]], 
                                              data_iss$ebs_slope[[names(data_iss$ebs_slope)[.]]]))
-    }
-    names(ebs_slope_new) <- names(data_iss$ebs_slope)
+      names(ebs_slope_new) <- names(data_iss$ebs_slope)
+    } else{ebs_slope_new <- data_iss$ebs_slope}
     
     ## append goa ----
     if(length(goa) > 0){
       goa_new <- purrr::map(1:length(data_iss$goa),
                             ~ bind_new(goa[[names(data_iss$goa)[.]]], 
                                        data_iss$goa[[names(data_iss$goa)[.]]]))
-    }
-    names(goa_new) <- names(data_iss$goa)
+      names(goa_new) <- names(data_iss$goa)
+    } else{goa_new <- data_iss$goa}
     
     ## append nebs ----
     if(length(nebs) > 0){
       nebs_new <- purrr::map(1:length(data_iss$nebs),
                              ~ bind_new(nebs[[names(data_iss$nebs)[.]]], 
                                         data_iss$nebs[[names(data_iss$nebs)[.]]]))
-    }
-    names(nebs_new) <- names(data_iss$nebs)
+      names(nebs_new) <- names(data_iss$nebs)
+    } else{nebs_new <- data_iss$nebs}
     
     ## write out results as package data ----
     data_iss <- list(ai_new, ebs_new, ebs_slope_new, goa_new, nebs_new)

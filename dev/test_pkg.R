@@ -7,11 +7,10 @@ library(afscISS)
 
 # write pkg data ----
 ## full run ----
-afscISS::pkg_data(append = FALSE,
-                  remove = TRUE)
+afscISS::pkg_data(append = FALSE)
+
 ## year run ----
-afscISS::pkg_data(append = TRUE,
-                  remove = TRUE)
+afscISS::pkg_data(append = TRUE)
 
 
 # set inputs ----
