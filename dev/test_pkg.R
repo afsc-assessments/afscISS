@@ -12,7 +12,6 @@ afscISS::pkg_data(append = FALSE)
 ## year run ----
 afscISS::pkg_data(append = TRUE)
 
-
 # set inputs ----
 
 species = 21720

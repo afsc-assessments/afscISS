@@ -10,7 +10,7 @@ library(surveyISS)
 # set iterations ----
 # set number of desired bootstrap iterations (suggested here: 10 for testing, 500 for running)
 # iters = 500
-iters = 10
+iters = 2
 
 # set year for running ----
 yrs = 2023
