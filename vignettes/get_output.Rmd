@@ -1,0 +1,92 @@
+---
+title: "Getting output"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting output}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE
+)
+```
+
+Here we describe the various functions within the `afscISS` package that obtain results provided from the `surveyISS` package.
+The primary result that is provided by the `afscISS` package is the annual input sample size (ISS) for age, length, or conditional age-at-length composition data by survey region; this is provided by the `afscISS::get_ISS()` function.
+The following is an example for standard age composition ISS for GOA Pacific cod:
+
+```
+afscISS::get_ISS(species = 21720,
+                 region = 'goa',
+                 comp = 'age',
+                 sex_cat = 4,
+                 spec_case = NULL)
+```
+
+The `species` argument in the `afscISS::get_ISS()` function is the RACE species code for your species.
+
+The `region` argument in the `afscISS::get_ISS()` function is the survey region for which you desire the ISS.
+Currently there are 5 survey regions, described in the following table:
+
+| region | Description |
+| ---- | ---------------------------------- |
+| ai | Aleutian Islands survey region |
+| ebs | Eastern Bering Sea survey region |
+| ebs_slope | Eastern Bering Sea slope survey region |
+| goa | Gulf of Alaska survey region |
+| nebs | Combined Northern and Eastern Bering Sea survey regions |
+
+The `comp` argument in the `afscISS::get_ISS()` function is the composition type for which you desire ISS.
+There are 3 options: `age` for age composition, `length` for length composition, and `caal` for conditional age-at-length composition.
+
+The `sex_cat` argument in the `afscISS::get_ISS()` function is the sex category for the specific composition data for which you are obtaining ISS output.
+There are 5 options, described in the following table:
+
+| sex_cat | Description |
+| ---- | ---------------------------------- |
+| 0 | Combined sex categories (females + males + unsexed) that are combined prior to computation of composition|
+| 1 | Male composition |
+| 2 | Female composition |
+| 12 | Female-Male composition that sums to 1 across both sexes (rather than sum to 1 across Females or Males only) |
+| 4 | Combined sex categories (females + males + unsexed) that are combined after the computation of composition. Note that this is the historical standard for combined sex composition data at AFSC. Also note that there is no sex category of 4 for conditional age-at-length data, as it is equivalent to sex category 0. |
+
+Finally, the `spec_case` argument in the `afscISS::get_ISS()` function specifies whether you desire ISS for a special case function within the `surveyISS` package.
+Note (1) that these special cases only pertain the the AI and GOA survey regions (so, if you're getting output for the EBS, EBS slope, for NEBS you don't put anything here), and (2), that these special cases do not pertain to conditional age-at-length results.
+There are currently 7 special cases, described in the following table:
+
+| spec_case | Description |
+| ---- | ---------------------------------- |
+| ai_subreg | Provides output for age/length composition computed at the sub-region scale within the AI survey region (and will also provide output for the combined values at the overall AI region). |
+| bsre | Provides output for the AI Blackspotted-Rougheye stock complex (where length pop'n computed for each individual species but age pop'n computed for the complex as a whole). |
+| dr | Provides output for the GOA dusky rockfish stock. |
+| rebs | Provides output for the GOA Rougheye-Blackspotted stock complex (where length and age pop'n are computed for each individual species and summed post-expansion. |
+| w_c_egoa | Provides output for age/length composition computed for the Western, Central, and Eastern GOA survey regions (and will also provide output for the combined values at the overall GOA region). |
+| w140 | Provides output for age/length composition computed for the GOA survey region west of 140$^\circ$ longitude (currently only computed for the GOA walleye pollock stock). |
+| wc_egoa | Provides output for age/length composition computed for the Western-Central GOA (combined), and Eastern GOA survey regions (and will also provide output for the combined values at the overall GOA region). |
+
+The output that will return from the `afscISS::get_ISS()` function will include the following columns:
+
+| Column | Description |
+| ---- | ---------------------------------- |
+| year | Survey year. |
+| species_code | RACE species code. |
+| sex | Numerical value for sex category (described in table above). |
+| sex_desc | Text string with short description of sex category. |
+| iss | Input sample size. |
+| nss | Nominal sample size (the number of age/length samples collected). |
+| nhl | Number of hauls from which samples were collected. |
+
+There are 4 other functions using the same arguments that obtain output from the `surveyISS` package:
+
+1. `afscISS::get_comp()`: obtains the design-based computed composition values (will also provide the design-based mean and sd in length-at-age when obtaining age composition output).
+
+2. `afscISS::get_bias()`: obtains the average bias in the bootstrap simulated age/length/conditional age-at-length.
+
+3. `afscISS::get_RSS()`: obtains the bootstrap mean, sd, 2.5%, 25%, 75%, and 97.5% percentiles of the realized sample size across the bootstrap iterations.
+
+4. `afscISS::get_res_comp()`: obtains the bootstrap mean, sd, 2.5%, 25%, 75%, and 97.5% percentiles of the age/length/conditional age-at-length composition across the bootstrap iterations.
+

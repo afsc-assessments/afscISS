@@ -147,7 +147,7 @@ get_comp <- function(species = 21720,
 #' @param sex_cat sex category for which composition ISS desired. options are 0, 1, 2, 12, and 4 (default = 4)
 #' @param spec_case description string if getting ISS for special case. options are 'ai_subreg', 'bsre', 'dr', 'rebs', 'w_c_egoa', 'w140', 'wc_egoa' (default = NULL)
 #'
-#' @return a dataframe of bias statistics
+#' @return a dataframe of bootstrap bias statistics
 #' 
 #' @export
 #'
@@ -215,7 +215,7 @@ get_bias <- function(species = 21720,
 #' @param sex_cat sex category for which composition ISS desired. options are 0, 1, 2, 12, and 4 (default = 4)
 #' @param spec_case description string if getting ISS for special case. options are 'ai_subreg', 'bsre', 'dr', 'rebs', 'w_c_egoa', 'w140', 'wc_egoa' (default = NULL)
 #'
-#' @return a dataframe of composition ISS
+#' @return a dataframe of bootstrap statistics for RSS
 #' 
 #' @export
 #'
@@ -275,7 +275,7 @@ get_RSS <- function(species = 21720,
 #' Get stock-specific resampled composition results
 #' 
 #' @description
-#' Function that retrieves bootstrap resampeld age and length pop'n numbers and conditional age-at-length for AFSC stock assessments
+#' Function that retrieves bootstrap statistics for resampled composition data for AFSC stock assessments
 #' 
 #' @param species AFSC species code (default = 21720, pacific cod)
 #' @param region survey region. options are 'ai', 'ebs', 'ebs_slope', 'goa', and 'nebs' (default = 'goa')
@@ -283,7 +283,7 @@ get_RSS <- function(species = 21720,
 #' @param sex_cat sex category for which composition ISS desired. options are 0, 1, 2, 12, and 4 (default = 4)
 #' @param spec_case description string if getting ISS for special case. options are 'ai_subreg', 'bsre', 'dr', 'rebs', 'w_c_egoa', 'w140', 'wc_egoa' (default = NULL)
 #'
-#' @return a dataframe of age-length pop'n numbers or conditional age-at-length
+#' @return a dataframe of bootstrap statistics for replicated composition data
 #' 
 #' @export
 #'
