@@ -7,7 +7,7 @@ The R package `afscISS` allows you to obtain AFSC survey ISS for the type of com
 The `afscISS` package also allows you to obtain expanded age and length population numbers, mean length-at-age, and bootstrap bias statistics.
 Please note that the expanded age and length population numbers are the same values that are provided in the GAP_PRODUCTS tables for age and length composition (in the AKFIN_SIZECOMP and AKFIN_AGECOMP tables). 
 We recommend, unless you're using a special case function (stock complex, spatially-explicit, or conditional age-at-length) or desire pre-expansion combined-sex compositions, that you get the age and length population estimates that are then used for age/length composition in your stock assessment from the GAP_PRODUCTS tables hosted on AKFIN.
-Please see the [Get output](https://benwilliams-noaa.github.io/surveyISS/articles/getting_started.html) vignette for instructions on how to use the `afscISS` package to obtain the output for your stock and the [Output description](https://benwilliams-noaa.github.io/surveyISS/articles/getting_started.html) vignette for description of the output files included in this repository.
+Please see the [Get output](https://afsc-assessments.github.io/afscISS/articles/get_output.html) vignette for instructions on how to use the `afscISS` package to obtain the output for your stock.
 
 ### Installation:
 Make sure you have installed R packages `devtools`.  
