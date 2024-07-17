@@ -167,23 +167,107 @@ summ_stats <- function(data, iter, tot, reg){
     if('abund' %in% colnames(data)){
       # with subregion case
       if('region' %in% colnames(data)){
+        # compute comps for sex categories 0, 1, and 2
+        data %>% 
+          tidytable::filter(sex %in% c(0, 1, 2)) %>% 
+          tidytable::mutate(tot = sum(abund), .by = c(sim, region, year, species_code, sex)) %>% 
+          tidytable::mutate(prop = abund / tot) %>% 
+          tidytable::select(sim, region, year, species_code, sex, length, prop) %>% 
+          # compute comps for sex category 12
+          tidytable::bind_rows(data %>% 
+                                 tidytable::filter(sex %in% c(1, 2)) %>% 
+                                 tidytable::mutate(tot = sum(abund), .by = c(sim, region, year, species_code)) %>% 
+                                 tidytable::mutate(prop = abund / tot) %>% 
+                                 tidytable::select(sim, region, year, species_code, sex, length, prop)) %>% 
+          # compute comps for sex category 4
+          tidytable::bind_rows(data %>% 
+                                 tidytable::filter(sex != 0) %>% 
+                                 tidytable::summarise(abund = sum(abund), .by = c(sim, region, year, species_code, length)) %>% 
+                                 tidytable::mutate(tot = sum(abund), .by = c(sim, region, year, species_code)) %>% 
+                                 tidytable::mutate(prop = abund / tot,
+                                                   sex = 4) %>% 
+                                 tidytable::select(sim, region, year, species_code, sex, length, prop)) -> data
+        # get bs stats
         summ <- get_stats(data = data,
                           grp = c('year', 'region', 'species_code', 'sex', 'length'),
-                          column = abund)
+                          column = prop)
       } else{ # without subregion case
+        # compute comps for sex categories 0, 1, and 2
+        data %>% 
+          tidytable::filter(sex %in% c(0, 1, 2)) %>% 
+          tidytable::mutate(tot = sum(abund), .by = c(sim, year, species_code, sex)) %>% 
+          tidytable::mutate(prop = abund / tot) %>% 
+          tidytable::select(sim, year, species_code, sex, length, prop) %>% 
+          # compute comps for sex category 12
+          tidytable::bind_rows(data %>% 
+                                 tidytable::filter(sex %in% c(1, 2)) %>% 
+                                 tidytable::mutate(tot = sum(abund), .by = c(sim, year, species_code)) %>% 
+                                 tidytable::mutate(prop = abund / tot) %>% 
+                                 tidytable::select(sim, year, species_code, sex, length, prop)) %>% 
+          # compute comps for sex category 4
+          tidytable::bind_rows(data %>% 
+                                 tidytable::filter(sex != 0) %>% 
+                                 tidytable::summarise(abund = sum(abund), .by = c(sim, year, species_code, length)) %>% 
+                                 tidytable::mutate(tot = sum(abund), .by = c(sim, year, species_code)) %>% 
+                                 tidytable::mutate(prop = abund / tot,
+                                                   sex = 4) %>% 
+                                 tidytable::select(sim, year, species_code, sex, length, prop)) -> data
+        # get bs stats
         summ <- get_stats(data = data,
                           grp = c('year', 'species_code', 'sex', 'length'),
-                          column = abund)
+                          column = prop)
       }
     }
     # for age comps
     if('agepop' %in% colnames(data)){
       # with subregion case
       if('region' %in% colnames(data)){
+        # compute comps for sex categories 0, 1, and 2
+        data %>% 
+          tidytable::filter(sex %in% c(0, 1, 2)) %>% 
+          tidytable::mutate(tot = sum(agepop), .by = c(sim, region, year, species_code, sex)) %>% 
+          tidytable::mutate(prop = agepop / tot) %>% 
+          tidytable::select(sim, region, year, species_code, sex, age, prop) %>% 
+          # compute comps for sex category 12
+          tidytable::bind_rows(data %>% 
+                                 tidytable::filter(sex %in% c(1, 2)) %>% 
+                                 tidytable::mutate(tot = sum(agepop), .by = c(sim, region, year, species_code)) %>% 
+                                 tidytable::mutate(prop = agepop / tot) %>% 
+                                 tidytable::select(sim, region, year, species_code, sex, age, prop)) %>% 
+          # compute comps for sex category 4
+          tidytable::bind_rows(data %>% 
+                                 tidytable::filter(sex != 0) %>% 
+                                 tidytable::summarise(agepop = sum(agepop), .by = c(sim, region, year, species_code, age)) %>% 
+                                 tidytable::mutate(tot = sum(agepop), .by = c(sim, region, year, species_code)) %>% 
+                                 tidytable::mutate(prop = agepop / tot,
+                                                   sex = 4) %>% 
+                                 tidytable::select(sim, region, year, species_code, sex, age, prop)) -> data
+        # get bs stats
         summ <- get_stats(data = data,
                           grp = c('year', 'region', 'species_code', 'sex', 'age'),
                           column = agepop)
       } else{ # without subregion case
+        # compute comps for sex categories 0, 1, and 2
+        data %>% 
+          tidytable::filter(sex %in% c(0, 1, 2)) %>% 
+          tidytable::mutate(tot = sum(agepop), .by = c(sim, year, species_code, sex)) %>% 
+          tidytable::mutate(prop = agepop / tot) %>% 
+          tidytable::select(sim, year, species_code, sex, age, prop) %>% 
+          # compute comps for sex category 12
+          tidytable::bind_rows(data %>% 
+                                 tidytable::filter(sex %in% c(1, 2)) %>% 
+                                 tidytable::mutate(tot = sum(agepop), .by = c(sim, year, species_code)) %>% 
+                                 tidytable::mutate(prop = agepop / tot) %>% 
+                                 tidytable::select(sim, year, species_code, sex, age, prop)) %>% 
+          # compute comps for sex category 4
+          tidytable::bind_rows(data %>% 
+                                 tidytable::filter(sex != 0) %>% 
+                                 tidytable::summarise(agepop = sum(agepop), .by = c(sim, year, species_code, age)) %>% 
+                                 tidytable::mutate(tot = sum(agepop), .by = c(sim, year, species_code)) %>% 
+                                 tidytable::mutate(prop = agepop / tot,
+                                                   sex = 4) %>% 
+                                 tidytable::select(sim, year, species_code, sex, age, prop)) -> data
+        # get bs stats
         summ <- get_stats(data = data,
                           grp = c('year', 'species_code', 'sex', 'age'),
                           column = agepop)
