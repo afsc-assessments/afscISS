@@ -127,20 +127,21 @@ pkg_data <- function(append = TRUE) {
 #' @param data dataframe to be summarized
 #' @param grp grouping for summarization
 #' @param column column name to be summarized across iterations
+#' @param dgts number of significant digits in rounding results
 #'
 #' @return dataframe with summary bootstrap statistics
 #' 
 #' @export
 #'
-get_stats <- function(data, grp, column){
+get_stats <- function(data, grp, column, dgts){
   data  %>% 
     tidytable::filter(!is.infinite({{column}})) %>% 
-    tidytable::summarise(bs_mean = mean({{column}}, na.rm = TRUE),
-                         bs_sd = sd({{column}}, na.rm = TRUE),
-                         q2_5th = quantile({{column}}, 0.025, na.rm = TRUE),
-                         q25th = quantile({{column}}, 0.25, na.rm = TRUE),
-                         q75th = quantile({{column}}, 0.75, na.rm = TRUE),
-                         q97_5th = quantile({{column}}, 0.975, na.rm = TRUE),
+    tidytable::summarise(bs_mean = round(mean({{column}}, na.rm = TRUE), digits = dgts),
+                         bs_sd = round(sd({{column}}, na.rm = TRUE), digits = dgts),
+                         q2_5th = round(quantile({{column}}, 0.025, na.rm = TRUE), digits = dgts),
+                         q25th = round(quantile({{column}}, 0.25, na.rm = TRUE), digits = dgts),
+                         q75th = round(quantile({{column}}, 0.75, na.rm = TRUE), digits = dgts),
+                         q97_5th = round(quantile({{column}}, 0.975, na.rm = TRUE), digits = dgts),
                          .by = grp)
 }
 
@@ -193,7 +194,8 @@ summ_stats <- function(data, iter, tot, reg){
         # get bs stats
         summ <- get_stats(data = data,
                           grp = c('year', 'region', 'species_code', 'sex', 'length'),
-                          column = prop)
+                          column = prop,
+                          dgts = 4)
       } else{ # without subregion case
         # compute comps for sex categories 0, 1, and 2
         data %>% 
@@ -221,7 +223,8 @@ summ_stats <- function(data, iter, tot, reg){
         # get bs stats
         summ <- get_stats(data = data,
                           grp = c('year', 'species_code', 'sex', 'length'),
-                          column = prop)
+                          column = prop,
+                          dgts = 4)
       }
     }
     # for age comps
@@ -254,7 +257,8 @@ summ_stats <- function(data, iter, tot, reg){
         # get bs stats
         summ <- get_stats(data = data,
                           grp = c('year', 'region', 'species_code', 'sex', 'age'),
-                          column = prop)
+                          column = prop,
+                          dgts = 4)
       } else{ # without subregion case
         # compute comps for sex categories 0, 1, and 2
         data %>% 
@@ -282,14 +286,16 @@ summ_stats <- function(data, iter, tot, reg){
         # get bs stats
         summ <- get_stats(data = data,
                           grp = c('year', 'species_code', 'sex', 'age'),
-                          column = prop)
+                          column = prop,
+                          dgts = 4)
       }
     }
     # for caal
     if('caal' %in% colnames(data)){
       summ <- get_stats(data = data,
                         grp = c('year', 'species_code', 'sex', 'length', 'age'),
-                        column = caal)
+                        column = caal,
+                        dgts = 4)
     }
     
     #for rss results
@@ -298,17 +304,20 @@ summ_stats <- function(data, iter, tot, reg){
       if('region' %in% colnames(data)){
         summ <- get_stats(data = data,
                           grp = c('year', 'region', 'species_code', 'sex', 'sex_desc'),
-                          column = rss)
+                          column = rss,
+                          dgts = 0)
       } else{ # without subregion case
         summ <- get_stats(data = data,
                           grp = c('year', 'species_code', 'sex', 'sex_desc'),
-                          column = rss)
+                          column = rss,
+                          dgts = 0)
       }
       # for caal
       if('length' %in% colnames(data)){
         summ <- get_stats(data = data,
                           grp = c('year', 'species_code', 'sex', 'sex_desc', 'length'),
-                          column = rss)
+                          column = rss,
+                          dgts = 0)
       }
     }
   } else{
