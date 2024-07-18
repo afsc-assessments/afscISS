@@ -6,7 +6,7 @@
 #' @param species AFSC species code (default = 21720, pacific cod)
 #' @param region survey region. options are 'ai', 'ebs', 'ebs_slope', 'goa', and 'nebs' (default = 'goa')
 #' @param comp type of composition for which ISS desired. options are 'age', 'length', and 'caal'
-#' @param sex_cat sex category for which composition ISS desired. options are 0 (sexes combined pre-expansion), 1 (males), 2 (females), 12 (males-female comp that sums to 1), and 4 (sexes combined post-expansion) (default = 4)
+#' @param sex_cat sex category for which composition ISS desired. options are 0 (sexes combined pre-expansion), 1 (males), 2 (females), 12 (males-female comp that sums to 1), and 4 (sexes combined post-expansion) (default = NULL)
 #' @param spec_case description string if getting ISS for special case. options are 'ai_subreg', 'bsre', 'dr', 'rebs', 'w_c_egoa', 'w140', 'wc_egoa' (default = NULL)
 #'
 #' @return a dataframe of composition ISS
@@ -16,7 +16,7 @@
 get_ISS <- function(species = 21720,
                     region = 'goa',
                     comp = 'age',
-                    sex_cat = 4,
+                    sex_cat = NULL,
                     spec_case = NULL) {
   data("data_iss", envir=environment())
   # age comp iss ----
@@ -82,7 +82,7 @@ get_ISS <- function(species = 21720,
 #' @param species AFSC species code (default = 21720, pacific cod)
 #' @param region survey region. options are 'ai', 'ebs', 'ebs_slope', 'goa', and 'nebs' (default = 'goa')
 #' @param comp type of pop'n numbers desired, options are 'age' and 'length'
-#' @param sex_cat sex category for which pop'n numbers desired. options are 0 (sexes combined pre-expansion), 1 (males), 2 (females), 3 (unsexed), and 4 (sexes combined post-expansion) (default = 4)
+#' @param sex_cat sex category for which pop'n numbers desired. options are 0 (sexes combined pre-expansion), 1 (males), 2 (females), 3 (unsexed), and 4 (sexes combined post-expansion) (default = NULL)
 #' @param spec_case description string if getting pop'n numbers for special case. options are 'ai_subreg', 'bsre', 'dr', 'rebs', 'w_c_egoa', 'w140', 'wc_egoa' (default = NULL)
 #'
 #' @return a dataframe of age or length pop'n numbers (note that age data also include mean and sd in length-at-age)
@@ -92,7 +92,7 @@ get_ISS <- function(species = 21720,
 get_popn <- function(species = 21720,
                      region = 'goa',
                      comp = 'age',
-                     sex_cat = 4,
+                     sex_cat = NULL,
                      spec_case = NULL) {
   data("data_iss", envir=environment())
   # age pop'n ----
@@ -143,7 +143,7 @@ get_popn <- function(species = 21720,
 #' @param species AFSC species code (default = 21720, pacific cod)
 #' @param region survey region. options are 'ai', 'ebs', 'ebs_slope', 'goa', and 'nebs' (default = 'goa')
 #' @param comp type of composition desired, options are 'age', 'length', and 'caal'
-#' @param sex_cat sex category for which composition ISS desired. options are 0 (sexes combined pre-expansion), 1 (males), 2 (females), 12 (males-female comp that sums to 1), and 4 (sexes combined post-expansion) (default = 4)
+#' @param sex_cat sex category for which composition is desired. options are 0 (sexes combined pre-expansion), 1 (males), 2 (females), 12 (males-female comp that sums to 1), and 4 (sexes combined post-expansion). Note that for comp = 'caal' the only sex categories available are 0 (sexes combined), 1 (males), and 2 (females) (default = NULL)
 #' @param spec_case description string if getting composition for special case. options are 'ai_subreg', 'bsre', 'dr', 'rebs', 'w_c_egoa', 'w140', 'wc_egoa' (default = NULL)
 #'
 #' @return a dataframe of age, length, or conditional age-at-length composition
@@ -153,7 +153,7 @@ get_popn <- function(species = 21720,
 get_comp <- function(species = 21720,
                      region = 'goa',
                      comp = 'age',
-                     sex_cat = 4,
+                     sex_cat = NULL,
                      spec_case = NULL) {
   data("data_iss", envir=environment())
   # age pop'n ----
@@ -298,7 +298,7 @@ get_comp <- function(species = 21720,
 #' @param species AFSC species code (default = 21720, pacific cod)
 #' @param region survey region. options are 'ai', 'ebs', 'ebs_slope', 'goa', and 'nebs' (default = 'goa')
 #' @param comp type of composition for which ISS desired. options are 'age', 'length', and 'caal'
-#' @param sex_cat sex category for which bootstrap bias desired, options are 0 (sexes combined pre-expansion), 1 (males), 2 (females), 12 (males-female comp that sums to 1), and 4 (sexes combined post-expansion) (default = 4)
+#' @param sex_cat sex category for which bootstrap bias desired, options are 0 (sexes combined pre-expansion), 1 (males), 2 (females), 12 (males-female comp that sums to 1), and 4 (sexes combined post-expansion) (default = NULL)
 #' @param spec_case description string if getting bootstrap bias for special case. options are 'ai_subreg', 'bsre', 'dr', 'rebs', 'w_c_egoa', 'w140', 'wc_egoa' (default = NULL)
 #'
 #' @return a dataframe of bootstrap bias statistics
@@ -308,7 +308,7 @@ get_comp <- function(species = 21720,
 get_bias <- function(species = 21720,
                      region = 'goa',
                      comp = 'age',
-                     sex_cat = 4,
+                     sex_cat = NULL,
                      spec_case = NULL) {
   data("data_iss", envir=environment())
   # age bias ----
@@ -361,12 +361,12 @@ get_bias <- function(species = 21720,
 #' Get stock-specific RSS results
 #' 
 #' @description
-#' Function that retrieves composition replicates of Realized Sample Size results for AFSC stock assessments
+#' Function that retrieves composition replicates of Realized Sample Size (RSS) results for AFSC stock assessments
 #' 
 #' @param species AFSC species code (default = 21720, pacific cod)
 #' @param region survey region. options are 'ai', 'ebs', 'ebs_slope', 'goa', and 'nebs' (default = 'goa')
 #' @param comp type of composition for which RSS desired, options are 'age', 'length', and 'caal'
-#' @param sex_cat sex category for which RSS desired, options are 0 (sexes combined pre-expansion), 1 (males), 2 (females), 12 (males-female comp that sums to 1), and 4 (sexes combined post-expansion) (default = 4)
+#' @param sex_cat sex category for which RSS desired, options are 0 (sexes combined pre-expansion), 1 (males), 2 (females), 12 (males-female comp that sums to 1), and 4 (sexes combined post-expansion) (default = NULL)
 #' @param spec_case description string if getting RSS for special case, options are 'ai_subreg', 'bsre', 'dr', 'rebs', 'w_c_egoa', 'w140', 'wc_egoa' (default = NULL)
 #'
 #' @return a dataframe of bootstrap statistics for RSS
@@ -376,7 +376,7 @@ get_bias <- function(species = 21720,
 get_RSS <- function(species = 21720,
                     region = 'goa',
                     comp = 'age',
-                    sex_cat = 4,
+                    sex_cat = NULL,
                     spec_case = NULL) {
   data("data_iss", envir=environment())
   # age comp iss ----
@@ -426,7 +426,7 @@ get_RSS <- function(species = 21720,
   
 }
 
-#' Get stock-specific resampled composition results
+#' Get stock-specific bootstrap composition results
 #' 
 #' @description
 #' Function that retrieves bootstrap statistics for resampled composition data for AFSC stock assessments
@@ -434,17 +434,17 @@ get_RSS <- function(species = 21720,
 #' @param species AFSC species code (default = 21720, pacific cod)
 #' @param region survey region. options are 'ai', 'ebs', 'ebs_slope', 'goa', and 'nebs' (default = 'goa')
 #' @param comp type of composition desired, options are 'age', 'length', and 'caal'
-#' @param sex_cat sex category for which composition desired, options are 0 (sexes combined pre-expansion), 1 (males), 2 (females), 12 (males-female comp that sums to 1), and 4 (sexes combined post-expansion) (default = 4)
+#' @param sex_cat sex category for which composition desired, options are 0 (sexes combined pre-expansion), 1 (males), 2 (females), 12 (males-female comp that sums to 1), and 4 (sexes combined post-expansion) (default = NULL)
 #' @param spec_case description string if getting composition for special case, options are 'ai_subreg', 'bsre', 'dr', 'rebs', 'w_c_egoa', 'w140', 'wc_egoa' (default = NULL)
 #'
 #' @return a dataframe of bootstrap statistics for replicated composition data
 #' 
 #' @export
 #'
-get_res_comp <- function(species = 21720,
+get_bs_comp <- function(species = 21720,
                          region = 'goa',
                          comp = 'age',
-                         sex_cat = 4,
+                         sex_cat = NULL,
                          spec_case = NULL) {
   data("data_iss", envir=environment())
   # age pop'n ----
@@ -452,15 +452,18 @@ get_res_comp <- function(species = 21720,
     if(is.null(spec_case)){
       tidytable::as_tidytable(data_iss[[region]]$prod_resampled_age) %>%
         tidytable::filter(species_code %in% species,
-                          sex %in% sex_cat) -> res
+                          sex_c %in% sex_cat) %>% 
+        tidytable::select(-sex_c) -> res
     } else{
       if(spec_case %in% c('bsre', 'dr', 'rebs')){
         tidytable::as_tidytable(data_iss[[region]][[paste0('prod_resampled_age_', spec_case)]]) %>%
-          tidytable::filter(sex %in% sex_cat) -> res
+          tidytable::filter(sex_c %in% sex_cat) %>% 
+          tidytable::select(-sex_c) -> res
       } else{
         tidytable::as_tidytable(data_iss[[region]][[paste0('prod_resampled_age_', spec_case)]]) %>%
           tidytable::filter(species_code %in% species,
-                            sex %in% sex_cat) -> res
+                            sex_c %in% sex_cat) %>% 
+          tidytable::select(-sex_c) -> res
       }
     }
   }
@@ -470,15 +473,18 @@ get_res_comp <- function(species = 21720,
     if(is.null(spec_case)){
       tidytable::as_tidytable(data_iss[[region]]$prod_resampled_length) %>%
         tidytable::filter(species_code %in% species,
-                          sex %in% sex_cat) -> res
+                          sex_c %in% sex_cat) %>% 
+        tidytable::select(-sex_c) -> res
     } else{
       if(spec_case %in% c('bsre', 'dr', 'rebs')){
         tidytable::as_tidytable(data_iss[[region]][[paste0('prod_resampled_length_', spec_case)]]) %>%
-          tidytable::filter(sex %in% sex_cat) -> res
+          tidytable::filter(sex_c %in% sex_cat) %>% 
+          tidytable::select(-sex_c) -> res
       } else{
         tidytable::as_tidytable(data_iss[[region]][[paste0('prod_resampled_length_', spec_case)]]) %>%
           tidytable::filter(species_code %in% species,
-                            sex %in% sex_cat) -> res
+                            sex_c %in% sex_cat) %>% 
+          tidytable::select(-sex_c) -> res
       }
     }
   } 
