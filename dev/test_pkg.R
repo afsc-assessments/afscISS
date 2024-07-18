@@ -24,12 +24,21 @@ spec_case = NULL
 afscISS::get_ISS(species,
                  region,
                  comp,
-                 sex_cat,
+                 sex_cat = 0,
                  spec_case)
 
 
 # test get comps ----
+sex_cat = 4
 afscISS::get_comp(species,
+                  region,
+                  comp,
+                  sex_cat,
+                  spec_case)
+
+# test get popn ----
+sex_cat = 4
+afscISS::get_popn(species,
                   region,
                   comp,
                   sex_cat,
@@ -50,6 +59,7 @@ afscISS::get_RSS(species,
                  spec_case)
 
 # test get resampled comps ----
+sex_cat = 0
 afscISS::get_res_comp(species,
                       region,
                       comp,
