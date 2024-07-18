@@ -86,12 +86,15 @@
     
 <p>Here we describe the various functions within the
 <code>afscISS</code> package that obtain results provided from the
-<code>surveyISS</code> package. The primary result that is provided by
-the <code>afscISS</code> package is the annual input sample size (ISS)
-for age, length, or conditional age-at-length composition data by survey
-region; this is provided by the <code><a href="../reference/get_ISS.html">afscISS::get_ISS()</a></code>
-function. The following is an example for standard age composition ISS
-for GOA Pacific cod:</p>
+<code>surveyISS</code> package.</p>
+<div class="section level2">
+<h2 id="afscissget_iss">afscISS::get_ISS()<a class="anchor" aria-label="anchor" href="#afscissget_iss"></a>
+</h2>
+<p>The primary result that is provided by the <code>afscISS</code>
+package is the annual input sample size (ISS) for age, length, or
+conditional age-at-length composition data by survey region; this is
+provided by the <code><a href="../reference/get_ISS.html">afscISS::get_ISS()</a></code> function. The following
+is an example for standard age composition ISS for GOA Pacific cod:</p>
 <pre><code><span><span class="fu">afscISS</span><span class="fu">::</span><span class="fu"><a href="../reference/get_ISS.html">get_ISS</a></span><span class="op">(</span>species <span class="op">=</span> <span class="fl">21720</span>,</span>
 <span>                 region <span class="op">=</span> <span class="st">'goa'</span>,</span>
 <span>                 comp <span class="op">=</span> <span class="st">'age'</span>,</span>
@@ -217,7 +220,7 @@ computed for the complex as a whole).</td>
 <td>rebs</td>
 <td>Provides output for the GOA Rougheye-Blackspotted stock complex
 (where length and age pop’n are computed for each individual species and
-summed post-expansion.</td>
+summed post-expansion).</td>
 </tr>
 <tr class="odd">
 <td>w_c_egoa</td>
@@ -285,26 +288,416 @@ collected).</td>
 </tr>
 </tbody>
 </table>
-<p>There are 5 other functions using the same arguments that obtain
-output from the <code>surveyISS</code> package:</p>
-<ol style="list-style-type: decimal">
-<li><p><code>afscISS::get_pop()</code>: obtains the design-based
-computed population at age or length values (will also provide the
-design-based mean and sd in length-at-age when obtaining age
-output).</p></li>
-<li><p><code><a href="../reference/get_comp.html">afscISS::get_comp()</a></code>: obtains the computed age,
-length, and condition age-at-length composition from design-based
-population estimates.</p></li>
-<li><p><code><a href="../reference/get_bias.html">afscISS::get_bias()</a></code>: obtains the average bias in the
-bootstrap simulated age/length/conditional age-at-length.</p></li>
-<li><p><code><a href="../reference/get_RSS.html">afscISS::get_RSS()</a></code>: obtains the bootstrap mean, sd,
-2.5%, 25%, 75%, and 97.5% percentiles of the realized sample size across
-the bootstrap iterations.</p></li>
-<li><p><code><a href="../reference/get_res_comp.html">afscISS::get_res_comp()</a></code>: obtains the bootstrap mean,
-sd, 2.5%, 25%, 75%, and 97.5% percentiles of the age/length/conditional
-age-at-length composition across the bootstrap iterations.</p></li>
-</ol>
 </div>
+<div class="section level2">
+<h2 id="afscissget_popn">afscISS::get_popn()<a class="anchor" aria-label="anchor" href="#afscissget_popn"></a>
+</h2>
+<p>The <code><a href="../reference/get_popn.html">afscISS::get_popn()</a></code> function obtains the
+design-based expanded population at age or length values (will also
+provide the design-based mean and sd in length-at-age when obtaining age
+output). This output replicates what is provided in the GAP_PRODUCTS
+tables, with the exception of the special cases implemented in the
+<code>surveyISS</code> package that are not available in the
+<code>gapindex</code> package. Note that the <code>sex_cat</code>
+arguments for this function are 0 (sexes combined pre-expansion), 1
+(males), 2 (females), 3 (unsexed), and 4 (sexes combined post-expansion)
+and does not include <code>sex_cat</code> argument of 12 (as those
+results are provided in this case for <code>sex_cat</code> 1 and 2
+individually). The output that will return from the
+<code><a href="../reference/get_popn.html">afscISS::get_popn()</a></code> function for <code>comp = 'age'</code>
+will include the following columns:</p>
+<table class="table">
+<colgroup>
+<col width="10%">
+<col width="89%">
+</colgroup>
+<thead><tr class="header">
+<th>Column</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>year</td>
+<td>Survey year.</td>
+</tr>
+<tr class="even">
+<td>species_code</td>
+<td>RACE species code.</td>
+</tr>
+<tr class="odd">
+<td>sex</td>
+<td>Numerical value for sex category.</td>
+</tr>
+<tr class="even">
+<td>age</td>
+<td>Age.</td>
+</tr>
+<tr class="odd">
+<td>agepop</td>
+<td>Design-based expanded population numbers for age.</td>
+</tr>
+<tr class="even">
+<td>mean_length</td>
+<td>Design-based computed mean length-at-age.</td>
+</tr>
+<tr class="odd">
+<td>sd_length</td>
+<td>Design-based computed standard deviation in length-at-age.</td>
+</tr>
+</tbody>
+</table>
+<p>The output that will return from the <code><a href="../reference/get_popn.html">afscISS::get_popn()</a></code>
+function for <code>comp = 'length'</code> will include the following
+columns:</p>
+<table class="table">
+<thead><tr class="header">
+<th>Column</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>year</td>
+<td>Survey year.</td>
+</tr>
+<tr class="even">
+<td>species_code</td>
+<td>RACE species code.</td>
+</tr>
+<tr class="odd">
+<td>length</td>
+<td>Length in cm.</td>
+</tr>
+<tr class="even">
+<td>sex</td>
+<td>Numerical value for sex category.</td>
+</tr>
+<tr class="odd">
+<td>abund</td>
+<td>Design-based expanded population numbers for length.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level2">
+<h2 id="afscissget_comp">afscISS::get_comp()<a class="anchor" aria-label="anchor" href="#afscissget_comp"></a>
+</h2>
+<p>The <code><a href="../reference/get_comp.html">afscISS::get_comp()</a></code> function obtains the computed
+age, length, and conditional age-at-length composition from design-based
+population estimates (i.e., the proportions that would be used in a
+stock assessment model). The output that will return from the
+<code><a href="../reference/get_comp.html">afscISS::get_comp()</a></code> function for <code>comp = 'age'</code>
+and <code>comp = 'length'</code> will include the following columns:</p>
+<table class="table">
+<colgroup>
+<col width="10%">
+<col width="89%">
+</colgroup>
+<thead><tr class="header">
+<th>Column</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>year</td>
+<td>Survey year.</td>
+</tr>
+<tr class="even">
+<td>species_code</td>
+<td>RACE species code.</td>
+</tr>
+<tr class="odd">
+<td>sex</td>
+<td>Numerical value for sex category. Note that when
+<code>sex_cat = 12</code> this will return values of 1 (males) and 2
+(females) in the sex column where the proportions will sum to 1 across
+both sexes.</td>
+</tr>
+<tr class="even">
+<td>age/length</td>
+<td>Age or length (in cm).</td>
+</tr>
+<tr class="odd">
+<td>prop</td>
+<td>Proportion at age or length.</td>
+</tr>
+</tbody>
+</table>
+<p>The output that will return from the <code><a href="../reference/get_comp.html">afscISS::get_comp()</a></code>
+function for <code>comp = 'caal'</code> will include the following
+columns:</p>
+<table class="table">
+<colgroup>
+<col width="10%">
+<col width="89%">
+</colgroup>
+<thead><tr class="header">
+<th>Column</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>year</td>
+<td>Survey year.</td>
+</tr>
+<tr class="even">
+<td>species_code</td>
+<td>RACE species code.</td>
+</tr>
+<tr class="odd">
+<td>sex</td>
+<td>Numerical value for sex category. Note that the only
+<code>sex_cat</code> arguments available for <code>comp = 'caal'</code>
+are 0 (combined sexes), 1 (males), and 2 (females).</td>
+</tr>
+<tr class="even">
+<td>length</td>
+<td>Length in cm.</td>
+</tr>
+<tr class="odd">
+<td>age</td>
+<td>Age.</td>
+</tr>
+<tr class="even">
+<td>caal</td>
+<td>Proportion at age within given length.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level2">
+<h2 id="afscissget_bias">afscISS::get_bias()<a class="anchor" aria-label="anchor" href="#afscissget_bias"></a>
+</h2>
+<p>The <code><a href="../reference/get_bias.html">afscISS::get_bias()</a></code> function obtains the average
+bias in the bootstrap simulated age/length/conditional age-at-length.
+The output that will return from the <code><a href="../reference/get_bias.html">afscISS::get_bias()</a></code>
+function for <code>comp = 'age'</code> and <code>comp = 'length'</code>
+will include the following columns:</p>
+<table class="table">
+<thead><tr class="header">
+<th>Column</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>year</td>
+<td>Survey year.</td>
+</tr>
+<tr class="even">
+<td>species_code</td>
+<td>RACE species code.</td>
+</tr>
+<tr class="odd">
+<td>sex</td>
+<td>Numerical value for sex category.</td>
+</tr>
+<tr class="even">
+<td>bias</td>
+<td>Average bias in composition across age/length.</td>
+</tr>
+</tbody>
+</table>
+<p>The output that will return from the <code><a href="../reference/get_bias.html">afscISS::get_bias()</a></code>
+function for <code>comp = 'caal'</code> will include the same columns as
+<code>comp = 'age'</code> or <code>comp = 'length'</code>, with an
+additional column for length (in cm) to reflect that the bias column is
+the average bias in composition across age within given length. Note
+that the only <code>sex_cat</code> arguments available for
+<code>comp = 'caal'</code> are 0 (combined sexes), 1 (males), and 2
+(females).</p>
+</div>
+<div class="section level2">
+<h2 id="afscissget_rss">afscISS::get_RSS()<a class="anchor" aria-label="anchor" href="#afscissget_rss"></a>
+</h2>
+<p>The <code><a href="../reference/get_RSS.html">afscISS::get_RSS()</a></code> function obtains statistics for
+bootstrap results for the iterated realized sample size. The output that
+will return from the <code><a href="../reference/get_RSS.html">afscISS::get_RSS()</a></code> function for
+<code>comp = 'age'</code> and <code>comp = 'length'</code> will include
+the following columns:</p>
+<table class="table">
+<thead><tr class="header">
+<th>Column</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>year</td>
+<td>Survey year.</td>
+</tr>
+<tr class="even">
+<td>species_code</td>
+<td>RACE species code.</td>
+</tr>
+<tr class="odd">
+<td>sex</td>
+<td>Numerical value for sex category.</td>
+</tr>
+<tr class="even">
+<td>sex_desc</td>
+<td>Text string with short description of sex category.</td>
+</tr>
+<tr class="odd">
+<td>bs_mean</td>
+<td>Average RSS across bootstrap iterations.</td>
+</tr>
+<tr class="even">
+<td>bs_sd</td>
+<td>Standard deviation in RSS across bootstrap iterations.</td>
+</tr>
+<tr class="odd">
+<td>q2_5th</td>
+<td>2.5% percentile in RSS across bootstrap iterations.</td>
+</tr>
+<tr class="even">
+<td>q25th</td>
+<td>25% percentile in RSS across bootstrap iterations.</td>
+</tr>
+<tr class="odd">
+<td>q75th</td>
+<td>75% percentile in RSS across bootstrap iterations.</td>
+</tr>
+<tr class="even">
+<td>q97_5th</td>
+<td>97.5% percentile in RSS across bootstrap iterations.</td>
+</tr>
+</tbody>
+</table>
+<p>The output that will return from the <code><a href="../reference/get_RSS.html">afscISS::get_RSS()</a></code>
+function for <code>comp = 'caal'</code> will include the same columns as
+<code>comp = 'age'</code> or <code>comp = 'length'</code>, with an
+additional column for length (in cm) to reflect that the RSS results are
+for the given length. Note that the only <code>sex_cat</code> arguments
+available for <code>comp = 'caal'</code> are 0 (combined sexes), 1
+(males), and 2 (females).</p>
+</div>
+<div class="section level2">
+<h2 id="afscissget_bs_comp">afscISS::get_bs_comp()<a class="anchor" aria-label="anchor" href="#afscissget_bs_comp"></a>
+</h2>
+<p>The <code><a href="../reference/get_bs_comp.html">afscISS::get_bs_comp()</a></code> function obtains statistics
+for bootstrap results for the iterated age/length/conditional
+age-at-length composition. The output that will return from the
+<code><a href="../reference/get_bs_comp.html">afscISS::get_bs_comp()</a></code> function for
+<code>comp = 'age'</code> and <code>comp = 'length'</code> will include
+the following columns:</p>
+<table class="table">
+<colgroup>
+<col width="10%">
+<col width="89%">
+</colgroup>
+<thead><tr class="header">
+<th>Column</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>year</td>
+<td>Survey year.</td>
+</tr>
+<tr class="even">
+<td>species_code</td>
+<td>RACE species code.</td>
+</tr>
+<tr class="odd">
+<td>sex</td>
+<td>Numerical value for sex category. Note that when
+<code>sex_cat = 12</code> this will return values of 1 (males) and 2
+(females) in the sex column where the proportions were computed in the
+bootstrap iterations to sum to 1 across both sexes.</td>
+</tr>
+<tr class="even">
+<td>age/length</td>
+<td>Age or length (in cm).</td>
+</tr>
+<tr class="odd">
+<td>bs_mean</td>
+<td>Average proportion across bootstrap iterations.</td>
+</tr>
+<tr class="even">
+<td>bs_sd</td>
+<td>Standard deviation in the proportion across bootstrap
+iterations.</td>
+</tr>
+<tr class="odd">
+<td>q2_5th</td>
+<td>2.5% percentile in the proportion across bootstrap iterations.</td>
+</tr>
+<tr class="even">
+<td>q25th</td>
+<td>25% percentile in the proportion across bootstrap iterations.</td>
+</tr>
+<tr class="odd">
+<td>q75th</td>
+<td>75% percentile in the proportion across bootstrap iterations.</td>
+</tr>
+<tr class="even">
+<td>q97_5th</td>
+<td>97.5% percentile in the proportion across bootstrap iterations.</td>
+</tr>
+</tbody>
+</table>
+<p>The output that will return from the
+<code><a href="../reference/get_bs_comp.html">afscISS::get_bs_comp()</a></code> function for
+<code>comp = 'caal'</code> will include the following columns:</p>
+<table class="table">
+<colgroup>
+<col width="10%">
+<col width="89%">
+</colgroup>
+<thead><tr class="header">
+<th>Column</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>year</td>
+<td>Survey year.</td>
+</tr>
+<tr class="even">
+<td>species_code</td>
+<td>RACE species code.</td>
+</tr>
+<tr class="odd">
+<td>sex</td>
+<td>Numerical value for sex category. Note that the only
+<code>sex_cat</code> arguments available for <code>comp = 'caal'</code>
+are 0 (combined sexes), 1 (males), and 2 (females).</td>
+</tr>
+<tr class="even">
+<td>length</td>
+<td>Length in cm.</td>
+</tr>
+<tr class="odd">
+<td>age</td>
+<td>Age.</td>
+</tr>
+<tr class="even">
+<td>bs_mean</td>
+<td>Average proportion across bootstrap iterations.</td>
+</tr>
+<tr class="odd">
+<td>bs_sd</td>
+<td>Standard deviation in the proportion across bootstrap
+iterations.</td>
+</tr>
+<tr class="even">
+<td>q2_5th</td>
+<td>2.5% percentile in the proportion across bootstrap iterations.</td>
+</tr>
+<tr class="odd">
+<td>q25th</td>
+<td>25% percentile in the proportion across bootstrap iterations.</td>
+</tr>
+<tr class="even">
+<td>q75th</td>
+<td>75% percentile in the proportion across bootstrap iterations.</td>
+</tr>
+<tr class="odd">
+<td>q97_5th</td>
+<td>97.5% percentile in the proportion across bootstrap iterations.</td>
+</tr>
+</tbody>
+</table>
+</div>
+  </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 

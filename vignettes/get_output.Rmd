@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
 ```
 
 Here we describe the various functions within the `afscISS` package that obtain results provided from the `surveyISS` package.
+
+## afscISS::get_ISS()
 The primary result that is provided by the `afscISS` package is the annual input sample size (ISS) for age, length, or conditional age-at-length composition data by survey region; this is provided by the `afscISS::get_ISS()` function.
 The following is an example for standard age composition ISS for GOA Pacific cod:
 
@@ -80,9 +82,9 @@ The output that will return from the `afscISS::get_ISS()` function will include 
 | nss | Nominal sample size (the number of age/length samples collected). |
 | nhl | Number of hauls from which samples were collected. |
 
-There are 5 other functions using the same arguments that obtain additional output from the `surveyISS` package:
+## afscISS::get_popn()
 
-1. `afscISS::get_popn()`: obtains the design-based expanded population at age or length values (will also provide the design-based mean and sd in length-at-age when obtaining age output). This output replicates what is provided in the GAP_PRODUCTS tables, with the exception of the special cases implemented in the `surveyISS` package that are not available in the `gapindex` package. Note that the `sex_cat` arguments for this function are 0 (sexes combined pre-expansion), 1 (males), 2 (females), 3 (unsexed), and 4 (sexes combined post-expansion) and does not include `sex_cat` argument of 12 (as those results are provided in this case for `sex_cat` 1 and 2 individually). The output that will return from the `afscISS::get_popn()` function for `comp = 'age'` will include the following columns:
+The `afscISS::get_popn()` function obtains the design-based expanded population at age or length values (will also provide the design-based mean and sd in length-at-age when obtaining age output). This output replicates what is provided in the GAP_PRODUCTS tables, with the exception of the special cases implemented in the `surveyISS` package that are not available in the `gapindex` package. Note that the `sex_cat` arguments for this function are 0 (sexes combined pre-expansion), 1 (males), 2 (females), 3 (unsexed), and 4 (sexes combined post-expansion) and does not include `sex_cat` argument of 12 (as those results are provided in this case for `sex_cat` 1 and 2 individually). The output that will return from the `afscISS::get_popn()` function for `comp = 'age'` will include the following columns:
 
 | Column | Description |
 | ---- | ---------------------------------- |
@@ -104,7 +106,9 @@ The output that will return from the `afscISS::get_popn()` function for `comp = 
 | sex | Numerical value for sex category. |
 | abund | Design-based expanded population numbers for length. |
 
-2. `afscISS::get_comp()`: obtains the computed age, length, and conditional age-at-length composition from design-based population estimates (i.e., the proportions that would be used in a stock assessment model). The output that will return from the `afscISS::get_comp()` function for `comp = 'age'` and `comp = 'length'` will include the following columns:
+## afscISS::get_comp()
+
+The `afscISS::get_comp()` function obtains the computed age, length, and conditional age-at-length composition from design-based population estimates (i.e., the proportions that would be used in a stock assessment model). The output that will return from the `afscISS::get_comp()` function for `comp = 'age'` and `comp = 'length'` will include the following columns:
 
 | Column | Description |
 | ---- | ---------------------------------- |
@@ -125,7 +129,9 @@ The output that will return from the `afscISS::get_comp()` function for `comp = 
 | age | Age. |
 | caal | Proportion at age within given length. |
 
-3. `afscISS::get_bias()`: obtains the average bias in the bootstrap simulated age/length/conditional age-at-length. The output that will return from the `afscISS::get_bias()` function for `comp = 'age'` and `comp = 'length'` will include the following columns:
+## afscISS::get_bias()
+
+The `afscISS::get_bias()` function obtains the average bias in the bootstrap simulated age/length/conditional age-at-length. The output that will return from the `afscISS::get_bias()` function for `comp = 'age'` and `comp = 'length'` will include the following columns:
 
 | Column | Description |
 | ---- | ---------------------------------- |
@@ -136,7 +142,9 @@ The output that will return from the `afscISS::get_comp()` function for `comp = 
 
 The output that will return from the `afscISS::get_bias()` function for `comp = 'caal'` will include the same columns as `comp = 'age'` or `comp = 'length'`, with an additional column for length (in cm) to reflect that the bias column is the average bias in composition across age within given length. Note that the only `sex_cat` arguments available for `comp = 'caal'` are 0 (combined sexes), 1 (males), and 2 (females).
 
-4. `afscISS::get_RSS()`: obtains statistics for bootstrap results for the iterated realized sample size. The output that will return from the `afscISS::get_RSS()` function for `comp = 'age'` and `comp = 'length'` will include the following columns:
+## afscISS::get_RSS()
+
+The `afscISS::get_RSS()` function obtains statistics for bootstrap results for the iterated realized sample size. The output that will return from the `afscISS::get_RSS()` function for `comp = 'age'` and `comp = 'length'` will include the following columns:
 
 | Column | Description |
 | ---- | ---------------------------------- |
@@ -153,7 +161,9 @@ The output that will return from the `afscISS::get_bias()` function for `comp = 
 
 The output that will return from the `afscISS::get_RSS()` function for `comp = 'caal'` will include the same columns as `comp = 'age'` or `comp = 'length'`, with an additional column for length (in cm) to reflect that the RSS results are for the given length. Note that the only `sex_cat` arguments available for `comp = 'caal'` are 0 (combined sexes), 1 (males), and 2 (females).
 
-5. `afscISS::get_bs_comp()`: obtains statistics for bootstrap results for the iterated age/length/conditional age-at-length composition. The output that will return from the `afscISS::get_bs_comp()` function for `comp = 'age'` and `comp = 'length'` will include the following columns:
+## afscISS::get_bs_comp()
+
+The `afscISS::get_bs_comp()` function obtains statistics for bootstrap results for the iterated age/length/conditional age-at-length composition. The output that will return from the `afscISS::get_bs_comp()` function for `comp = 'age'` and `comp = 'length'` will include the following columns:
 
 | Column | Description |
 | ---- | ---------------------------------- |
