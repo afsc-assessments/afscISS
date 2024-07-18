@@ -58,8 +58,8 @@ afscISS::get_bias(species,
                   spec_case)
 
 # test get rss ----
-comp = 'age'
-sex_cat = 4
+comp = 'caal'
+sex_cat = 0
 spec_case = NULL
 afscISS::get_RSS(species,
                  region,
