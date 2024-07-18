@@ -6,7 +6,7 @@
 #' @param species AFSC species code (default = 21720, pacific cod)
 #' @param region survey region. options are 'ai', 'ebs', 'ebs_slope', 'goa', and 'nebs' (default = 'goa')
 #' @param comp type of composition for which ISS desired. options are 'age', 'length', and 'caal'
-#' @param sex_cat sex category for which composition ISS desired. options are 0, 1, 2, 12, and 4 (default = 4)
+#' @param sex_cat sex category for which composition ISS desired. options are 0 (sexes combined pre-expansion), 1 (males), 2 (females), 12 (males-female comp that sums to 1), and 4 (sexes combined post-expansion) (default = 4)
 #' @param spec_case description string if getting ISS for special case. options are 'ai_subreg', 'bsre', 'dr', 'rebs', 'w_c_egoa', 'w140', 'wc_egoa' (default = NULL)
 #'
 #' @return a dataframe of composition ISS
@@ -24,15 +24,18 @@ get_ISS <- function(species = 21720,
     if(is.null(spec_case)){
       tidytable::as_tidytable(data_iss[[region]]$prod_iss_ag) %>%
         tidytable::filter(species_code %in% species,
-                          sex %in% sex_cat) -> res
+                          sex %in% sex_cat) %>% 
+        tidytable::mutate(iss = round(iss, digits = 0)) -> res
     } else{
       if(spec_case %in% c('bsre', 'dr', 'rebs')){
         tidytable::as_tidytable(data_iss[[region]][[paste0('prod_iss_ag_', spec_case)]]) %>%
-          tidytable::filter(sex %in% sex_cat) -> res
+          tidytable::filter(sex %in% sex_cat) %>% 
+          tidytable::mutate(iss = round(iss, digits = 0)) -> res
       } else{
         tidytable::as_tidytable(data_iss[[region]][[paste0('prod_iss_ag_', spec_case)]]) %>%
           tidytable::filter(species_code %in% species,
-                            sex %in% sex_cat) -> res
+                            sex %in% sex_cat) %>% 
+          tidytable::mutate(iss = round(iss, digits = 0)) -> res
       }
     }
   }
@@ -42,15 +45,18 @@ get_ISS <- function(species = 21720,
     if(is.null(spec_case)){
       tidytable::as_tidytable(data_iss[[region]]$prod_iss_ln) %>%
         tidytable::filter(species_code %in% species,
-                          sex %in% sex_cat) -> res
+                          sex %in% sex_cat) %>% 
+        tidytable::mutate(iss = round(iss, digits = 0)) -> res
     } else{
       if(spec_case %in% c('bsre', 'dr', 'rebs')){
         tidytable::as_tidytable(data_iss[[region]][[paste0('prod_iss_ln_', spec_case)]]) %>%
-          tidytable::filter(sex %in% sex_cat) -> res
+          tidytable::filter(sex %in% sex_cat) %>% 
+          tidytable::mutate(iss = round(iss, digits = 0)) -> res
       } else{
         tidytable::as_tidytable(data_iss[[region]][[paste0('prod_iss_ln_', spec_case)]]) %>%
           tidytable::filter(species_code %in% species,
-                            sex %in% sex_cat) -> res
+                            sex %in% sex_cat) %>% 
+          tidytable::mutate(iss = round(iss, digits = 0)) -> res
       }
     }
   } 
@@ -59,7 +65,8 @@ get_ISS <- function(species = 21720,
   if(comp == 'caal'){
     tidytable::as_tidytable(data_iss[[region]]$prod_iss_caal) %>%
       tidytable::filter(species_code %in% species,
-                        sex %in% sex_cat) -> res
+                        sex %in% sex_cat) %>% 
+      tidytable::mutate(iss = round(iss, digits = 2)) -> res
   }
   
   res
@@ -70,19 +77,19 @@ get_ISS <- function(species = 21720,
 #' Get stock-specific composition results
 #' 
 #' @description
-#' Function that retrieves age and length pop'n numbers and conditional age-at-length for AFSC stock assessments
+#' Function that retrieves age and length pop'n numbers for AFSC stock assessments
 #' 
 #' @param species AFSC species code (default = 21720, pacific cod)
 #' @param region survey region. options are 'ai', 'ebs', 'ebs_slope', 'goa', and 'nebs' (default = 'goa')
-#' @param comp type of composition for which ISS desired. options are 'age', 'length', and 'caal'
-#' @param sex_cat sex category for which composition ISS desired. options are 0, 1, 2, 12, and 4 (default = 4)
-#' @param spec_case description string if getting ISS for special case. options are 'ai_subreg', 'bsre', 'dr', 'rebs', 'w_c_egoa', 'w140', 'wc_egoa' (default = NULL)
+#' @param comp type of pop'n numbers desired, options are 'age' and 'length'
+#' @param sex_cat sex category for which pop'n numbers desired. options are 0 (sexes combined pre-expansion), 1 (males), 2 (females), 3 (unsexed), and 4 (sexes combined post-expansion) (default = 4)
+#' @param spec_case description string if getting pop'n numbers for special case. options are 'ai_subreg', 'bsre', 'dr', 'rebs', 'w_c_egoa', 'w140', 'wc_egoa' (default = NULL)
 #'
-#' @return a dataframe of age-length pop'n numbers or conditional age-at-length
+#' @return a dataframe of age or length pop'n numbers (note that age data also include mean and sd in length-at-age)
 #' 
 #' @export
 #'
-get_comp <- function(species = 21720,
+get_popn <- function(species = 21720,
                      region = 'goa',
                      comp = 'age',
                      sex_cat = 4,
@@ -123,7 +130,155 @@ get_comp <- function(species = 21720,
       }
     }
   } 
+  
+  res
+  
+}
 
+#' Get stock-specific composition results
+#' 
+#' @description
+#' Function that retrieves age, length, and conditional age-at-length composition for AFSC stock assessments
+#' 
+#' @param species AFSC species code (default = 21720, pacific cod)
+#' @param region survey region. options are 'ai', 'ebs', 'ebs_slope', 'goa', and 'nebs' (default = 'goa')
+#' @param comp type of composition desired, options are 'age', 'length', and 'caal'
+#' @param sex_cat sex category for which composition ISS desired. options are 0 (sexes combined pre-expansion), 1 (males), 2 (females), 12 (males-female comp that sums to 1), and 4 (sexes combined post-expansion) (default = 4)
+#' @param spec_case description string if getting composition for special case. options are 'ai_subreg', 'bsre', 'dr', 'rebs', 'w_c_egoa', 'w140', 'wc_egoa' (default = NULL)
+#'
+#' @return a dataframe of age, length, or conditional age-at-length composition
+#' 
+#' @export
+#'
+get_comp <- function(species = 21720,
+                     region = 'goa',
+                     comp = 'age',
+                     sex_cat = 4,
+                     spec_case = NULL) {
+  
+  # age pop'n ----
+  if(comp == 'age'){
+    if(is.null(spec_case)){
+      tidytable::as_tidytable(data_iss[[region]]$prod_base_age) %>%
+        # for sex categories 0, 1, 2, and 4
+        tidytable::filter(sex %in% c(0, 1, 2, 4)) %>% 
+        tidytable::mutate(tot = sum(agepop), .by = c(year, species_code, sex)) %>% 
+        tidytable::mutate(prop = agepop / tot,
+                          sex_c = sex) %>% 
+        tidytable::select(year, species_code, sex, sex_c, age, prop) %>% 
+        # for sex category 12
+        tidytable::bind_rows(tidytable::as_tidytable(data_iss[[region]]$prod_base_age) %>%
+                               tidytable::filter(sex %in% c(1, 2)) %>% 
+                               tidytable::mutate(tot = sum(agepop), .by = c(year, species_code)) %>% 
+                               tidytable::mutate(prop = agepop / tot,
+                                                 sex_c = 12) %>% 
+                               tidytable::select(year, species_code, sex, sex_c, age, prop)) %>% 
+        tidytable::filter(species_code %in% species,
+                          sex_c %in% sex_cat) %>% 
+        tidytable::select(-sex_c) -> res
+    } else{
+      if(spec_case %in% c('bsre', 'dr', 'rebs')){
+        tidytable::as_tidytable(data_iss[[region]][[paste0('prod_base_age_', spec_case)]]) %>%
+          # for sex categories 0, 1, 2, and 4
+          tidytable::filter(sex %in% c(0, 1, 2, 4)) %>% 
+          tidytable::mutate(tot = sum(agepop), .by = c(year, species_code, sex)) %>% 
+          tidytable::mutate(prop = agepop / tot,
+                            sex_c = sex) %>% 
+          tidytable::select(year, species_code, sex, sex_c, age, prop) %>% 
+          # for sex category 12
+          tidytable::bind_rows(tidytable::as_tidytable(data_iss[[region]][[paste0('prod_base_age_', spec_case)]]) %>%
+                                 tidytable::filter(sex %in% c(1, 2)) %>% 
+                                 tidytable::mutate(tot = sum(agepop), .by = c(year, species_code)) %>% 
+                                 tidytable::mutate(prop = agepop / tot,
+                                                   sex_c = 12) %>% 
+                                 tidytable::select(year, species_code, sex, sex_c, age, prop)) %>% 
+          tidytable::filter(sex_c %in% sex_cat) %>% 
+          tidytable::select(-sex_c) -> res
+      } else{
+        tidytable::as_tidytable(data_iss[[region]][[paste0('prod_base_age_', spec_case)]]) %>%
+          # for sex categories 0, 1, 2, and 4
+          tidytable::filter(sex %in% c(0, 1, 2, 4)) %>% 
+          tidytable::mutate(tot = sum(agepop), .by = c(year, region, species_code, sex)) %>% 
+          tidytable::mutate(prop = agepop / tot,
+                            sex_c = sex) %>% 
+          tidytable::select(year, region, species_code, sex, sex_c, age, prop) %>% 
+          # for sex category 12
+          tidytable::bind_rows(tidytable::as_tidytable(data_iss[[region]][[paste0('prod_base_age_', spec_case)]]) %>%
+                                 tidytable::filter(sex %in% c(1, 2)) %>% 
+                                 tidytable::mutate(tot = sum(agepop), .by = c(year, region, species_code)) %>% 
+                                 tidytable::mutate(prop = agepop / tot,
+                                                   sex_c = 12) %>% 
+                                 tidytable::select(year, region, species_code, sex, sex_c, age, prop)) %>% 
+          tidytable::filter(species_code %in% species,
+                            sex_c %in% sex_cat) %>% 
+          tidytable::select(-sex_c) -> res
+      }
+    }
+  }
+  
+  # length pop'n ----
+  if(comp == 'length'){
+    if(is.null(spec_case)){
+      tidytable::as_tidytable(data_iss[[region]]$prod_base_length) %>%
+        # for sex categories 0, 1, 2, and 4
+        tidytable::filter(sex %in% c(0, 1, 2, 4)) %>% 
+        tidytable::mutate(tot = sum(abund), .by = c(year, species_code, sex)) %>% 
+        tidytable::mutate(prop = abund / tot,
+                          sex_c = sex) %>% 
+        tidytable::select(year, species_code, sex, sex_c, length, prop) %>% 
+        # for sex category 12
+        tidytable::bind_rows(tidytable::as_tidytable(data_iss[[region]]$prod_base_length) %>%
+                               tidytable::filter(sex %in% c(1, 2)) %>% 
+                               tidytable::mutate(tot = sum(abund), .by = c(year, species_code)) %>% 
+                               tidytable::mutate(prop = abund / tot,
+                                                 sex_c = 12) %>% 
+                               tidytable::select(year, species_code, sex, sex_c, length, prop)) %>% 
+        tidytable::filter(species_code %in% species,
+                          sex_c %in% sex_cat) %>% 
+        tidytable::select(-sex_c) -> res
+      
+    } else{
+      if(spec_case %in% c('bsre', 'dr', 'rebs')){
+        tidytable::as_tidytable(data_iss[[region]][[paste0('prod_base_length_', spec_case)]]) %>%
+          # for sex categories 0, 1, 2, and 4
+          tidytable::filter(sex %in% c(0, 1, 2, 4)) %>% 
+          tidytable::mutate(tot = sum(abund), .by = c(year, species_code, sex)) %>% 
+          tidytable::mutate(prop = abund / tot,
+                            sex_c = sex) %>% 
+          tidytable::select(year, species_code, sex, sex_c, length, prop) %>% 
+          # for sex category 12
+          tidytable::bind_rows(tidytable::as_tidytable(data_iss[[region]][[paste0('prod_base_length_', spec_case)]]) %>%
+                                 tidytable::filter(sex %in% c(1, 2)) %>% 
+                                 tidytable::mutate(tot = sum(abund), .by = c(year, species_code)) %>% 
+                                 tidytable::mutate(prop = abund / tot,
+                                                   sex_c = 12) %>% 
+                                 tidytable::select(year, species_code, sex, sex_c, length, prop)) %>% 
+          tidytable::filter(sex_c %in% sex_cat) %>% 
+          tidytable::select(-sex_c) -> res
+        
+        
+      } else{
+        tidytable::as_tidytable(data_iss[[region]][[paste0('prod_base_length_', spec_case)]]) %>%
+          # for sex categories 0, 1, 2, and 4
+          tidytable::filter(sex %in% c(0, 1, 2, 4)) %>% 
+          tidytable::mutate(tot = sum(abund), .by = c(year, region, species_code, sex)) %>% 
+          tidytable::mutate(prop = abund / tot,
+                            sex_c = sex) %>% 
+          tidytable::select(year, region, species_code, sex, sex_c, length, prop) %>% 
+          # for sex category 12
+          tidytable::bind_rows(tidytable::as_tidytable(data_iss[[region]][[paste0('prod_base_length_', spec_case)]]) %>%
+                                 tidytable::filter(sex %in% c(1, 2)) %>% 
+                                 tidytable::mutate(tot = sum(abund), .by = c(year, region, species_code)) %>% 
+                                 tidytable::mutate(prop = abund / tot,
+                                                   sex_c = 12) %>% 
+                                 tidytable::select(year, region, species_code, sex, sex_c, length, prop)) %>% 
+          tidytable::filter(species_code %in% species,
+                            sex_c %in% sex_cat) %>% 
+          tidytable::select(-sex_c) -> res
+      }
+    }
+  } 
+  
   # caal ----
   if(comp == 'caal'){
     tidytable::as_tidytable(data_iss[[region]]$prod_base_caal) %>%
@@ -135,7 +290,6 @@ get_comp <- function(species = 21720,
   
 }
 
-
 #' Get stock-specific bootstrap bias results
 #' 
 #' @description
@@ -144,8 +298,8 @@ get_comp <- function(species = 21720,
 #' @param species AFSC species code (default = 21720, pacific cod)
 #' @param region survey region. options are 'ai', 'ebs', 'ebs_slope', 'goa', and 'nebs' (default = 'goa')
 #' @param comp type of composition for which ISS desired. options are 'age', 'length', and 'caal'
-#' @param sex_cat sex category for which composition ISS desired. options are 0, 1, 2, 12, and 4 (default = 4)
-#' @param spec_case description string if getting ISS for special case. options are 'ai_subreg', 'bsre', 'dr', 'rebs', 'w_c_egoa', 'w140', 'wc_egoa' (default = NULL)
+#' @param sex_cat sex category for which bootstrap bias desired, options are 0 (sexes combined pre-expansion), 1 (males), 2 (females), 12 (males-female comp that sums to 1), and 4 (sexes combined post-expansion) (default = 4)
+#' @param spec_case description string if getting bootstrap bias for special case. options are 'ai_subreg', 'bsre', 'dr', 'rebs', 'w_c_egoa', 'w140', 'wc_egoa' (default = NULL)
 #'
 #' @return a dataframe of bootstrap bias statistics
 #' 
@@ -211,9 +365,9 @@ get_bias <- function(species = 21720,
 #' 
 #' @param species AFSC species code (default = 21720, pacific cod)
 #' @param region survey region. options are 'ai', 'ebs', 'ebs_slope', 'goa', and 'nebs' (default = 'goa')
-#' @param comp type of composition for which ISS desired. options are 'age', 'length', and 'caal'
-#' @param sex_cat sex category for which composition ISS desired. options are 0, 1, 2, 12, and 4 (default = 4)
-#' @param spec_case description string if getting ISS for special case. options are 'ai_subreg', 'bsre', 'dr', 'rebs', 'w_c_egoa', 'w140', 'wc_egoa' (default = NULL)
+#' @param comp type of composition for which RSS desired, options are 'age', 'length', and 'caal'
+#' @param sex_cat sex category for which RSS desired, options are 0 (sexes combined pre-expansion), 1 (males), 2 (females), 12 (males-female comp that sums to 1), and 4 (sexes combined post-expansion) (default = 4)
+#' @param spec_case description string if getting RSS for special case, options are 'ai_subreg', 'bsre', 'dr', 'rebs', 'w_c_egoa', 'w140', 'wc_egoa' (default = NULL)
 #'
 #' @return a dataframe of bootstrap statistics for RSS
 #' 
@@ -279,9 +433,9 @@ get_RSS <- function(species = 21720,
 #' 
 #' @param species AFSC species code (default = 21720, pacific cod)
 #' @param region survey region. options are 'ai', 'ebs', 'ebs_slope', 'goa', and 'nebs' (default = 'goa')
-#' @param comp type of composition for which ISS desired. options are 'age', 'length', and 'caal'
-#' @param sex_cat sex category for which composition ISS desired. options are 0, 1, 2, 12, and 4 (default = 4)
-#' @param spec_case description string if getting ISS for special case. options are 'ai_subreg', 'bsre', 'dr', 'rebs', 'w_c_egoa', 'w140', 'wc_egoa' (default = NULL)
+#' @param comp type of composition desired, options are 'age', 'length', and 'caal'
+#' @param sex_cat sex category for which composition desired, options are 0 (sexes combined pre-expansion), 1 (males), 2 (females), 12 (males-female comp that sums to 1), and 4 (sexes combined post-expansion) (default = 4)
+#' @param spec_case description string if getting composition for special case, options are 'ai_subreg', 'bsre', 'dr', 'rebs', 'w_c_egoa', 'w140', 'wc_egoa' (default = NULL)
 #'
 #' @return a dataframe of bootstrap statistics for replicated composition data
 #' 
