@@ -70,6 +70,8 @@ There are currently 7 special cases, described in the following table:
 | w140 | Provides output for age/length composition computed for the GOA survey region west of 140$^\circ$ longitude (currently only computed for the GOA walleye pollock stock). |
 | wc_egoa | Provides output for age/length composition computed for the Western-Central GOA (combined), and Eastern GOA survey regions (and will also provide output for the combined values at the overall GOA region). |
 
+Note that for the `bsre`, `dr`, and `rebs` special cases, the `species` argument is not needed, as a special species code has already been defined (as an agglomeration of the individual species codes). Also note for that these stock complex special cases are not included in the spatial special cases.
+
 The output that will return from the `afscISS::get_ISS()` function will include the following columns:
 
 | Column | Description |
