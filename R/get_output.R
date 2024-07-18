@@ -155,7 +155,7 @@ get_comp <- function(species = 21720,
                      comp = 'age',
                      sex_cat = 4,
                      spec_case = NULL) {
-  
+  data("data_iss", envir=environment())
   # age pop'n ----
   if(comp == 'age'){
     if(is.null(spec_case)){
