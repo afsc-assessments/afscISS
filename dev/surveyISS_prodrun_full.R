@@ -7,6 +7,9 @@
 # devtools::install_github("BenWilliams-NOAA/surveyISS", force = TRUE)
 library(surveyISS)
 
+# do you want to write package data after run?
+write_data = FALSE
+
 # set iterations ----
 # set number of desired bootstrap iterations (suggested here: 10 for testing, 500 for running)
 # iters = 500
@@ -389,4 +392,9 @@ if(iters < 500){
   end <- Sys.time()
   runtime <- (end - st) / iters * 500 / 60
   runtime
+}
+
+# write pkg data ----
+if(isTRUE(write_data)){
+  afscISS::pkg_data(append = FALSE)
 }
