@@ -1,6 +1,6 @@
 # afscISS
 
-## Welsome
+## Welcome
 
 This repository is a storage location for AFSC survey age and length composition Input Sample Sizes (ISS) provided by the [surveyISS](https://benwilliams-noaa.github.io/surveyISS/) package.
 The R package `afscISS` allows you to obtain AFSC survey ISS for the type of composition data you use in your stock assessment.
