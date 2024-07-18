@@ -80,13 +80,15 @@ The output that will return from the `afscISS::get_ISS()` function will include 
 | nss | Nominal sample size (the number of age/length samples collected). |
 | nhl | Number of hauls from which samples were collected. |
 
-There are 4 other functions using the same arguments that obtain output from the `surveyISS` package:
+There are 5 other functions using the same arguments that obtain output from the `surveyISS` package:
 
-1. `afscISS::get_comp()`: obtains the design-based computed composition values (will also provide the design-based mean and sd in length-at-age when obtaining age composition output).
+1. `afscISS::get_pop()`: obtains the design-based computed population at age or length values (will also provide the design-based mean and sd in length-at-age when obtaining age output).
 
-2. `afscISS::get_bias()`: obtains the average bias in the bootstrap simulated age/length/conditional age-at-length.
+2. `afscISS::get_comp()`: obtains the computed age, length, and condition age-at-length composition from design-based population estimates.
 
-3. `afscISS::get_RSS()`: obtains the bootstrap mean, sd, 2.5%, 25%, 75%, and 97.5% percentiles of the realized sample size across the bootstrap iterations.
+3. `afscISS::get_bias()`: obtains the average bias in the bootstrap simulated age/length/conditional age-at-length.
 
-4. `afscISS::get_res_comp()`: obtains the bootstrap mean, sd, 2.5%, 25%, 75%, and 97.5% percentiles of the age/length/conditional age-at-length composition across the bootstrap iterations.
+4. `afscISS::get_RSS()`: obtains the bootstrap mean, sd, 2.5%, 25%, 75%, and 97.5% percentiles of the realized sample size across the bootstrap iterations.
+
+5. `afscISS::get_res_comp()`: obtains the bootstrap mean, sd, 2.5%, 25%, 75%, and 97.5% percentiles of the age/length/conditional age-at-length composition across the bootstrap iterations.
 
