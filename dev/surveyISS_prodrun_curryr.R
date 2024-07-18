@@ -31,9 +31,9 @@ data_ebss <- data$data_ebss
 data_nbs <- data$data_nbs
 data_nebs <- data$data_nebs
 
-# for testing run time
-if(iters < 100){
-  st <- Sys.time()
+# test run time ----
+if(iters < 500){
+  tictoc::tic()
 }
 
 # gulf of alaska ----
@@ -453,11 +453,11 @@ if(nrow(data_nebs$specimen %>%
   
 }
 
-# For testing run time of 500 iterations ----
+# Test run time ----
 if(iters < 500){
-  end <- Sys.time()
-  runtime <- (end - st) / iters * 500 / 60
-  runtime
+  end <- tictoc::toc(quiet = TRUE)
+  runtime <- round((((as.numeric(strsplit(end$callback_msg, split = " ")[[1]][1]) / iters) * 500) / 60) / 60, digits = 1)
+  cat("Full run of", crayon::green$bold(500), "iterations will take", crayon::red$bold$underline$italic(runtime), "hours", "\u2693","\n")
 }
 
 # write pkg data ----
