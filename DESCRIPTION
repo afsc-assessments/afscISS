@@ -17,7 +17,7 @@ License: MIT + file LICENSE
 URL: https://github.com/afsc-assessments/afscISS/, https://afsc-assessments.github.io/afscISS/
 BugReports: https://github.com/afsc-assessments/afscISS/issues
 Encoding: UTF-8
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Imports: 
     magrittr,
     tidytable,

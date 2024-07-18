@@ -17,15 +17,15 @@ get_comp(
 
 \item{region}{survey region. options are 'ai', 'ebs', 'ebs_slope', 'goa', and 'nebs' (default = 'goa')}
 
-\item{comp}{type of composition for which ISS desired. options are 'age', 'length', and 'caal'}
+\item{comp}{type of composition desired, options are 'age', 'length', and 'caal'}
 
-\item{sex_cat}{sex category for which composition ISS desired. options are 0, 1, 2, 12, and 4 (default = 4)}
+\item{sex_cat}{sex category for which composition ISS desired. options are 0 (sexes combined pre-expansion), 1 (males), 2 (females), 12 (males-female comp that sums to 1), and 4 (sexes combined post-expansion) (default = 4)}
 
-\item{spec_case}{description string if getting ISS for special case. options are 'ai_subreg', 'bsre', 'dr', 'rebs', 'w_c_egoa', 'w140', 'wc_egoa' (default = NULL)}
+\item{spec_case}{description string if getting composition for special case. options are 'ai_subreg', 'bsre', 'dr', 'rebs', 'w_c_egoa', 'w140', 'wc_egoa' (default = NULL)}
 }
 \value{
-a dataframe of age-length pop'n numbers or conditional age-at-length
+a dataframe of age, length, or conditional age-at-length composition
 }
 \description{
-Function that retrieves age and length pop'n numbers and conditional age-at-length for AFSC stock assessments
+Function that retrieves age, length, and conditional age-at-length composition for AFSC stock assessments
 }

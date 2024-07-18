@@ -17,14 +17,14 @@ get_RSS(
 
 \item{region}{survey region. options are 'ai', 'ebs', 'ebs_slope', 'goa', and 'nebs' (default = 'goa')}
 
-\item{comp}{type of composition for which ISS desired. options are 'age', 'length', and 'caal'}
+\item{comp}{type of composition for which RSS desired, options are 'age', 'length', and 'caal'}
 
-\item{sex_cat}{sex category for which composition ISS desired. options are 0, 1, 2, 12, and 4 (default = 4)}
+\item{sex_cat}{sex category for which RSS desired, options are 0 (sexes combined pre-expansion), 1 (males), 2 (females), 12 (males-female comp that sums to 1), and 4 (sexes combined post-expansion) (default = 4)}
 
-\item{spec_case}{description string if getting ISS for special case. options are 'ai_subreg', 'bsre', 'dr', 'rebs', 'w_c_egoa', 'w140', 'wc_egoa' (default = NULL)}
+\item{spec_case}{description string if getting RSS for special case, options are 'ai_subreg', 'bsre', 'dr', 'rebs', 'w_c_egoa', 'w140', 'wc_egoa' (default = NULL)}
 }
 \value{
-a dataframe of composition ISS
+a dataframe of bootstrap statistics for RSS
 }
 \description{
 Function that retrieves composition replicates of Realized Sample Size results for AFSC stock assessments
