@@ -4,7 +4,7 @@
 \alias{get_stats}
 \title{function to summarize bootstrap results}
 \usage{
-get_stats(data, grp, column)
+get_stats(data, grp, column, dgts)
 }
 \arguments{
 \item{data}{dataframe to be summarized}
@@ -12,6 +12,8 @@ get_stats(data, grp, column)
 \item{grp}{grouping for summarization}
 
 \item{column}{column name to be summarized across iterations}
+
+\item{dgts}{number of significant digits in rounding results}
 }
 \value{
 dataframe with summary bootstrap statistics
