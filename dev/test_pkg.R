@@ -13,23 +13,24 @@ afscISS::pkg_data(append = FALSE)
 afscISS::pkg_data(append = TRUE)
 
 # set inputs ----
-
 species = 21720
 region = 'goa'
-comp = 'age'
-sex_cat = 4
-spec_case = NULL
 
 # test get iss ----
+comp = 'caal'
+sex_cat = 0
+spec_case = NULL
 afscISS::get_ISS(species,
                  region,
                  comp,
-                 sex_cat = 0,
+                 sex_cat,
                  spec_case)
 
 
 # test get comps ----
-sex_cat = 4
+comp = 'caal'
+sex_cat = 0
+spec_case = NULL
 afscISS::get_comp(species,
                   region,
                   comp,
@@ -37,7 +38,9 @@ afscISS::get_comp(species,
                   spec_case)
 
 # test get popn ----
+comp = 'length'
 sex_cat = 4
+spec_case = NULL
 afscISS::get_popn(species,
                   region,
                   comp,
@@ -45,6 +48,9 @@ afscISS::get_popn(species,
                   spec_case)
 
 # test get bias ----
+comp = 'caal'
+sex_cat = 0
+spec_case = NULL
 afscISS::get_bias(species,
                   region,
                   comp,
@@ -52,6 +58,9 @@ afscISS::get_bias(species,
                   spec_case)
 
 # test get rss ----
+comp = 'age'
+sex_cat = 4
+spec_case = NULL
 afscISS::get_RSS(species,
                  region,
                  comp,
@@ -59,12 +68,14 @@ afscISS::get_RSS(species,
                  spec_case)
 
 # test get resampled comps ----
-sex_cat = 0
-afscISS::get_res_comp(species,
-                      region,
-                      comp,
-                      sex_cat,
-                      spec_case)
+comp = 'length'
+sex_cat = 12
+spec_case = NULL
+afscISS::get_bs_comp(species,
+                     region,
+                     comp,
+                     sex_cat,
+                     spec_case)
 
 # notes:
 # caal doesn't have sex cat 4
