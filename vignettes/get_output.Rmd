@@ -63,7 +63,7 @@ There are currently 7 special cases, described in the following table:
 | ai_subreg | Provides output for age/length composition computed at the sub-region scale within the AI survey region (and will also provide output for the combined values at the overall AI region). |
 | bsre | Provides output for the AI Blackspotted-Rougheye stock complex (where length pop'n computed for each individual species but age pop'n computed for the complex as a whole). |
 | dr | Provides output for the GOA dusky rockfish stock. |
-| rebs | Provides output for the GOA Rougheye-Blackspotted stock complex (where length and age pop'n are computed for each individual species and summed post-expansion. |
+| rebs | Provides output for the GOA Rougheye-Blackspotted stock complex (where length and age pop'n are computed for each individual species and summed post-expansion). |
 | w_c_egoa | Provides output for age/length composition computed for the Western, Central, and Eastern GOA survey regions (and will also provide output for the combined values at the overall GOA region). |
 | w140 | Provides output for age/length composition computed for the GOA survey region west of 140$^\circ$ longitude (currently only computed for the GOA walleye pollock stock). |
 | wc_egoa | Provides output for age/length composition computed for the Western-Central GOA (combined), and Eastern GOA survey regions (and will also provide output for the combined values at the overall GOA region). |
@@ -80,15 +80,107 @@ The output that will return from the `afscISS::get_ISS()` function will include 
 | nss | Nominal sample size (the number of age/length samples collected). |
 | nhl | Number of hauls from which samples were collected. |
 
-There are 5 other functions using the same arguments that obtain output from the `surveyISS` package:
+There are 5 other functions using the same arguments that obtain additional output from the `surveyISS` package:
 
-1. `afscISS::get_pop()`: obtains the design-based computed population at age or length values (will also provide the design-based mean and sd in length-at-age when obtaining age output).
+1. `afscISS::get_popn()`: obtains the design-based expanded population at age or length values (will also provide the design-based mean and sd in length-at-age when obtaining age output). This output replicates what is provided in the GAP_PRODUCTS tables, with the exception of the special cases implemented in the `surveyISS` package that are not available in the `gapindex` package. Note that the `sex_cat` arguments for this function are 0 (sexes combined pre-expansion), 1 (males), 2 (females), 3 (unsexed), and 4 (sexes combined post-expansion) and does not include `sex_cat` argument of 12 (as those results are provided in this case for `sex_cat` 1 and 2 individually). The output that will return from the `afscISS::get_popn()` function for `comp = 'age'` will include the following columns:
 
-2. `afscISS::get_comp()`: obtains the computed age, length, and condition age-at-length composition from design-based population estimates.
+| Column | Description |
+| ---- | ---------------------------------- |
+| year | Survey year. |
+| species_code | RACE species code. |
+| sex | Numerical value for sex category. |
+| age | Age. |
+| agepop | Design-based expanded population numbers for age. |
+| mean_length | Design-based computed mean length-at-age. |
+| sd_length | Design-based computed standard deviation in length-at-age. |
 
-3. `afscISS::get_bias()`: obtains the average bias in the bootstrap simulated age/length/conditional age-at-length.
+The output that will return from the `afscISS::get_popn()` function for `comp = 'length'` will include the following columns:
 
-4. `afscISS::get_RSS()`: obtains the bootstrap mean, sd, 2.5%, 25%, 75%, and 97.5% percentiles of the realized sample size across the bootstrap iterations.
+| Column | Description |
+| ---- | ---------------------------------- |
+| year | Survey year. |
+| species_code | RACE species code. |
+| length | Length in cm. |
+| sex | Numerical value for sex category. |
+| abund | Design-based expanded population numbers for length. |
 
-5. `afscISS::get_res_comp()`: obtains the bootstrap mean, sd, 2.5%, 25%, 75%, and 97.5% percentiles of the age/length/conditional age-at-length composition across the bootstrap iterations.
+2. `afscISS::get_comp()`: obtains the computed age, length, and conditional age-at-length composition from design-based population estimates (i.e., the proportions that would be used in a stock assessment model). The output that will return from the `afscISS::get_comp()` function for `comp = 'age'` and `comp = 'length'` will include the following columns:
+
+| Column | Description |
+| ---- | ---------------------------------- |
+| year | Survey year. |
+| species_code | RACE species code. |
+| sex | Numerical value for sex category. Note that when `sex_cat = 12` this will return values of 1 (males) and 2 (females) in the sex column where the proportions will sum to 1 across both sexes. |
+| age/length | Age or length (in cm). |
+| prop | Proportion at age or length. |
+
+The output that will return from the `afscISS::get_comp()` function for `comp = 'caal'` will include the following columns:
+
+| Column | Description |
+| ---- | ---------------------------------- |
+| year | Survey year. |
+| species_code | RACE species code. |
+| sex | Numerical value for sex category. Note that the only `sex_cat` arguments available for `comp = 'caal'` are 0 (combined sexes), 1 (males), and 2 (females). |
+| length | Length in cm. |
+| age | Age. |
+| caal | Proportion at age within given length. |
+
+3. `afscISS::get_bias()`: obtains the average bias in the bootstrap simulated age/length/conditional age-at-length. The output that will return from the `afscISS::get_bias()` function for `comp = 'age'` and `comp = 'length'` will include the following columns:
+
+| Column | Description |
+| ---- | ---------------------------------- |
+| year | Survey year. |
+| species_code | RACE species code. |
+| sex | Numerical value for sex category. |
+| bias | Average bias in composition across age/length. |
+
+The output that will return from the `afscISS::get_bias()` function for `comp = 'caal'` will include the same columns as `comp = 'age'` or `comp = 'length'`, with an additional column for length (in cm) to reflect that the bias column is the average bias in composition across age within given length. Note that the only `sex_cat` arguments available for `comp = 'caal'` are 0 (combined sexes), 1 (males), and 2 (females).
+
+4. `afscISS::get_RSS()`: obtains statistics for bootstrap results for the iterated realized sample size. The output that will return from the `afscISS::get_RSS()` function for `comp = 'age'` and `comp = 'length'` will include the following columns:
+
+| Column | Description |
+| ---- | ---------------------------------- |
+| year | Survey year. |
+| species_code | RACE species code. |
+| sex | Numerical value for sex category. |
+| sex_desc | Text string with short description of sex category. |
+| bs_mean | Average RSS across bootstrap iterations. |
+| bs_sd | Standard deviation in RSS across bootstrap iterations. |
+| q2_5th | 2.5% percentile in RSS across bootstrap iterations. |
+| q25th | 25% percentile in RSS across bootstrap iterations. |
+| q75th | 75% percentile in RSS across bootstrap iterations. |
+| q97_5th | 97.5% percentile in RSS across bootstrap iterations. |
+
+The output that will return from the `afscISS::get_RSS()` function for `comp = 'caal'` will include the same columns as `comp = 'age'` or `comp = 'length'`, with an additional column for length (in cm) to reflect that the RSS results are for the given length. Note that the only `sex_cat` arguments available for `comp = 'caal'` are 0 (combined sexes), 1 (males), and 2 (females).
+
+5. `afscISS::get_bs_comp()`: obtains statistics for bootstrap results for the iterated age/length/conditional age-at-length composition. The output that will return from the `afscISS::get_bs_comp()` function for `comp = 'age'` and `comp = 'length'` will include the following columns:
+
+| Column | Description |
+| ---- | ---------------------------------- |
+| year | Survey year. |
+| species_code | RACE species code. |
+| sex | Numerical value for sex category. Note that when `sex_cat = 12` this will return values of 1 (males) and 2 (females) in the sex column where the proportions were computed in the bootstrap iterations to sum to 1 across both sexes. |
+| age/length | Age or length (in cm). |
+| bs_mean | Average proportion across bootstrap iterations. |
+| bs_sd | Standard deviation in the proportion across bootstrap iterations. |
+| q2_5th | 2.5% percentile in the proportion across bootstrap iterations. |
+| q25th | 25% percentile in the proportion across bootstrap iterations. |
+| q75th | 75% percentile in the proportion across bootstrap iterations. |
+| q97_5th | 97.5% percentile in the proportion across bootstrap iterations. |
+
+The output that will return from the `afscISS::get_bs_comp()` function for `comp = 'caal'` will include the following columns:
+
+| Column | Description |
+| ---- | ---------------------------------- |
+| year | Survey year. |
+| species_code | RACE species code. |
+| sex | Numerical value for sex category. Note that the only `sex_cat` arguments available for `comp = 'caal'` are 0 (combined sexes), 1 (males), and 2 (females). |
+| length | Length in cm. |
+| age | Age. |
+| bs_mean | Average proportion across bootstrap iterations. |
+| bs_sd | Standard deviation in the proportion across bootstrap iterations. |
+| q2_5th | 2.5% percentile in the proportion across bootstrap iterations. |
+| q25th | 25% percentile in the proportion across bootstrap iterations. |
+| q75th | 75% percentile in the proportion across bootstrap iterations. |
+| q97_5th | 97.5% percentile in the proportion across bootstrap iterations. |
 
