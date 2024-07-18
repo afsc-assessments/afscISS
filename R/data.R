@@ -315,7 +315,7 @@ summ_stats <- function(data, iter, tot, reg){
     summ <- data
   }
   
-  cat(crayon::red(iter), "of", crayon::green(crayon::bold(tot)), crayon::blue(crayon::bold(toupper(reg))), "objects summarized\n")
+  cat(crayon::yellow(iter), "of", crayon::green(tot), crayon::blue$bold$underline(toupper(reg)), "objects summarized", crayon::green$bold("\u2713"), "\n")
   summ
   
 }
