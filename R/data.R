@@ -245,7 +245,7 @@ summ_stats <- function(data, iter, tot, reg){
         # get bs stats
         summ <- get_stats(data = data,
                           grp = c('year', 'region', 'species_code', 'sex', 'age'),
-                          column = agepop)
+                          column = prop)
       } else{ # without subregion case
         # compute comps for sex categories 0, 1, and 2
         data %>% 
@@ -270,7 +270,7 @@ summ_stats <- function(data, iter, tot, reg){
         # get bs stats
         summ <- get_stats(data = data,
                           grp = c('year', 'species_code', 'sex', 'age'),
-                          column = agepop)
+                          column = prop)
       }
     }
     # for caal
