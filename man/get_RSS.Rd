@@ -8,7 +8,7 @@ get_RSS(
   species = 21720,
   region = "goa",
   comp = "age",
-  sex_cat = NULL,
+  sex_cat = 4,
   spec_case = NULL
 )
 }
@@ -19,7 +19,7 @@ get_RSS(
 
 \item{comp}{type of composition for which RSS desired, options are 'age', 'length', and 'caal'}
 
-\item{sex_cat}{sex category for which RSS desired, options are 0 (sexes combined pre-expansion), 1 (males), 2 (females), 12 (males-female comp that sums to 1), and 4 (sexes combined post-expansion) (default = NULL)}
+\item{sex_cat}{sex category for which RSS desired, options are 0 (sexes combined pre-expansion), 1 (males), 2 (females), 12 (males-female comp that sums to 1), and 4 (sexes combined post-expansion) (default = 4)}
 
 \item{spec_case}{description string if getting RSS for special case, options are 'ai_subreg', 'bsre', 'dr', 'rebs', 'w_c_egoa', 'w140', 'wc_egoa' (default = NULL)}
 }
