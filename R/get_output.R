@@ -18,7 +18,7 @@ get_ISS <- function(species = 21720,
                     comp = 'age',
                     sex_cat = NULL,
                     spec_case = NULL) {
-  data("data_iss", envir=environment())
+  data_iss = afscISS::data_iss
   # age comp iss ----
   if(comp == 'age'){
     if(is.null(spec_case)){
@@ -94,7 +94,7 @@ get_popn <- function(species = 21720,
                      comp = 'age',
                      sex_cat = NULL,
                      spec_case = NULL) {
-  data("data_iss", envir=environment())
+  data_iss = afscISS::data_iss
   # age pop'n ----
   if(comp == 'age'){
     if(is.null(spec_case)){
@@ -155,7 +155,7 @@ get_comp <- function(species = 21720,
                      comp = 'age',
                      sex_cat = NULL,
                      spec_case = NULL) {
-  data("data_iss", envir=environment())
+ data_iss = afscISS::data_iss
   # age pop'n ----
   if(comp == 'age'){
     if(is.null(spec_case)){
@@ -310,7 +310,7 @@ get_bias <- function(species = 21720,
                      comp = 'age',
                      sex_cat = NULL,
                      spec_case = NULL) {
-  data("data_iss", envir=environment())
+  data_iss = afscISS::data_iss
   # age bias ----
   if(comp == 'age'){
     if(is.null(spec_case)){
@@ -378,7 +378,7 @@ get_RSS <- function(species = 21720,
                     comp = 'age',
                     sex_cat = NULL,
                     spec_case = NULL) {
-  data("data_iss", envir=environment())
+  data_iss = afscISS::data_iss
   # age comp iss ----
   if(comp == 'age'){
     if(is.null(spec_case)){
@@ -446,7 +446,7 @@ get_bs_comp <- function(species = 21720,
                          comp = 'age',
                          sex_cat = NULL,
                          spec_case = NULL) {
-  data("data_iss", envir=environment())
+  data_iss = afscISS::data_iss
   # age pop'n ----
   if(comp == 'age'){
     if(is.null(spec_case)){
