@@ -11,9 +11,17 @@ library(surveyISS)
 write_data = FALSE
 
 # set iterations ----
-# set number of desired bootstrap iterations (suggested here: 10 for testing, 500 for running)
-# iters = 500
-iters = 2
+# first, is this a full run?
+full_run = FALSE
+# set number of desired bootstrap iterations for full run
+iters_full = 500
+# set number of iterations for testing run time
+iters_test = 5
+# set number of iters for this run
+if(isTRUE(full_run)){
+  iters = iters_full
+} else{
+  iters = iters_test}
 
 # set year for running ----
 yrs = 2023
@@ -32,7 +40,7 @@ data_nbs <- data$data_nbs
 data_nebs <- data$data_nebs
 
 # test run time ----
-if(iters < 500){
+if(iters < iters_full){
   tictoc::tic()
 }
 
@@ -53,71 +61,140 @@ if(nrow(.specimen %>%
         tidytable::drop_na()) > 0){
   
   # age/length
-  surveyISS::srvy_iss(iters = iters, 
+  # for comp results
+  surveyISS::srvy_iss(iters = iters,
                       lfreq_data = .lfreq,
-                      specimen_data = .specimen, 
-                      cpue_data = .cpue, 
+                      specimen_data = .specimen,
+                      cpue_data = .cpue,
                       strata_data = strata_data,
-                      yrs = yrs,  
-                      boot_hauls = TRUE, 
-                      boot_lengths = TRUE, 
-                      boot_ages = TRUE, 
-                      al_var = TRUE, 
-                      al_var_ann = TRUE, 
-                      age_err = TRUE,
-                      region = 'goa', 
+                      yrs = 1990,
+                      boot_hauls = TRUE,
+                      boot_lengths = TRUE,
+                      boot_ages = TRUE,
+                      al_var = FALSE,
+                      al_var_ann = FALSE,
+                      age_err = FALSE,
+                      region = 'goa',
                       save_interm = TRUE,
+                      save_stats = FALSE,
+                      save = 'prod')
+  # for stats results
+  surveyISS::srvy_iss(iters = iters,
+                      lfreq_data = .lfreq,
+                      specimen_data = .specimen,
+                      cpue_data = .cpue,
+                      strata_data = strata_data,
+                      yrs = 1990,
+                      boot_hauls = TRUE,
+                      boot_lengths = TRUE,
+                      boot_ages = TRUE,
+                      al_var = TRUE,
+                      al_var_ann = TRUE,
+                      age_err = TRUE,
+                      region = 'goa',
+                      save_interm = FALSE,
                       save_stats = TRUE,
                       save = 'prod')
   
   # caal
+  # for comp results
   surveyISS::srvy_iss_caal(iters = iters, 
                            specimen_data = .specimen, 
                            cpue_data = .cpue, 
-                           yrs = yrs,
+                           yrs = 1990,
+                           boot_hauls = TRUE, 
+                           boot_ages = TRUE,
+                           al_var = FALSE, 
+                           al_var_ann = FALSE, 
+                           age_err = FALSE,
+                           region = 'goa', 
+                           save_interm = TRUE,
+                           save_stats = FALSE,
+                           save = 'prod')
+  # for stats results
+  surveyISS::srvy_iss_caal(iters = iters, 
+                           specimen_data = .specimen, 
+                           cpue_data = .cpue, 
+                           yrs = 1990,
                            boot_hauls = TRUE, 
                            boot_ages = TRUE,
                            al_var = TRUE, 
                            al_var_ann = TRUE, 
                            age_err = TRUE,
                            region = 'goa', 
-                           save_interm = TRUE,
+                           save_interm = FALSE,
                            save_stats = TRUE,
                            save = 'prod')
   
   ## run w-c-e goa ----
-  surveyISS::srvy_iss_goa_w_c_e(iters = iters, 
+  # for comp results
+  surveyISS::srvy_iss_goa_w_c_e(iters = iters,
                                 lfreq_data = .lfreq,
-                                specimen_data = .specimen, 
-                                cpue_data = .cpue, 
-                                strata_data = strata_data, 
-                                yrs = yrs,
+                                specimen_data = .specimen,
+                                cpue_data = .cpue,
+                                strata_data = strata_data,
+                                yrs = 1990,
+                                boot_hauls = TRUE,
+                                boot_lengths = TRUE,
+                                boot_ages = TRUE,
+                                al_var = FALSE,
+                                al_var_ann = FALSE,
+                                age_err = FALSE,
+                                region = 'goa',
+                                save_interm = TRUE,
+                                save_stats = FALSE,
+                                save = 'prod')
+  # for stats results
+  surveyISS::srvy_iss_goa_w_c_e(iters = iters,
+                                lfreq_data = .lfreq,
+                                specimen_data = .specimen,
+                                cpue_data = .cpue,
+                                strata_data = strata_data,
+                                yrs = 1990,
                                 boot_hauls = TRUE,
                                 boot_lengths = TRUE,
                                 boot_ages = TRUE,
                                 al_var = TRUE,
                                 al_var_ann = TRUE,
                                 age_err = TRUE,
-                                region = 'goa', 
-                                save_interm = TRUE,
+                                region = 'goa',
+                                save_interm = FALSE,
                                 save_stats = TRUE,
                                 save = 'prod')
   
   ## run wc-e goa ----
-  surveyISS::srvy_iss_goa_wc_e(iters = iters, 
+  # for comp results
+  surveyISS::srvy_iss_goa_wc_e(iters = iters,
                                lfreq_data = .lfreq,
-                               specimen_data = .specimen, 
-                               cpue_data = .cpue, 
-                               strata_data = strata_data, 
-                               yrs = yrs,
+                               specimen_data = .specimen,
+                               cpue_data = .cpue,
+                               strata_data = strata_data,
+                               yrs = 1990,
+                               boot_hauls = TRUE,
+                               boot_lengths = TRUE,
+                               boot_ages = TRUE,
+                               al_var = FALSE,
+                               al_var_ann = FALSE,
+                               age_err = FALSE,
+                               region = 'goa',
+                               save_interm = TRUE,
+                               save_stats = FALSE,
+                               save = 'prod')
+  # for stats results
+  surveyISS::srvy_iss_goa_wc_e(iters = iters,
+                               lfreq_data = .lfreq,
+                               specimen_data = .specimen,
+                               cpue_data = .cpue,
+                               strata_data = strata_data,
+                               yrs = 1990,
                                boot_hauls = TRUE,
                                boot_lengths = TRUE,
                                boot_ages = TRUE,
                                al_var = TRUE,
                                al_var_ann = TRUE,
                                age_err = TRUE,
-                               region = 'goa', 
-                               save_interm = TRUE,
+                               region = 'goa',
+                               save_interm = FALSE,
                                save_stats = TRUE,
                                save = 'prod')
   
@@ -137,20 +214,38 @@ if(nrow(.specimen_poll %>%
         tidytable::filter(year >= yrs) %>% 
         tidytable::drop_na()) > 0){
   
-  surveyISS::srvy_iss_w140(iters = iters, 
+  # for comp results
+  surveyISS::srvy_iss_w140(iters = iters,
                            lfreq_data = .lfreq_poll,
-                           specimen_data = .specimen_poll, 
-                           cpue_data = .cpue_poll, 
+                           specimen_data = .specimen_poll,
+                           cpue_data = .cpue_poll,
                            strata_data = strata_data,
-                           yrs = yrs, 
-                           boot_hauls = TRUE, 
-                           boot_lengths = TRUE, 
-                           boot_ages = TRUE, 
-                           al_var = TRUE, 
-                           al_var_ann = TRUE, 
+                           yrs = 1990,
+                           boot_hauls = TRUE,
+                           boot_lengths = TRUE,
+                           boot_ages = TRUE,
+                           al_var = FALSE,
+                           al_var_ann = FALSE,
+                           age_err = FALSE,
+                           region = 'goa',
+                           save_interm = TRUE,
+                           save_stats = FALSE,
+                           save = 'prod')
+  # for stats results
+  surveyISS::srvy_iss_w140(iters = iters,
+                           lfreq_data = .lfreq_poll,
+                           specimen_data = .specimen_poll,
+                           cpue_data = .cpue_poll,
+                           strata_data = strata_data,
+                           yrs = 1990,
+                           boot_hauls = TRUE,
+                           boot_lengths = TRUE,
+                           boot_ages = TRUE,
+                           al_var = TRUE,
+                           al_var_ann = TRUE,
                            age_err = TRUE,
                            region = 'goa',
-                           save_interm = TRUE,  
+                           save_interm = FALSE,
                            save_stats = TRUE,
                            save = 'prod')
   
@@ -169,23 +264,44 @@ if(nrow(.specimen_rebs %>%
         tidytable::filter(year >= yrs) %>% 
         tidytable::drop_na()) > 0){
   
-  surveyISS::srvy_iss_goa_cmplx(iters = iters, 
-                                lfreq_data = .lfreq_rebs, 
-                                specimen_data = .specimen_rebs, 
-                                cpue_data = .cpue_rebs, 
-                                strata_data = strata_data, 
-                                yrs = yrs, 
-                                boot_hauls = TRUE, 
-                                boot_lengths = TRUE, 
-                                boot_ages = TRUE, 
-                                al_var = TRUE, 
-                                al_var_ann = TRUE, 
+  # for comp results
+  surveyISS::srvy_iss_goa_cmplx(iters = iters,
+                                lfreq_data = .lfreq_rebs,
+                                specimen_data = .specimen_rebs,
+                                cpue_data = .cpue_rebs,
+                                strata_data = strata_data,
+                                yrs = 1990,
+                                boot_hauls = TRUE,
+                                boot_lengths = TRUE,
+                                boot_ages = TRUE,
+                                al_var = FALSE,
+                                al_var_ann = FALSE,
+                                age_err = FALSE,
+                                cmplx_code = 3005012,
+                                cmplx = 'rebs',
+                                region = 'goa',
+                                save_interm = TRUE,
+                                save_stats = FALSE,
+                                save = 'prod')
+  
+  # for stats results
+  surveyISS::srvy_iss_goa_cmplx(iters = iters,
+                                lfreq_data = .lfreq_rebs,
+                                specimen_data = .specimen_rebs,
+                                cpue_data = .cpue_rebs,
+                                strata_data = strata_data,
+                                yrs = 1990,
+                                boot_hauls = TRUE,
+                                boot_lengths = TRUE,
+                                boot_ages = TRUE,
+                                al_var = TRUE,
+                                al_var_ann = TRUE,
                                 age_err = TRUE,
                                 cmplx_code = 3005012,
                                 cmplx = 'rebs',
                                 region = 'goa',
-                                save_interm = TRUE, 
-                                save_stats = TRUE, 
+                                save_interm = FALSE,
+                                save_stats = TRUE,
                                 save = 'prod')
   
 }
@@ -203,23 +319,44 @@ if(nrow(.specimen_dr %>%
         tidytable::filter(year >= yrs) %>% 
         tidytable::drop_na()) > 0){
   
-  surveyISS::srvy_iss_goa_cmplx(iters = iters, 
-                                lfreq_data = .lfreq_dr, 
-                                specimen_data = .specimen_dr, 
-                                cpue_data = .cpue_dr, 
-                                strata_data = strata_data, 
-                                yrs = yrs, 
-                                boot_hauls = TRUE, 
-                                boot_lengths = TRUE, 
-                                boot_ages = TRUE, 
-                                al_var = TRUE, 
-                                al_var_ann = TRUE, 
+  # for comp results
+  surveyISS::srvy_iss_goa_cmplx(iters = iters,
+                                lfreq_data = .lfreq_dr,
+                                specimen_data = .specimen_dr,
+                                cpue_data = .cpue_dr,
+                                strata_data = strata_data,
+                                yrs = 1990,
+                                boot_hauls = TRUE,
+                                boot_lengths = TRUE,
+                                boot_ages = TRUE,
+                                al_var = FALSE,
+                                al_var_ann = FALSE,
+                                age_err = FALSE,
+                                cmplx_code = 301502,
+                                cmplx = 'dr',
+                                region = 'goa',
+                                save_interm = TRUE,
+                                save_stats = FALSE,
+                                save = 'prod')
+  
+  # for stats results
+  surveyISS::srvy_iss_goa_cmplx(iters = iters,
+                                lfreq_data = .lfreq_dr,
+                                specimen_data = .specimen_dr,
+                                cpue_data = .cpue_dr,
+                                strata_data = strata_data,
+                                yrs = 1990,
+                                boot_hauls = TRUE,
+                                boot_lengths = TRUE,
+                                boot_ages = TRUE,
+                                al_var = TRUE,
+                                al_var_ann = TRUE,
                                 age_err = TRUE,
                                 cmplx_code = 301502,
                                 cmplx = 'dr',
                                 region = 'goa',
-                                save_interm = TRUE,  
-                                save_stats = TRUE, 
+                                save_interm = FALSE,
+                                save_stats = TRUE,
                                 save = 'prod')
   
 }
@@ -241,54 +378,105 @@ if(nrow(.specimen %>%
         tidytable::drop_na()) > 0){
   
   # age/length
-  surveyISS::srvy_iss(iters = iters, 
+  # for comp results
+  surveyISS::srvy_iss(iters = iters,
                       lfreq_data = .lfreq,
-                      specimen_data = .specimen, 
-                      cpue_data = .cpue, 
+                      specimen_data = .specimen,
+                      cpue_data = .cpue,
                       strata_data = strata_data,
-                      yrs = yrs, 
-                      boot_hauls = TRUE, 
-                      boot_lengths = TRUE, 
-                      boot_ages = TRUE, 
-                      al_var = TRUE, 
-                      al_var_ann = TRUE, 
-                      age_err = TRUE,
-                      region = 'ai',  
+                      yrs = 1991,
+                      boot_hauls = TRUE,
+                      boot_lengths = TRUE,
+                      boot_ages = TRUE,
+                      al_var = FALSE,
+                      al_var_ann = FALSE,
+                      age_err = FALSE,
+                      region = 'ai',
                       save_interm = TRUE,
-                      save_stats = TRUE, 
+                      save_stats = FALSE,
+                      save = 'prod')
+  # for stats results
+  surveyISS::srvy_iss(iters = iters,
+                      lfreq_data = .lfreq,
+                      specimen_data = .specimen,
+                      cpue_data = .cpue,
+                      strata_data = strata_data,
+                      yrs = 1991,
+                      boot_hauls = TRUE,
+                      boot_lengths = TRUE,
+                      boot_ages = TRUE,
+                      al_var = TRUE,
+                      al_var_ann = TRUE,
+                      age_err = TRUE,
+                      region = 'ai',
+                      save_interm = FALSE,
+                      save_stats = TRUE,
                       save = 'prod')
   
   # caal
+  # for comp results
   surveyISS::srvy_iss_caal(iters = iters, 
                            specimen_data = .specimen, 
                            cpue_data = .cpue, 
-                           yrs = yrs,
+                           yrs = 1991,
+                           boot_hauls = TRUE, 
+                           boot_ages = TRUE,
+                           al_var = FALSE, 
+                           al_var_ann = FALSE, 
+                           age_err = FALSE,
+                           region = 'ai', 
+                           save_interm = TRUE,
+                           save_stats = FALSE,
+                           save = 'prod')
+  # for stats results
+  surveyISS::srvy_iss_caal(iters = iters, 
+                           specimen_data = .specimen, 
+                           cpue_data = .cpue, 
+                           yrs = 1991,
                            boot_hauls = TRUE, 
                            boot_ages = TRUE,
                            al_var = TRUE, 
                            al_var_ann = TRUE, 
                            age_err = TRUE,
                            region = 'ai', 
-                           save_interm = TRUE,
+                           save_interm = FALSE,
                            save_stats = TRUE,
                            save = 'prod')
   
   ## run for ai subregion ----
+  # for comp results
   surveyISS::srvy_iss_ai_subreg(iters = iters,
                                 lfreq_data = .lfreq,
-                                specimen_data = .specimen, 
-                                cpue_data = .cpue, 
-                                strata_data = strata_data, 
-                                yrs = yrs,
+                                specimen_data = .specimen,
+                                cpue_data = .cpue,
+                                strata_data = strata_data,
+                                yrs = 1991,
                                 boot_hauls = TRUE,
                                 boot_lengths = TRUE,
-                                boot_ages = TRUE, 
-                                al_var = TRUE, 
-                                al_var_ann = TRUE, 
+                                boot_ages = TRUE,
+                                al_var = FALSE,
+                                al_var_ann = FALSE,
+                                age_err = FALSE,
+                                region = 'ai',
+                                save_interm = TRUE,
+                                save_stats = FALSE,
+                                save = 'prod')
+  # for stats results
+  surveyISS::srvy_iss_ai_subreg(iters = iters,
+                                lfreq_data = .lfreq,
+                                specimen_data = .specimen,
+                                cpue_data = .cpue,
+                                strata_data = strata_data,
+                                yrs = 1991,
+                                boot_hauls = TRUE,
+                                boot_lengths = TRUE,
+                                boot_ages = TRUE,
+                                al_var = TRUE,
+                                al_var_ann = TRUE,
                                 age_err = TRUE,
-                                region = 'ai',  
-                                save_interm = TRUE, 
-                                save_stats = TRUE, 
+                                region = 'ai',
+                                save_interm = FALSE,
+                                save_stats = TRUE,
                                 save = 'prod')
   
 }
@@ -306,23 +494,43 @@ if(nrow(.specimen_bsre %>%
         tidytable::filter(year >= yrs) %>% 
         tidytable::drop_na()) > 0){
   
-  surveyISS::srvy_iss_ai_cmplx(iters = iters, 
-                               lfreq_data = .lfreq_bsre, 
-                               specimen_data = .specimen_bsre, 
-                               cpue_data = .cpue_bsre, 
+  # for comp results
+  surveyISS::srvy_iss_ai_cmplx(iters = iters,
+                               lfreq_data = .lfreq_bsre,
+                               specimen_data = .specimen_bsre,
+                               cpue_data = .cpue_bsre,
                                strata_data = strata_data,
-                               yrs = yrs,
-                               boot_hauls = TRUE, 
-                               boot_lengths = TRUE, 
-                               boot_ages = TRUE, 
-                               al_var = TRUE, 
-                               al_var_ann = TRUE, 
+                               yrs = 1991,
+                               boot_hauls = TRUE,
+                               boot_lengths = TRUE,
+                               boot_ages = TRUE,
+                               al_var = FALSE,
+                               al_var_ann = FALSE,
+                               age_err = FALSE,
+                               cmplx_code = 3005012,
+                               cmplx = 'bsre',
+                               region = 'ai',
+                               save_interm = TRUE,
+                               save_stats = FALSE,
+                               save = 'prod')
+  # for stats results
+  surveyISS::srvy_iss_ai_cmplx(iters = iters,
+                               lfreq_data = .lfreq_bsre,
+                               specimen_data = .specimen_bsre,
+                               cpue_data = .cpue_bsre,
+                               strata_data = strata_data,
+                               yrs = 1991,
+                               boot_hauls = TRUE,
+                               boot_lengths = TRUE,
+                               boot_ages = TRUE,
+                               al_var = TRUE,
+                               al_var_ann = TRUE,
                                age_err = TRUE,
                                cmplx_code = 3005012,
                                cmplx = 'bsre',
-                               region = 'ai',  
-                               save_interm = TRUE,
-                               save_stats = TRUE,  
+                               region = 'ai',
+                               save_interm = FALSE,
+                               save_stats = TRUE,
                                save = 'prod')
   
 }
@@ -335,35 +543,68 @@ if(nrow(data_ebs$specimen %>%
         tidytable::drop_na()) > 0){
   
   # age/length
-  surveyISS::srvy_iss(iters = iters, 
+  # for comp results
+  surveyISS::srvy_iss(iters = iters,
                       lfreq_data = data_ebs$lfreq,
-                      specimen_data = data_ebs$specimen, 
-                      cpue_data = data_ebs$cpue, 
+                      specimen_data = data_ebs$specimen,
+                      cpue_data = data_ebs$cpue,
                       strata_data = data_ebs$strata,
-                      yrs = yrs,
-                      boot_hauls = TRUE, 
-                      boot_lengths = TRUE, 
-                      boot_ages = TRUE, 
-                      al_var = TRUE, 
-                      al_var_ann = TRUE, 
+                      yrs = 1979,
+                      boot_hauls = TRUE,
+                      boot_lengths = TRUE,
+                      boot_ages = TRUE,
+                      al_var = FALSE,
+                      al_var_ann = FALSE,
+                      age_err = FALSE,
+                      region = 'ebs',
+                      save_interm = TRUE,
+                      save_stats = FALSE,
+                      save = 'prod')
+  # for stats results
+  surveyISS::srvy_iss(iters = iters,
+                      lfreq_data = data_ebs$lfreq,
+                      specimen_data = data_ebs$specimen,
+                      cpue_data = data_ebs$cpue,
+                      strata_data = data_ebs$strata,
+                      yrs = 1979,
+                      boot_hauls = TRUE,
+                      boot_lengths = TRUE,
+                      boot_ages = TRUE,
+                      al_var = TRUE,
+                      al_var_ann = TRUE,
                       age_err = TRUE,
-                      region = 'ebs',  
-                      save_interm = TRUE, 
+                      region = 'ebs',
+                      save_interm = FALSE,
                       save_stats = TRUE,
                       save = 'prod')
   
   # caal
+  # for comp results
   surveyISS::srvy_iss_caal(iters = iters, 
                            specimen_data = data_ebs$specimen, 
                            cpue_data = data_ebs$cpue, 
-                           yrs = yrs,
+                           yrs = 1979,
+                           boot_hauls = TRUE, 
+                           boot_ages = TRUE,
+                           al_var = FALSE, 
+                           al_var_ann = FALSE, 
+                           age_err = FALSE,
+                           region = 'ebs', 
+                           save_interm = TRUE,
+                           save_stats = FALSE,
+                           save = 'prod')
+  # for stats results
+  surveyISS::srvy_iss_caal(iters = iters, 
+                           specimen_data = data_ebs$specimen, 
+                           cpue_data = data_ebs$cpue, 
+                           yrs = 1979,
                            boot_hauls = TRUE, 
                            boot_ages = TRUE,
                            al_var = TRUE, 
                            al_var_ann = TRUE, 
                            age_err = TRUE,
                            region = 'ebs', 
-                           save_interm = TRUE,
+                           save_interm = FALSE,
                            save_stats = TRUE,
                            save = 'prod')
   
@@ -377,35 +618,68 @@ if(nrow(data_ebss$specimen %>%
         tidytable::drop_na()) > 0){
   
   # age/length
-  surveyISS::srvy_iss(iters = iters, 
+  # for comp results
+  surveyISS::srvy_iss(iters = iters,
                       lfreq_data = data_ebss$lfreq,
-                      specimen_data = data_ebss$specimen, 
-                      cpue_data = data_ebss$cpue, 
-                      strata_data = data_ebss$strata, 
-                      yrs = yrs,
-                      boot_hauls = TRUE, 
-                      boot_lengths = TRUE, 
-                      boot_ages = TRUE, 
-                      al_var = TRUE, 
-                      al_var_ann = TRUE, 
+                      specimen_data = data_ebss$specimen,
+                      cpue_data = data_ebss$cpue,
+                      strata_data = data_ebss$strata,
+                      yrs = 2002,
+                      boot_hauls = TRUE,
+                      boot_lengths = TRUE,
+                      boot_ages = TRUE,
+                      al_var = FALSE,
+                      al_var_ann = FALSE,
+                      age_err = FALSE,
+                      region = 'ebs_slope',
+                      save_interm = TRUE,
+                      save_stats = FALSE,
+                      save = 'prod')
+  # for stats results
+  surveyISS::srvy_iss(iters = iters,
+                      lfreq_data = data_ebss$lfreq,
+                      specimen_data = data_ebss$specimen,
+                      cpue_data = data_ebss$cpue,
+                      strata_data = data_ebss$strata,
+                      yrs = 2002,
+                      boot_hauls = TRUE,
+                      boot_lengths = TRUE,
+                      boot_ages = TRUE,
+                      al_var = TRUE,
+                      al_var_ann = TRUE,
                       age_err = TRUE,
-                      region = 'ebs_slope', 
-                      save_interm = TRUE,  
+                      region = 'ebs_slope',
+                      save_interm = FALSE,
                       save_stats = TRUE,
                       save = 'prod')
   
   # caal
+  # for comp results
   surveyISS::srvy_iss_caal(iters = iters, 
                            specimen_data = data_ebss$specimen, 
                            cpue_data = data_ebss$cpue, 
-                           yrs = yrs,
+                           yrs = 2002,
+                           boot_hauls = TRUE, 
+                           boot_ages = TRUE,
+                           al_var = FALSE, 
+                           al_var_ann = FALSE, 
+                           age_err = FALSE,
+                           region = 'ebs_slope', 
+                           save_interm = TRUE,
+                           save_stats = FALSE,
+                           save = 'prod')
+  # for stats results
+  surveyISS::srvy_iss_caal(iters = iters, 
+                           specimen_data = data_ebss$specimen, 
+                           cpue_data = data_ebss$cpue, 
+                           yrs = 2002,
                            boot_hauls = TRUE, 
                            boot_ages = TRUE,
                            al_var = TRUE, 
                            al_var_ann = TRUE, 
                            age_err = TRUE,
                            region = 'ebs_slope', 
-                           save_interm = TRUE,
+                           save_interm = FALSE,
                            save_stats = TRUE,
                            save = 'prod')
   
@@ -419,45 +693,48 @@ if(nrow(data_nebs$specimen %>%
         tidytable::drop_na()) > 0){
   
   # age/length
-  surveyISS::srvy_iss(iters = iters, 
+  # for comp results
+  surveyISS::srvy_iss(iters = iters,
                       lfreq_data = data_nebs$lfreq,
-                      specimen_data = data_nebs$specimen, 
-                      cpue_data = data_nebs$cpue, 
-                      strata_data = data_nebs$strata,  
-                      yrs = yrs,
-                      boot_hauls = TRUE, 
-                      boot_lengths = TRUE, 
-                      boot_ages = TRUE, 
-                      al_var = TRUE, 
-                      al_var_ann = TRUE, 
+                      specimen_data = data_nebs$specimen,
+                      cpue_data = data_nebs$cpue,
+                      strata_data = data_nebs$strata,
+                      yrs = 1979,
+                      boot_hauls = TRUE,
+                      boot_lengths = TRUE,
+                      boot_ages = TRUE,
+                      al_var = FALSE,
+                      al_var_ann = FALSE,
+                      age_err = FALSE,
+                      region = 'nebs',
+                      save_interm = TRUE,
+                      save_stats = FALSE,
+                      save = 'prod')
+  # for stats results
+  surveyISS::srvy_iss(iters = iters,
+                      lfreq_data = data_nebs$lfreq,
+                      specimen_data = data_nebs$specimen,
+                      cpue_data = data_nebs$cpue,
+                      strata_data = data_nebs$strata,
+                      yrs = 1979,
+                      boot_hauls = TRUE,
+                      boot_lengths = TRUE,
+                      boot_ages = TRUE,
+                      al_var = TRUE,
+                      al_var_ann = TRUE,
                       age_err = TRUE,
-                      region = 'nebs',   
-                      save_interm = TRUE, 
+                      region = 'nebs',
+                      save_interm = FALSE,
                       save_stats = TRUE,
                       save = 'prod')
-  
-  # caal
-  surveyISS::srvy_iss_caal(iters = iters, 
-                           specimen_data = data_nebs$specimen, 
-                           cpue_data = data_nebs$cpue, 
-                           yrs = yrs,
-                           boot_hauls = TRUE, 
-                           boot_ages = TRUE,
-                           al_var = TRUE, 
-                           al_var_ann = TRUE, 
-                           age_err = TRUE,
-                           region = 'nebs', 
-                           save_interm = TRUE,
-                           save_stats = TRUE,
-                           save = 'prod')
   
 }
 
 # Test run time ----
-if(iters < 500){
+if(iters < iters_full){
   end <- tictoc::toc(quiet = TRUE)
-  runtime <- round((((as.numeric(strsplit(end$callback_msg, split = " ")[[1]][1]) / iters) * 500) / 60) / 60, digits = 1)
-  cat("Full run of", crayon::green$bold(500), "iterations will take", crayon::red$bold$underline$italic(runtime), "hours", "\u2693","\n")
+  runtime <- round((((as.numeric(strsplit(end$callback_msg, split = " ")[[1]][1]) / iters) * iters_full) / 60) / 60, digits = 1)
+  cat("Full run of", crayon::green$bold(iters_full), "iterations will take", crayon::red$bold$underline$italic(runtime), "hours", "\u2693","\n")
 }
 
 # write pkg data ----
