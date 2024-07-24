@@ -7,7 +7,9 @@
 theme_report(base_size = 11, base_family = "Times")
 }
 \arguments{
-\item{base_family}{}
+\item{base_size}{size of font}
+
+\item{base_family}{font family}
 }
 \description{
 Set figure theme for reports

@@ -27,7 +27,9 @@ Imports:
     usethis,
     data.table,
     crayon,
-    here
+    here,
+    dplyr,
+    ggplot2
 LazyData: true
 LazyDataCompression: xz
 Depends: 

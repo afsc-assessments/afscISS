@@ -1,4 +1,50 @@
-
+#' Plot stock-specific ISS results
+#' 
+#' @description
+#' Function that plots composition Input Sample Size results for AFSC stock assessments
+#' 
+#' @param species AFSC species code 
+#' @param region survey region. options are 'ai', 'ebs', 'ebs_slope', 'goa', and 'nebs' (default = 'goa')
+#' @param comp type of composition for which ISS desired. options are 'age', 'length', and 'caal'
+#' @param sex_cat sex category for which composition ISS desired. options are 0 (sexes combined pre-expansion), 1 (males), 2 (females), 12 (males-female comp that sums to 1), and 4 (sexes combined post-expansion) (default = 4)
+#' @param spec_case description string if getting ISS for special case. options are 'ai_subreg', 'bsre', 'dr', 'rebs', 'w_c_egoa', 'w140', 'wc_egoa' (default = NULL)
+#'
+#' @return a dataframe of composition ISS
+#' 
+#' @export
+#'
+plot_ISS <- function(species, region = 'goa', comp = 'age', sex_cat = 4, spec_case = NULL) {
+  
+  get_ISS(species = species,
+          region = region,
+          comp = comp,
+          sex_cat = sex_cat,
+          spec_case = spec_case) -> dat
+  
+  get_RSS(species = species,
+          region = region,
+          comp = comp,
+          sex_cat = sex_cat,
+          spec_case = spec_case) -> dat1
+  
+  if(comp == 'length') {
+    id = 'Length ISS'
+  } else {
+    id = 'Age ISS'
+  }
+  
+  dat %>% 
+    dplyr::left_join(dat1) %>% 
+    dplyr::mutate(Year = factor(year)) %>% 
+    ggplot(aes(Year)) +
+    ggplot2::geom_errorbar(ggplot2::aes(ymin = q25th,
+                                        ymax = q75th),
+                           width = 0.2) +
+    ggplot2::geom_point(ggplot2::aes(y = iss)) +
+    afscISS::theme_report() +
+    ggplot2::ylab(id)
+  
+}
 
 
 #' Adjust axis tick marks and labels
@@ -83,10 +129,9 @@ scale_y_tickr <- function(..., data, var, to = 5, start=NULL, end=NULL, min=NULL
 
 #' Set figure theme for reports
 #'
-#' @param base_size
-#' @param base_family
+#' @param base_size size of font
+#' @param base_family font family
 #'
-#' @return
 #' @export theme_report
 #'
 #' @importFrom ggplot2 element_blank
