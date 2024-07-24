@@ -14,7 +14,7 @@
 #' @export
 #'
 plot_ISS <- function(species, region = 'goa', comp = 'age', sex_cat = 4, spec_case = NULL) {
-  
+
   get_ISS(species = species,
           region = region,
           comp = comp,
@@ -36,13 +36,24 @@ plot_ISS <- function(species, region = 'goa', comp = 'age', sex_cat = 4, spec_ca
   dat %>% 
     dplyr::left_join(dat1) %>% 
     dplyr::mutate(Year = factor(year)) %>% 
-    ggplot(aes(Year)) +
+    ggplot2::ggplot(ggplot2::aes(Year)) +
     ggplot2::geom_errorbar(ggplot2::aes(ymin = q25th,
                                         ymax = q75th),
                            width = 0.2) +
     ggplot2::geom_point(ggplot2::aes(y = iss)) +
-    afscISS::theme_report() +
-    ggplot2::ylab(id)
+    ggplot2::ylab(id) +
+    ggplot2::theme_light() +
+    ggplot2::theme(
+      panel.grid.major = ggplot2::element_blank(),
+      panel.grid.minor = ggplot2::element_blank(),
+      strip.background = ggplot2::element_rect(fill = NA, colour = NA),
+      strip.text.x = ggplot2::element_text(colour = "black"),
+      strip.text.y = ggplot2::element_text(colour = "black"),
+      panel.border = ggplot2::element_rect(fill = NA),
+      legend.key.size = grid::unit(0.9, "lines"),
+      legend.key = ggplot2::element_rect(colour = NA, fill = NA),
+      legend.background = ggplot2::element_rect(colour = NA, fill = NA)
+    )
   
 }
 
@@ -127,49 +138,5 @@ scale_y_tickr <- function(..., data, var, to = 5, start=NULL, end=NULL, min=NULL
   ggplot2::scale_y_continuous(breaks = axis$breaks, labels = axis$labels, ...)
 }
 
-#' Set figure theme for reports
-#'
-#' @param base_size size of font
-#' @param base_family font family
-#'
-#' @export theme_report
-#'
-#' @importFrom ggplot2 element_blank
-#' @importFrom ggplot2 element_line
-#' @importFrom ggplot2 element_rect
-#' @importFrom ggplot2 element_text
-#'
-#' @examples
-#'
 
-#'theme_report(base_size = 11, base_family = "Times")
-#'
-#'Other fonts are available, though sans font is
-#'the easiest to implement using the following.
-#'
-#'theme_report(base_family = "")
-#'
-#'Updating font size is accomplished by changing the base_size.
-#'
-#'theme_report(base_size = 20, base_family = "")
-#'
-theme_report <- function(base_size = 11, base_family = "Times") {
-  
-  windowsFonts(Times=windowsFont("TT Times New Roman"))
-  
-  half_line <- base_size/2
-  
-  ggplot2::theme_light(base_size = base_size, base_family = base_family) +
-    ggplot2::theme(
-      panel.grid.major = ggplot2::element_blank(),
-      panel.grid.minor = ggplot2::element_blank(),
-      axis.ticks.length = grid::unit(half_line / 2.2, "pt"),
-      strip.background = ggplot2::element_rect(fill = NA, colour = NA),
-      strip.text.x = ggplot2::element_text(colour = "black"),
-      strip.text.y = ggplot2::element_text(colour = "black"),
-      panel.border = ggplot2::element_rect(fill = NA),
-      legend.key.size = grid::unit(0.9, "lines"),
-      legend.key = ggplot2::element_rect(colour = NA, fill = NA),
-      legend.background = ggplot2::element_rect(colour = NA, fill = NA)
-    )
-}
+

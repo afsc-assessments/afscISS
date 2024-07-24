@@ -1,23 +1,84 @@
-<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
-<url><loc>/404.html</loc></url>
-<url><loc>/articles/get_output.html</loc></url>
-<url><loc>/articles/index.html</loc></url>
-<url><loc>/authors.html</loc></url>
-<url><loc>/index.html</loc></url>
-<url><loc>/LICENSE-text.html</loc></url>
-<url><loc>/reference/afscISS-package.html</loc></url>
-<url><loc>/reference/data_iss.html</loc></url>
-<url><loc>/reference/get_bias.html</loc></url>
-<url><loc>/reference/get_bs_comp.html</loc></url>
-<url><loc>/reference/get_comp.html</loc></url>
-<url><loc>/reference/get_ISS.html</loc></url>
-<url><loc>/reference/get_popn.html</loc></url>
-<url><loc>/reference/get_res_comp.html</loc></url>
-<url><loc>/reference/get_RSS.html</loc></url>
-<url><loc>/reference/get_stats.html</loc></url>
-<url><loc>/reference/index.html</loc></url>
-<url><loc>/reference/pipe.html</loc></url>
-<url><loc>/reference/pkg_data.html</loc></url>
-<url><loc>/reference/summ_stats.html</loc></url>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>/404.html</loc>
+  </url>
+  <url>
+    <loc>/articles/Basic example.html</loc>
+  </url>
+  <url>
+    <loc>/articles/basic.html</loc>
+  </url>
+  <url>
+    <loc>/articles/get_output.html</loc>
+  </url>
+  <url>
+    <loc>/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>/authors.html</loc>
+  </url>
+  <url>
+    <loc>/index.html</loc>
+  </url>
+  <url>
+    <loc>/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>/reference/afscISS-package.html</loc>
+  </url>
+  <url>
+    <loc>/reference/data_iss.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_bias.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_bs_comp.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_comp.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_ISS.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_popn.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_res_comp.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_RSS.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_stats.html</loc>
+  </url>
+  <url>
+    <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pkg_data.html</loc>
+  </url>
+  <url>
+    <loc>/reference/plot_ISS.html</loc>
+  </url>
+  <url>
+    <loc>/reference/scale_x_tickr.html</loc>
+  </url>
+  <url>
+    <loc>/reference/scale_y_tickr.html</loc>
+  </url>
+  <url>
+    <loc>/reference/summ_stats.html</loc>
+  </url>
+  <url>
+    <loc>/reference/theme_report.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tickr.html</loc>
+  </url>
 </urlset>
-
