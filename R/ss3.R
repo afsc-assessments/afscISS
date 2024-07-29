@@ -43,7 +43,7 @@ get_ss3_comp <- function(species, region, comp='age', sex_cat=12, bysex = FALSE,
     merge(dat, all=T) %>% 
     tidytable::left_join(tidytable::select(iss, year, iss)) %>% 
     tidytable::replace_na(list(prop = 0)) %>%
-    tidytable::mutate(prop = tidytable::case_when(age>=max_age ~ sum(prop),
+    tidytable::mutate(prop = tidytable::case_when(age>=max_age ~ sum(prop[age>=max_age]),
                                                   TRUE ~ prop),
                       .by = c(sex, year)) %>% 
     tidytable::filter(age<=max_age) -> df
