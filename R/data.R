@@ -170,8 +170,6 @@ get_comps <- function(base_data, res_data, iter, tot, reg){
                                                           .default = q2_5th),
                             q97_5th = tidytable::case_when(q97_5th > 1 ~ 1,
                                                            .default = q97_5th)) %>% 
-          # rename columns
-          tidytable::rename(lci = q2_5th, uci = q97_5th) %>% 
           tidytable::select(-bs_mean) -> comps
       } else{ # without subregion case
         # get base comps
@@ -238,8 +236,6 @@ get_comps <- function(base_data, res_data, iter, tot, reg){
                                                           .default = q2_5th),
                             q97_5th = tidytable::case_when(q97_5th > 1 ~ 1,
                                                            .default = q97_5th)) %>% 
-          # rename columns
-          tidytable::rename(lci = q2_5th, uci = q97_5th) %>% 
           tidytable::select(-bs_mean) -> comps
       }
     }
@@ -312,8 +308,6 @@ get_comps <- function(base_data, res_data, iter, tot, reg){
                                                           .default = q2_5th),
                             q97_5th = tidytable::case_when(q97_5th > 1 ~ 1,
                                                            .default = q97_5th)) %>% 
-          # rename columns
-          tidytable::rename(lci = q2_5th, uci = q97_5th) %>% 
           tidytable::select(-bs_mean) -> comps
       } else{ # without subregion case
         # get base comps
@@ -380,8 +374,6 @@ get_comps <- function(base_data, res_data, iter, tot, reg){
                                                           .default = q2_5th),
                             q97_5th = tidytable::case_when(q97_5th > 1 ~ 1,
                                                            .default = q97_5th)) %>% 
-          # rename columns
-          tidytable::rename(lci = q2_5th, uci = q97_5th) %>% 
           tidytable::select(-bs_mean) -> comps
       }
     }
@@ -404,8 +396,6 @@ get_comps <- function(base_data, res_data, iter, tot, reg){
                                                         .default = q2_5th),
                           q97_5th = tidytable::case_when(q97_5th > 1 ~ 1,
                                                         .default = q97_5th)) %>% 
-        # rename columns
-        tidytable::rename(lci = q2_5th, uci = q97_5th) %>% 
         tidytable::select(-bs_mean) -> comps
       
     }
