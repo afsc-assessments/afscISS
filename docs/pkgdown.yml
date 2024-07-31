@@ -2,6 +2,5 @@ pandoc: 3.1.11
 pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
-  Basic example: Basic example.html
   get_output: get_output.html
-last_built: 2024-07-31T19:58Z
+last_built: 2024-07-31T20:24Z
