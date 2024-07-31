@@ -3,7 +3,7 @@
 #' @description
 #' Function that creates package data for afscISS (NOTE: this is not a user fcn, this is a developer/maintainer fcn)
 #' 
-#' @param append boolean. whether to append results to previous results (default = TRUE)
+#' @param region region for surveyISS output to be gathered
 #'
 #' @return .rda files within /data folder
 #' 
@@ -25,12 +25,9 @@ pkg_data <- function(region = c('ai', 'ebs', 'ebs_slope', 'goa', 'nebs')) {
 #' @description
 #' Function that retrieves results from the surveyISS package (NOTE: this is not a user fcn, this is a developer/maintainer fcn)
 #' 
-#' @param data dataframe to be summarized
-#' @param grp grouping for summarization
-#' @param column column name to be summarized across iterations
-#' @param dgts number of significant digits in rounding results
-#'
-#' @return dataframe with summary bootstrap statistics
+#' @param region region for surveyISS output to be gathered
+#' 
+#' @return dataframe with summary results from surveyISS
 #' 
 #' @export
 #'

@@ -4,10 +4,10 @@
 \alias{pkg_data}
 \title{function to get surveyISS results transferred to data package}
 \usage{
-pkg_data(append = TRUE)
+pkg_data(region = c("ai", "ebs", "ebs_slope", "goa", "nebs"))
 }
 \arguments{
-\item{append}{boolean. whether to append results to previous results (default = TRUE)}
+\item{region}{region for surveyISS output to be gathered}
 }
 \value{
 .rda files within /data folder
