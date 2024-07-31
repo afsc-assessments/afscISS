@@ -2,7 +2,7 @@
 
 # load packages ----
 # devtools::unload('afscISS')
-devtools::install_github("afsc-assessments/afscISS", force = TRUE)
+# devtools::install_github("afsc-assessments/afscISS", force = TRUE)
 library(afscISS)
 
 # set inputs ----
