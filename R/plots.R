@@ -20,13 +20,7 @@ plot_ISS <- function(species, region = 'goa', comp = 'age', sex_cat = 4, spec_ca
           comp = comp,
           sex_cat = sex_cat,
           spec_case = spec_case) -> dat
-  
-  get_RSS(species = species,
-          region = region,
-          comp = comp,
-          sex_cat = sex_cat,
-          spec_case = spec_case) -> dat1
-  
+
   if(comp == 'length') {
     id = 'Length ISS'
   } else {
@@ -34,11 +28,14 @@ plot_ISS <- function(species, region = 'goa', comp = 'age', sex_cat = 4, spec_ca
   }
   
   dat %>% 
-    dplyr::left_join(dat1) %>% 
+    tidytable::mutate(lci = iss - 1.96 * sd_iss,
+                      uci = iss + 1.96 * sd_iss) %>% 
+    tidytable::mutate(lci = case_when(lci < 0 ~ 0,
+                                      .default = lci)) %>% 
     dplyr::mutate(Year = factor(year)) %>% 
     ggplot2::ggplot(ggplot2::aes(Year)) +
-    ggplot2::geom_errorbar(ggplot2::aes(ymin = q25th,
-                                        ymax = q75th),
+    ggplot2::geom_errorbar(ggplot2::aes(ymin = lci,
+                                        ymax = uci),
                            width = 0.2) +
     ggplot2::geom_point(ggplot2::aes(y = iss)) +
     ggplot2::ylab(id) +
