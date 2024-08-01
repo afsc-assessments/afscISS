@@ -44,24 +44,6 @@ data_goa$specimen %>%
 strata_data <- data_goa$strata
 
 # age/length
-# for comp results
-surveyISS::srvy_iss(iters = iters,
-                    lfreq_data = .lfreq,
-                    specimen_data = .specimen,
-                    cpue_data = .cpue,
-                    strata_data = strata_data,
-                    yrs = 1990,
-                    boot_hauls = TRUE,
-                    boot_lengths = TRUE,
-                    boot_ages = TRUE,
-                    al_var = FALSE,
-                    al_var_ann = FALSE,
-                    age_err = FALSE,
-                    region = 'goa',
-                    save_interm = TRUE,
-                    save_stats = FALSE,
-                    save = 'prod')
-# for stats results
 surveyISS::srvy_iss(iters = iters,
                     lfreq_data = .lfreq,
                     specimen_data = .specimen,
@@ -75,26 +57,11 @@ surveyISS::srvy_iss(iters = iters,
                     al_var_ann = TRUE,
                     age_err = TRUE,
                     region = 'goa',
-                    save_interm = FALSE,
+                    save_interm = TRUE,
                     save_stats = TRUE,
                     save = 'prod')
 
 # caal
-# for comp results
-surveyISS::srvy_iss_caal(iters = iters, 
-                         specimen_data = .specimen, 
-                         cpue_data = .cpue, 
-                         yrs = 1990,
-                         boot_hauls = TRUE, 
-                         boot_ages = TRUE,
-                         al_var = FALSE, 
-                         al_var_ann = FALSE, 
-                         age_err = FALSE,
-                         region = 'goa', 
-                         save_interm = TRUE,
-                         save_stats = FALSE,
-                         save = 'prod')
-# for stats results
 surveyISS::srvy_iss_caal(iters = iters, 
                          specimen_data = .specimen, 
                          cpue_data = .cpue, 
@@ -105,7 +72,7 @@ surveyISS::srvy_iss_caal(iters = iters,
                          al_var_ann = TRUE, 
                          age_err = TRUE,
                          region = 'goa', 
-                         save_interm = FALSE,
+                         save_interm = TRUE,
                          save_stats = TRUE,
                          save = 'prod')
 
@@ -118,24 +85,6 @@ data_goa$lfreq %>%
 data_goa$specimen %>%
   tidytable::filter(species_code %in% c(21740)) -> .specimen_poll
 
-# for comp results
-surveyISS::srvy_iss_w140(iters = iters,
-                         lfreq_data = .lfreq_poll,
-                         specimen_data = .specimen_poll,
-                         cpue_data = .cpue_poll,
-                         strata_data = strata_data,
-                         yrs = 1990,
-                         boot_hauls = TRUE,
-                         boot_lengths = TRUE,
-                         boot_ages = TRUE,
-                         al_var = FALSE,
-                         al_var_ann = FALSE,
-                         age_err = FALSE,
-                         region = 'goa',
-                         save_interm = TRUE,
-                         save_stats = FALSE,
-                         save = 'prod')
-# for stats results
 surveyISS::srvy_iss_w140(iters = iters,
                          lfreq_data = .lfreq_poll,
                          specimen_data = .specimen_poll,
@@ -149,7 +98,7 @@ surveyISS::srvy_iss_w140(iters = iters,
                          al_var_ann = TRUE,
                          age_err = TRUE,
                          region = 'goa',
-                         save_interm = FALSE,
+                         save_interm = TRUE,
                          save_stats = TRUE,
                          save = 'prod')
 
@@ -161,27 +110,6 @@ data_goa$lfreq %>%
 data_goa$specimen %>%
   tidytable::filter(species_code %in% c(30050, 30051, 30052)) -> .specimen_rebs
 
-# for comp results
-surveyISS::srvy_iss_goa_cmplx(iters = iters,
-                              lfreq_data = .lfreq_rebs,
-                              specimen_data = .specimen_rebs,
-                              cpue_data = .cpue_rebs,
-                              strata_data = strata_data,
-                              yrs = 1990,
-                              boot_hauls = TRUE,
-                              boot_lengths = TRUE,
-                              boot_ages = TRUE,
-                              al_var = FALSE,
-                              al_var_ann = FALSE,
-                              age_err = FALSE,
-                              cmplx_code = 3005012,
-                              cmplx = 'rebs',
-                              region = 'goa',
-                              save_interm = TRUE,
-                              save_stats = FALSE,
-                              save = 'prod')
-
-# for stats results
 surveyISS::srvy_iss_goa_cmplx(iters = iters,
                               lfreq_data = .lfreq_rebs,
                               specimen_data = .specimen_rebs,
@@ -197,7 +125,7 @@ surveyISS::srvy_iss_goa_cmplx(iters = iters,
                               cmplx_code = 3005012,
                               cmplx = 'rebs',
                               region = 'goa',
-                              save_interm = FALSE,
+                              save_interm = TRUE,
                               save_stats = TRUE,
                               save = 'prod')
 
@@ -209,27 +137,6 @@ data_goa$lfreq %>%
 data_goa$specimen %>%
   tidytable::filter(species_code %in% c(30150, 30152)) -> .specimen_dr
 
-# for comp results
-surveyISS::srvy_iss_goa_cmplx(iters = iters,
-                              lfreq_data = .lfreq_dr,
-                              specimen_data = .specimen_dr,
-                              cpue_data = .cpue_dr,
-                              strata_data = strata_data,
-                              yrs = 1990,
-                              boot_hauls = TRUE,
-                              boot_lengths = TRUE,
-                              boot_ages = TRUE,
-                              al_var = FALSE,
-                              al_var_ann = FALSE,
-                              age_err = FALSE,
-                              cmplx_code = 301502,
-                              cmplx = 'dr',
-                              region = 'goa',
-                              save_interm = TRUE,
-                              save_stats = FALSE,
-                              save = 'prod')
-
-# for stats results
 surveyISS::srvy_iss_goa_cmplx(iters = iters,
                               lfreq_data = .lfreq_dr,
                               specimen_data = .specimen_dr,
@@ -245,7 +152,7 @@ surveyISS::srvy_iss_goa_cmplx(iters = iters,
                               cmplx_code = 301502,
                               cmplx = 'dr',
                               region = 'goa',
-                              save_interm = FALSE,
+                              save_interm = TRUE,
                               save_stats = TRUE,
                               save = 'prod')
 
@@ -254,4 +161,6 @@ if(iters < iters_full){
   end <- tictoc::toc(quiet = TRUE)
   runtime <- round((((as.numeric(strsplit(end$callback_msg, split = " ")[[1]][1]) / iters) * iters_full) / 60) / 60, digits = 1)
   cat("Full run of", crayon::green$bold(iters_full), "iterations will take", crayon::red$bold$underline$italic(runtime), "hours", "\u2693","\n")
+} else{
+  cat("All", crayon::green$bold$underline$italic('Done'), "\u2693","\n")
 }

@@ -45,24 +45,6 @@ data_goa$specimen %>%
 strata_data <- data_goa$strata
 
 ## run w-c-e goa ----
-# for comp results
-surveyISS::srvy_iss_goa_w_c_e(iters = iters,
-                              lfreq_data = .lfreq,
-                              specimen_data = .specimen,
-                              cpue_data = .cpue,
-                              strata_data = strata_data,
-                              yrs = 1990,
-                              boot_hauls = TRUE,
-                              boot_lengths = TRUE,
-                              boot_ages = TRUE,
-                              al_var = FALSE,
-                              al_var_ann = FALSE,
-                              age_err = FALSE,
-                              region = 'goa',
-                              save_interm = TRUE,
-                              save_stats = FALSE,
-                              save = 'prod')
-# for stats results
 surveyISS::srvy_iss_goa_w_c_e(iters = iters,
                               lfreq_data = .lfreq,
                               specimen_data = .specimen,
@@ -76,29 +58,11 @@ surveyISS::srvy_iss_goa_w_c_e(iters = iters,
                               al_var_ann = TRUE,
                               age_err = TRUE,
                               region = 'goa',
-                              save_interm = FALSE,
+                              save_interm = TRUE,
                               save_stats = TRUE,
                               save = 'prod')
 
 ## run wc-e goa ----
-# for comp results
-surveyISS::srvy_iss_goa_wc_e(iters = iters,
-                             lfreq_data = .lfreq,
-                             specimen_data = .specimen,
-                             cpue_data = .cpue,
-                             strata_data = strata_data,
-                             yrs = 1990,
-                             boot_hauls = TRUE,
-                             boot_lengths = TRUE,
-                             boot_ages = TRUE,
-                             al_var = FALSE,
-                             al_var_ann = FALSE,
-                             age_err = FALSE,
-                             region = 'goa',
-                             save_interm = TRUE,
-                             save_stats = FALSE,
-                             save = 'prod')
-# for stats results
 surveyISS::srvy_iss_goa_wc_e(iters = iters,
                              lfreq_data = .lfreq,
                              specimen_data = .specimen,
@@ -112,7 +76,7 @@ surveyISS::srvy_iss_goa_wc_e(iters = iters,
                              al_var_ann = TRUE,
                              age_err = TRUE,
                              region = 'goa',
-                             save_interm = FALSE,
+                             save_interm = TRUE,
                              save_stats = TRUE,
                              save = 'prod')
 
@@ -121,4 +85,6 @@ if(iters < iters_full){
   end <- tictoc::toc(quiet = TRUE)
   runtime <- round((((as.numeric(strsplit(end$callback_msg, split = " ")[[1]][1]) / iters) * iters_full) / 60) / 60, digits = 1)
   cat("Full run of", crayon::green$bold(iters_full), "iterations will take", crayon::red$bold$underline$italic(runtime), "hours", "\u2693","\n")
+} else{
+  cat("All", crayon::green$bold$underline$italic('Done'), "\u2693","\n")
 }
