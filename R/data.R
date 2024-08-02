@@ -3,7 +3,7 @@
 #' @description
 #' Function that creates package data for afscISS (NOTE: this is not a user fcn, this is a developer/maintainer fcn)
 #' 
-#' @param region region for surveyISS output to be gathered
+#' @param region region for surveyISS output to be gathered (default = standard afsc survey regions)
 #'
 #' @return .rda files within /data folder
 #' 
