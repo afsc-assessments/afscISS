@@ -64,7 +64,6 @@ plot_ISS <- function(species, region = 'goa', comp = 'age', sex_cat = 4, spec_ca
 #' @param end = adjust the end vlaue
 #' @param min = lowest value to label
 #'
-#' @export tickr
 tickr <- function (data, var, to = 5, start = NULL, end = NULL, min = NULL)
 {
   out <- data %>% dplyr::summarise(min = min({
@@ -113,7 +112,6 @@ tickr <- function (data, var, to = 5, start = NULL, end = NULL, min = NULL)
 #' @param min = lowest value to label
 #' @param ... = other scale_x_continuous inputs
 #'
-#' @export scale_x_tickr
 scale_x_tickr <- function(..., data, var, to = 5, start=NULL, end=NULL, min=NULL) {
   axis = tickr(data, {{var}}, to, start, end, min)
   ggplot2::scale_x_continuous(breaks = axis$breaks, labels = axis$labels, ...)
@@ -129,7 +127,6 @@ scale_x_tickr <- function(..., data, var, to = 5, start=NULL, end=NULL, min=NULL
 #' @param min = lowest value to label
 #' @param ... = other scale_y_continuous inputs
 #'
-#' @export scale_y_tickr
 scale_y_tickr <- function(..., data, var, to = 5, start=NULL, end=NULL, min=NULL) {
   axis = tickr(data, {{var}}, to, start, end, min)
   ggplot2::scale_y_continuous(breaks = axis$breaks, labels = axis$labels, ...)

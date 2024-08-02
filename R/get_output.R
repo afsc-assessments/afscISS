@@ -74,7 +74,7 @@ get_ISS <- function(species = 21720,
 }
 
 
-#' Get stock-specific composition results
+#' Get stock-specific numbers at age/length results
 #' 
 #' @description
 #' Function that retrieves age and length pop'n numbers for AFSC stock assessments

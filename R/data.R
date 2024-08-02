@@ -1,4 +1,4 @@
-#' function to get surveyISS results transferred to data package
+#' Function to get surveyISS results transferred to data package
 #' 
 #' @description
 #' Function that creates package data for afscISS (NOTE: this is not a user fcn, this is a developer/maintainer fcn)
@@ -7,7 +7,6 @@
 #'
 #' @return .rda files within /data folder
 #' 
-#' @export
 #'
 pkg_data <- function(region = c('ai', 'ebs', 'ebs_slope', 'goa', 'nebs')) {
 
@@ -29,7 +28,6 @@ pkg_data <- function(region = c('ai', 'ebs', 'ebs_slope', 'goa', 'nebs')) {
 #' 
 #' @return dataframe with summary results from surveyISS
 #' 
-#' @export
 #'
 get_surveyISS <- function(region){
 
@@ -71,7 +69,6 @@ get_surveyISS <- function(region){
 #'
 #' @return dataframe with summary bootstrap statistics
 #' 
-#' @export
 #'
 get_comp_stats <- function(data, grp, column, dgts){
   data  %>% 
@@ -95,7 +92,6 @@ get_comp_stats <- function(data, grp, column, dgts){
 #'
 #' @return dataframe with summary bootstrap statistics
 #' 
-#' @export
 #'
 get_comps <- function(base_data, res_data, iter, tot, reg){
 
@@ -415,7 +411,6 @@ get_comps <- function(base_data, res_data, iter, tot, reg){
 #'
 #' @return dataframe with summary bootstrap statistics
 #' 
-#' @export
 #'
 iss_stats <- function(iss_data, rss_data, iter, tot, reg){
   
@@ -472,6 +467,6 @@ iss_stats <- function(iss_data, rss_data, iter, tot, reg){
 #'
 #' @format A list
 #' \describe{
-#' A list of ISS, age/length pop'n numbers, bootstrap bias, mean length-at-age, bootstrap summary statistics for replicated rss and age/length pop'n numbers
+#' A list of ISS, age/length pop'n numbers, age/length/conditional age-at-length composition, bootstrap bias, and mean length-at-age
 #' }
 "data_iss"
