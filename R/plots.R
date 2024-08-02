@@ -14,13 +14,13 @@
 #' @export
 #'
 plot_ISS <- function(species, region = 'goa', comp = 'age', sex_cat = 4, spec_case = NULL) {
-
+  
   get_ISS(species = species,
           region = region,
           comp = comp,
           sex_cat = sex_cat,
           spec_case = spec_case) -> dat
-
+  
   if(comp == 'length') {
     id = 'Length ISS'
   } else {
@@ -30,8 +30,8 @@ plot_ISS <- function(species, region = 'goa', comp = 'age', sex_cat = 4, spec_ca
   dat %>% 
     tidytable::mutate(lci = iss - 1.96 * sd_iss,
                       uci = iss + 1.96 * sd_iss) %>% 
-    tidytable::mutate(lci = case_when(lci < 0 ~ 0,
-                                      .default = lci)) %>% 
+    tidytable::mutate(lci = tidytable::case_when(lci < 0 ~ 0,
+                                                 .default = lci)) %>% 
     dplyr::mutate(Year = factor(year)) %>% 
     ggplot2::ggplot(ggplot2::aes(Year)) +
     ggplot2::geom_errorbar(ggplot2::aes(ymin = lci,

@@ -2,12 +2,12 @@
 % Please edit documentation in R/data.R
 \name{pkg_data}
 \alias{pkg_data}
-\title{function to get surveyISS results transferred to data package}
+\title{Function to get surveyISS results transferred to data package}
 \usage{
 pkg_data(region = c("ai", "ebs", "ebs_slope", "goa", "nebs"))
 }
 \arguments{
-\item{region}{region for surveyISS output to be gathered}
+\item{region}{region for surveyISS output to be gathered (default = standard afsc survey regions)}
 }
 \value{
 .rda files within /data folder

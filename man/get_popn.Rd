@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_output.R
 \name{get_popn}
 \alias{get_popn}
-\title{Get stock-specific composition results}
+\title{Get stock-specific numbers at age/length results}
 \usage{
 get_popn(
   species = 21720,
