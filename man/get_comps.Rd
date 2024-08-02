@@ -2,7 +2,7 @@
 % Please edit documentation in R/data.R
 \name{get_comps}
 \alias{get_comps}
-\title{function to get composition data}
+\title{Developer function to get composition data}
 \usage{
 get_comps(base_data, res_data, iter, tot, reg)
 }
@@ -23,3 +23,4 @@ dataframe with summary bootstrap statistics
 \description{
 Function that computes age/length/conditional age-at-length composition with bootstrap 95\% simulation intervals (NOTE: this is not a user fcn, this is a developer/maintainer fcn)
 }
+\keyword{internal}

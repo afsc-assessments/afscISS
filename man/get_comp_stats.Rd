@@ -2,7 +2,7 @@
 % Please edit documentation in R/data.R
 \name{get_comp_stats}
 \alias{get_comp_stats}
-\title{function to summarize bootstrap results for composition data}
+\title{Developer function to summarize bootstrap results for composition data}
 \usage{
 get_comp_stats(data, grp, column, dgts)
 }
@@ -21,3 +21,4 @@ dataframe with summary bootstrap statistics
 \description{
 Function that computes mean and percentiles for iterated composition results from the surveyISS package (NOTE: this is not a user fcn, this is a developer/maintainer fcn)
 }
+\keyword{internal}

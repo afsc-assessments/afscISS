@@ -2,7 +2,7 @@
 % Please edit documentation in R/data.R
 \name{get_surveyISS}
 \alias{get_surveyISS}
-\title{function to pull surveyISS results}
+\title{Developer function to pull surveyISS results}
 \usage{
 get_surveyISS(region)
 }
@@ -15,3 +15,4 @@ dataframe with summary results from surveyISS
 \description{
 Function that retrieves results from the surveyISS package (NOTE: this is not a user fcn, this is a developer/maintainer fcn)
 }
+\keyword{internal}

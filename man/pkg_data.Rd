@@ -2,7 +2,7 @@
 % Please edit documentation in R/data.R
 \name{pkg_data}
 \alias{pkg_data}
-\title{Function to get surveyISS results transferred to data package}
+\title{Developer function to get surveyISS results transferred to data package}
 \usage{
 pkg_data(region = c("ai", "ebs", "ebs_slope", "goa", "nebs"))
 }
@@ -15,3 +15,4 @@ pkg_data(region = c("ai", "ebs", "ebs_slope", "goa", "nebs"))
 \description{
 Function that creates package data for afscISS (NOTE: this is not a user fcn, this is a developer/maintainer fcn)
 }
+\keyword{internal}
