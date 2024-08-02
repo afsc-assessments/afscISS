@@ -22,3 +22,4 @@ tickr(data, var, to = 5, start = NULL, end = NULL, min = NULL)
 \description{
 Adjust axis tick marks and labels
 }
+\keyword{internal}

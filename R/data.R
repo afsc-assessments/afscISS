@@ -1,4 +1,4 @@
-#' Function to get surveyISS results transferred to data package
+#' Developer function to get surveyISS results transferred to data package
 #' 
 #' @description
 #' Function that creates package data for afscISS (NOTE: this is not a user fcn, this is a developer/maintainer fcn)
@@ -7,6 +7,7 @@
 #'
 #' @return .rda files within /data folder
 #' 
+#' @keywords internal
 #'
 pkg_data <- function(region = c('ai', 'ebs', 'ebs_slope', 'goa', 'nebs')) {
 
@@ -19,7 +20,7 @@ pkg_data <- function(region = c('ai', 'ebs', 'ebs_slope', 'goa', 'nebs')) {
 
 }
 
-#' function to pull surveyISS results
+#' Developer function to pull surveyISS results
 #' 
 #' @description
 #' Function that retrieves results from the surveyISS package (NOTE: this is not a user fcn, this is a developer/maintainer fcn)
@@ -28,6 +29,7 @@ pkg_data <- function(region = c('ai', 'ebs', 'ebs_slope', 'goa', 'nebs')) {
 #' 
 #' @return dataframe with summary results from surveyISS
 #' 
+#' @keywords internal
 #'
 get_surveyISS <- function(region){
 
@@ -57,7 +59,7 @@ get_surveyISS <- function(region){
 
 }
 
-#' function to summarize bootstrap results for composition data
+#' Developer function to summarize bootstrap results for composition data
 #' 
 #' @description
 #' Function that computes mean and percentiles for iterated composition results from the surveyISS package (NOTE: this is not a user fcn, this is a developer/maintainer fcn)
@@ -69,6 +71,7 @@ get_surveyISS <- function(region){
 #'
 #' @return dataframe with summary bootstrap statistics
 #' 
+#' @keywords internal
 #'
 get_comp_stats <- function(data, grp, column, dgts){
   data  %>% 
@@ -79,7 +82,7 @@ get_comp_stats <- function(data, grp, column, dgts){
                          .by = grp)
 }
 
-#' function to get composition data
+#' Developer function to get composition data
 #' 
 #' @description
 #' Function that computes age/length/conditional age-at-length composition with bootstrap 95% simulation intervals (NOTE: this is not a user fcn, this is a developer/maintainer fcn)
@@ -92,6 +95,7 @@ get_comp_stats <- function(data, grp, column, dgts){
 #'
 #' @return dataframe with summary bootstrap statistics
 #' 
+#' @keywords internal
 #'
 get_comps <- function(base_data, res_data, iter, tot, reg){
 
@@ -398,7 +402,7 @@ get_comps <- function(base_data, res_data, iter, tot, reg){
   
 }
 
-#' function to get input sample size stats
+#' Developer function to get input sample size stats
 #' 
 #' @description
 #' Function that computes the SD for input sample size (NOTE: this is not a user fcn, this is a developer/maintainer fcn)
@@ -411,6 +415,7 @@ get_comps <- function(base_data, res_data, iter, tot, reg){
 #'
 #' @return dataframe with summary bootstrap statistics
 #' 
+#' @keywords internal
 #'
 iss_stats <- function(iss_data, rss_data, iter, tot, reg){
   

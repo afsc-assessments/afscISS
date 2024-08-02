@@ -2,7 +2,7 @@
 % Please edit documentation in R/data.R
 \name{iss_stats}
 \alias{iss_stats}
-\title{function to get input sample size stats}
+\title{Developer function to get input sample size stats}
 \usage{
 iss_stats(iss_data, rss_data, iter, tot, reg)
 }
@@ -23,3 +23,4 @@ dataframe with summary bootstrap statistics
 \description{
 Function that computes the SD for input sample size (NOTE: this is not a user fcn, this is a developer/maintainer fcn)
 }
+\keyword{internal}
