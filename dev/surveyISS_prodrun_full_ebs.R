@@ -35,24 +35,6 @@ if(iters < iters_full){
 data_ebs <- data$data_ebs
 
 # age/length
-# for comp results
-surveyISS::srvy_iss(iters = iters,
-                    lfreq_data = data_ebs$lfreq,
-                    specimen_data = data_ebs$specimen,
-                    cpue_data = data_ebs$cpue,
-                    strata_data = data_ebs$strata,
-                    yrs = 1979,
-                    boot_hauls = TRUE,
-                    boot_lengths = TRUE,
-                    boot_ages = TRUE,
-                    al_var = FALSE,
-                    al_var_ann = FALSE,
-                    age_err = FALSE,
-                    region = 'ebs',
-                    save_interm = TRUE,
-                    save_stats = FALSE,
-                    save = 'prod')
-# for stats results
 surveyISS::srvy_iss(iters = iters,
                     lfreq_data = data_ebs$lfreq,
                     specimen_data = data_ebs$specimen,
@@ -66,26 +48,11 @@ surveyISS::srvy_iss(iters = iters,
                     al_var_ann = TRUE,
                     age_err = TRUE,
                     region = 'ebs',
-                    save_interm = FALSE,
+                    save_interm = TRUE,
                     save_stats = TRUE,
                     save = 'prod')
 
 # caal
-# for comp results
-surveyISS::srvy_iss_caal(iters = iters, 
-                         specimen_data = data_ebs$specimen, 
-                         cpue_data = data_ebs$cpue, 
-                         yrs = 1979,
-                         boot_hauls = TRUE, 
-                         boot_ages = TRUE,
-                         al_var = FALSE, 
-                         al_var_ann = FALSE, 
-                         age_err = FALSE,
-                         region = 'ebs', 
-                         save_interm = TRUE,
-                         save_stats = FALSE,
-                         save = 'prod')
-# for stats results
 surveyISS::srvy_iss_caal(iters = iters, 
                          specimen_data = data_ebs$specimen, 
                          cpue_data = data_ebs$cpue, 
@@ -96,7 +63,7 @@ surveyISS::srvy_iss_caal(iters = iters,
                          al_var_ann = TRUE, 
                          age_err = TRUE,
                          region = 'ebs', 
-                         save_interm = FALSE,
+                         save_interm = TRUE,
                          save_stats = TRUE,
                          save = 'prod')
 
@@ -105,4 +72,6 @@ if(iters < iters_full){
   end <- tictoc::toc(quiet = TRUE)
   runtime <- round((((as.numeric(strsplit(end$callback_msg, split = " ")[[1]][1]) / iters) * iters_full) / 60) / 60, digits = 1)
   cat("Full run of", crayon::green$bold(iters_full), "iterations will take", crayon::red$bold$underline$italic(runtime), "hours", "\u2693","\n")
+} else{
+  cat("All", crayon::green$bold$underline$italic('Done'), "\u2693","\n")
 }

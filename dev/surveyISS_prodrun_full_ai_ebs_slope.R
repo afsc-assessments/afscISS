@@ -44,24 +44,6 @@ data_ai$specimen %>%
 strata_data <- data_ai$strata
 
 # age/length
-# for comp results
-surveyISS::srvy_iss(iters = iters,
-                    lfreq_data = .lfreq,
-                    specimen_data = .specimen,
-                    cpue_data = .cpue,
-                    strata_data = strata_data,
-                    yrs = 1991,
-                    boot_hauls = TRUE,
-                    boot_lengths = TRUE,
-                    boot_ages = TRUE,
-                    al_var = FALSE,
-                    al_var_ann = FALSE,
-                    age_err = FALSE,
-                    region = 'ai',
-                    save_interm = TRUE,
-                    save_stats = FALSE,
-                    save = 'prod')
-# for stats results
 surveyISS::srvy_iss(iters = iters,
                     lfreq_data = .lfreq,
                     specimen_data = .specimen,
@@ -75,26 +57,11 @@ surveyISS::srvy_iss(iters = iters,
                     al_var_ann = TRUE,
                     age_err = TRUE,
                     region = 'ai',
-                    save_interm = FALSE,
+                    save_interm = TRUE,
                     save_stats = TRUE,
                     save = 'prod')
 
 # caal
-# for comp results
-surveyISS::srvy_iss_caal(iters = iters,
-                         specimen_data = .specimen,
-                         cpue_data = .cpue,
-                         yrs = 1991,
-                         boot_hauls = TRUE,
-                         boot_ages = TRUE,
-                         al_var = FALSE,
-                         al_var_ann = FALSE,
-                         age_err = FALSE,
-                         region = 'ai',
-                         save_interm = TRUE,
-                         save_stats = FALSE,
-                         save = 'prod')
-# for stats results
 surveyISS::srvy_iss_caal(iters = iters,
                          specimen_data = .specimen,
                          cpue_data = .cpue,
@@ -105,29 +72,11 @@ surveyISS::srvy_iss_caal(iters = iters,
                          al_var_ann = TRUE,
                          age_err = TRUE,
                          region = 'ai',
-                         save_interm = FALSE,
+                         save_interm = TRUE,
                          save_stats = TRUE,
                          save = 'prod')
 
 ## run for ai subregion ----
-# for comp results
-surveyISS::srvy_iss_ai_subreg(iters = iters,
-                              lfreq_data = .lfreq,
-                              specimen_data = .specimen,
-                              cpue_data = .cpue,
-                              strata_data = strata_data,
-                              yrs = 1991,
-                              boot_hauls = TRUE,
-                              boot_lengths = TRUE,
-                              boot_ages = TRUE,
-                              al_var = FALSE,
-                              al_var_ann = FALSE,
-                              age_err = FALSE,
-                              region = 'ai',
-                              save_interm = TRUE,
-                              save_stats = FALSE,
-                              save = 'prod')
-# for stats results
 surveyISS::srvy_iss_ai_subreg(iters = iters,
                               lfreq_data = .lfreq,
                               specimen_data = .specimen,
@@ -141,7 +90,7 @@ surveyISS::srvy_iss_ai_subreg(iters = iters,
                               al_var_ann = TRUE,
                               age_err = TRUE,
                               region = 'ai',
-                              save_interm = FALSE,
+                              save_interm = TRUE,
                               save_stats = TRUE,
                               save = 'prod')
 
@@ -154,26 +103,6 @@ data_ai$lfreq %>%
 data_ai$specimen %>%
   tidytable::filter(species_code %in% c(30050, 30051, 30052)) -> .specimen_bsre
 
-# for comp results
-surveyISS::srvy_iss_ai_cmplx(iters = iters,
-                             lfreq_data = .lfreq_bsre,
-                             specimen_data = .specimen_bsre,
-                             cpue_data = .cpue_bsre,
-                             strata_data = strata_data,
-                             yrs = 1991,
-                             boot_hauls = TRUE,
-                             boot_lengths = TRUE,
-                             boot_ages = TRUE,
-                             al_var = FALSE,
-                             al_var_ann = FALSE,
-                             age_err = FALSE,
-                             cmplx_code = 3005012,
-                             cmplx = 'bsre',
-                             region = 'ai',
-                             save_interm = TRUE,
-                             save_stats = FALSE,
-                             save = 'prod')
-# for stats results
 surveyISS::srvy_iss_ai_cmplx(iters = iters,
                              lfreq_data = .lfreq_bsre,
                              specimen_data = .specimen_bsre,
@@ -189,7 +118,7 @@ surveyISS::srvy_iss_ai_cmplx(iters = iters,
                              cmplx_code = 3005012,
                              cmplx = 'bsre',
                              region = 'ai',
-                             save_interm = FALSE,
+                             save_interm = TRUE,
                              save_stats = TRUE,
                              save = 'prod')
 
@@ -197,24 +126,6 @@ surveyISS::srvy_iss_ai_cmplx(iters = iters,
 data_ebss <- data$data_ebss
 
 # age/length
-# for comp results
-surveyISS::srvy_iss(iters = iters,
-                    lfreq_data = data_ebss$lfreq,
-                    specimen_data = data_ebss$specimen,
-                    cpue_data = data_ebss$cpue,
-                    strata_data = data_ebss$strata,
-                    yrs = 2002,
-                    boot_hauls = TRUE,
-                    boot_lengths = TRUE,
-                    boot_ages = TRUE,
-                    al_var = FALSE,
-                    al_var_ann = FALSE,
-                    age_err = FALSE,
-                    region = 'ebs_slope',
-                    save_interm = TRUE,
-                    save_stats = FALSE,
-                    save = 'prod')
-# for stats results
 surveyISS::srvy_iss(iters = iters,
                     lfreq_data = data_ebss$lfreq,
                     specimen_data = data_ebss$specimen,
@@ -228,26 +139,11 @@ surveyISS::srvy_iss(iters = iters,
                     al_var_ann = TRUE,
                     age_err = TRUE,
                     region = 'ebs_slope',
-                    save_interm = FALSE,
+                    save_interm = TRUE,
                     save_stats = TRUE,
                     save = 'prod')
 
 # caal
-# for comp results
-surveyISS::srvy_iss_caal(iters = iters, 
-                         specimen_data = data_ebss$specimen, 
-                         cpue_data = data_ebss$cpue, 
-                         yrs = 2002,
-                         boot_hauls = TRUE, 
-                         boot_ages = TRUE,
-                         al_var = FALSE, 
-                         al_var_ann = FALSE, 
-                         age_err = FALSE,
-                         region = 'ebs_slope', 
-                         save_interm = TRUE,
-                         save_stats = FALSE,
-                         save = 'prod')
-# for stats results
 surveyISS::srvy_iss_caal(iters = iters, 
                          specimen_data = data_ebss$specimen, 
                          cpue_data = data_ebss$cpue, 
@@ -258,7 +154,7 @@ surveyISS::srvy_iss_caal(iters = iters,
                          al_var_ann = TRUE, 
                          age_err = TRUE,
                          region = 'ebs_slope', 
-                         save_interm = FALSE,
+                         save_interm = TRUE,
                          save_stats = TRUE,
                          save = 'prod')
 
@@ -267,4 +163,6 @@ if(iters < iters_full){
   end <- tictoc::toc(quiet = TRUE)
   runtime <- round((((as.numeric(strsplit(end$callback_msg, split = " ")[[1]][1]) / iters) * iters_full) / 60) / 60, digits = 1)
   cat("Full run of", crayon::green$bold(iters_full), "iterations will take", crayon::red$bold$underline$italic(runtime), "hours", "\u2693","\n")
+} else{
+  cat("All", crayon::green$bold$underline$italic('Done'), "\u2693","\n")
 }
