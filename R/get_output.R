@@ -234,12 +234,12 @@ get_comp <- function(species = 21720,
     if(is.null(spec_case)){
       tidytable::as_tidytable(data_iss[[region]]$prod_comp_caal) %>%
         tidytable::filter(species_code %in% species,
-                          sex_c %in% sex_cat) -> res
+                          sex %in% sex_cat) -> res
     }else{
       if(spec_case %in% c('bin')){
         tidytable::as_tidytable(data_iss[[region]][[paste0('prod_', spec_case, '_comp_caal')]]) %>%
           tidytable::filter(species_code %in% species,
-                            sex_c %in% sex_cat) -> res
+                            sex %in% sex_cat) -> res
       }
     }
   }
