@@ -456,6 +456,7 @@ iss_stats <- function(iss_data, rss_data, iter, tot, reg){
   if('region' %in% colnames(iss_data)){
     iss_data %>% 
       tidytable::left_join(rss_data %>% 
+                             tidytable::filter(rss != 0) %>% 
                              tidytable::summarise(v = var(1 / rss),
                                                   n = length(rss),
                                                   m = 1 / length(rss) * sum(1 / rss),
@@ -468,6 +469,7 @@ iss_stats <- function(iss_data, rss_data, iter, tot, reg){
   } else{ # without subregion case
     iss_data %>% 
       tidytable::left_join(rss_data %>% 
+                             tidytable::filter(rss != 0) %>% 
                              tidytable::summarise(v = var(1 / rss),
                                                   n = length(rss),
                                                   m = 1 / length(rss) * sum(1 / rss),
@@ -482,6 +484,7 @@ iss_stats <- function(iss_data, rss_data, iter, tot, reg){
   if('length' %in% colnames(iss_data)){
     iss_data %>% 
       tidytable::left_join(rss_data %>% 
+                             tidytable::filter(rss != 0) %>% 
                              tidytable::summarise(v = var(1 / rss),
                                                   n = length(rss),
                                                   m = 1 / length(rss) * sum(1 / rss),
