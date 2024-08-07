@@ -7,4 +7,4 @@ library(afscISS)
 
 # write pkg data ----
 
-afscISS::pkg_data(region = c('ai', 'ebs', 'ebs_slope', 'goa', 'nebs'))
+afscISS:::pkg_data(region = c('ai', 'ebs', 'ebs_slope', 'goa', 'nebs'))
