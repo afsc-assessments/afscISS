@@ -30,9 +30,9 @@ if(iters < iters_full){
   tictoc::tic()
 }
 
+# nbs & ebs ----
 bin = c(4.5, 9.5, 14.5, 19.5, 24.5, 29.5, 34.5, 39.5, 44.5, 49.5, 54.5, 59.5, 64.5, 69.5, 74.5, 79.5, 84.5, 89.5, 94.5, 99.5, 104.5, 109.5, 114.5, 119.5)
 
-# nbs & ebs ----
 data_nebs <- data$data_nebs
 
 data_nebs$cpue %>% 
@@ -153,7 +153,7 @@ surveyISS::srvy_iss(iters = iters,
                     region = 'goa',
                     save_interm = TRUE,
                     save_stats = TRUE,
-                    save = 'prod_bin2')
+                    save = 'prod_bin5')
 
 # caal
 surveyISS::srvy_iss_caal(iters = iters, 
@@ -169,7 +169,7 @@ surveyISS::srvy_iss_caal(iters = iters,
                          region = 'goa', 
                          save_interm = TRUE,
                          save_stats = TRUE,
-                         save = 'prod_bin2')
+                         save = 'prod_bin5')
 
 # stop run time test ----
 if(iters < iters_full){
