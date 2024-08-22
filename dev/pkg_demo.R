@@ -7,6 +7,41 @@ library(afscISS)
 
 # set inputs ----
 
+# cod bin example
+afscISS::get_ISS(species = 21720,
+                 region = 'nebs',
+                 comp = 'caal',
+                 sex_cat = 0,
+                 spec_case = 'bin')
+
+
+afscISS::get_comp(species = 21720,
+                  region = 'nebs',
+                  comp = 'length',
+                  sex_cat = 4,
+                  spec_case = 'bin')
+
+# nrs example
+afscISS::get_ISS(species = 10262,
+                 region = 'ebs',
+                 comp = 'caal',
+                 sex_cat = 1,
+                 spec_case = NULL)
+
+
+
+
+
+afscISS::get_comp(species = 10262,
+                 region = 'ebs',
+                 comp = 'length',
+                 sex_cat = 12,
+                 spec_case = NULL)
+
+
+
+
+
 ## standard iss/comps example ----
 species = 21720 # pcod
 region = 'goa'
