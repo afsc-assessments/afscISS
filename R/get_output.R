@@ -35,7 +35,7 @@ get_ISS <- function(species = 21720,
           tidytable::filter(species_code %in% species,
                             sex %in% sex_cat) -> res
       }
-      if(spec_case %in% c('bin')){
+      if(spec_case %in% c('bin', 'bin2', 'bin5')){
         tidytable::as_tidytable(data_iss[[region]][[paste0('prod_', spec_case, '_iss_ag')]]) %>%
           tidytable::filter(species_code %in% species,
                             sex %in% sex_cat) -> res
@@ -59,7 +59,7 @@ get_ISS <- function(species = 21720,
           tidytable::filter(species_code %in% species,
                             sex %in% sex_cat) -> res
       }
-      if(spec_case %in% c('bin')){
+      if(spec_case %in% c('bin', 'bin2', 'bin5')){
         tidytable::as_tidytable(data_iss[[region]][[paste0('prod_', spec_case, '_iss_ln')]]) %>%
           tidytable::filter(species_code %in% species,
                             sex %in% sex_cat) -> res
@@ -80,7 +80,7 @@ get_ISS <- function(species = 21720,
           tidytable::filter(sex == sex_cat) -> res
       }
     } else{
-      if(spec_case %in% c('bin')){
+      if(spec_case %in% c('bin', 'bin2', 'bin5')){
         tidytable::as_tidytable(data_iss[[region]][[paste0('prod_', spec_case, '_iss_caal')]]) %>%
           tidytable::filter(species_code %in% species) -> res1
         if(sex_cat %in% c(0, 4)){
@@ -136,7 +136,7 @@ get_popn <- function(species = 21720,
           tidytable::filter(species_code %in% species,
                             sex %in% sex_cat) -> res
       }
-      if(spec_case %in% c('bin')){
+      if(spec_case %in% c('bin', 'bin2', 'bin5')){
         tidytable::as_tidytable(data_iss[[region]][[paste0('prod_', spec_case, '_base_age')]]) %>%
           tidytable::filter(species_code %in% species,
                             sex %in% sex_cat) -> res
@@ -160,7 +160,7 @@ get_popn <- function(species = 21720,
           tidytable::filter(species_code %in% species,
                             sex %in% sex_cat) -> res
       }
-      if(spec_case %in% c('bin')){
+      if(spec_case %in% c('bin', 'bin2', 'bin5')){
         tidytable::as_tidytable(data_iss[[region]][[paste0('prod_', spec_case, '_base_length')]]) %>%
           tidytable::filter(species_code %in% species,
                             sex %in% sex_cat) -> res
@@ -209,7 +209,7 @@ get_comp <- function(species = 21720,
           tidytable::filter(species_code %in% species,
                             sex_c %in% sex_cat) -> res
       }
-      if(spec_case %in% c('bin')){
+      if(spec_case %in% c('bin', 'bin2', 'bin5')){
         tidytable::as_tidytable(data_iss[[region]][[paste0('prod_', spec_case, '_comp_age')]]) %>%
           tidytable::filter(species_code %in% species,
                             sex_c %in% sex_cat) -> res
@@ -233,7 +233,7 @@ get_comp <- function(species = 21720,
           tidytable::filter(species_code %in% species,
                             sex_c %in% sex_cat) -> res
       }
-      if(spec_case %in% c('bin')){
+      if(spec_case %in% c('bin', 'bin2', 'bin5')){
         tidytable::as_tidytable(data_iss[[region]][[paste0('prod_', spec_case, '_comp_length')]]) %>%
           tidytable::filter(species_code %in% species,
                             sex_c %in% sex_cat) -> res
@@ -254,7 +254,7 @@ get_comp <- function(species = 21720,
           tidytable::filter(sex == sex_cat) -> res
       }
     }else{
-      if(spec_case %in% c('bin')){
+      if(spec_case %in% c('bin', 'bin2', 'bin5')){
         tidytable::as_tidytable(data_iss[[region]][[paste0('prod_', spec_case, '_comp_caal')]]) %>%
           tidytable::filter(species_code %in% species) -> res1
         if(sex_cat %in% c(0, 4)){
@@ -309,7 +309,7 @@ get_bias <- function(species = 21720,
           tidytable::filter(species_code %in% species,
                             sex %in% sex_cat) -> res
       }
-      if(spec_case %in% c('bin')){
+      if(spec_case %in% c('bin', 'bin2', 'bin5')){
         tidytable::as_tidytable(data_iss[[region]][[paste0('prod_', spec_case, '_bias_age')]]) %>%
           tidytable::filter(species_code %in% species,
                             sex %in% sex_cat) -> res
@@ -333,7 +333,7 @@ get_bias <- function(species = 21720,
           tidytable::filter(species_code %in% species,
                             sex %in% sex_cat) -> res
       }
-      if(spec_case %in% c('bin')){
+      if(spec_case %in% c('bin', 'bin2', 'bin5')){
         tidytable::as_tidytable(data_iss[[region]][[paste0('prod_', spec_case, '_bias_length')]]) %>%
           tidytable::filter(species_code %in% species,
                             sex %in% sex_cat) -> res
@@ -354,7 +354,7 @@ get_bias <- function(species = 21720,
           tidytable::filter(sex == sex_cat) -> res
       }
     } else{
-      if(spec_case %in% c('bin')){
+      if(spec_case %in% c('bin', 'bin2', 'bin5')){
         tidytable::as_tidytable(data_iss[[region]][[paste0('prod_', spec_case, '_bias_caal')]]) %>%
           tidytable::filter(species_code %in% species) -> res1
         if(sex_cat %in% c(0, 4)){

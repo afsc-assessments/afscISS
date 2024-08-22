@@ -44,18 +44,53 @@ get_surveyISS <- function(region){
     stringr::str_replace(., '.csv', "") %>% 
     stringr::str_replace(., 'base', "comp")
   ## alt bin results ----
-  if(length(list.files(here::here('output', region), pattern = "prod_bin")) > 0){
-    base_bin <- purrr::map(list.files(here::here('output', region), pattern = "prod_bin_base"), ~ vroom::vroom(here::here('output', region, .)))
-    names(base_bin) <- list.files(here::here('output', region), pattern = "prod_bin_base") %>% 
-      stringr::str_replace(., '.csv', "")
-    base <- c(base, base_bin)
-    resamp_bin <- purrr::map(list.files(here::here('output', region), pattern = "prod_bin_resampled"), ~ vroom::vroom(here::here('output', region, .)))
-    resamp <- c(resamp, resamp_bin)
-    comps_bin <- purrr::map(1:length(base_bin), ~ get_comps(base_bin[[.]], resamp_bin[[.]], ., length(base_bin), region))
-    names(comps_bin) <- list.files(here::here('output', region), pattern = "prod_bin_base") %>% 
-      stringr::str_replace(., '.csv', "") %>% 
-      stringr::str_replace(., 'base', "comp")
-    comps <- c(comps, comps_bin)
+  # nebs
+  if(region == 'nebs'){
+    if(length(list.files(here::here('output', region), pattern = "prod_bin")) > 0){
+      base_bin <- purrr::map(list.files(here::here('output', region), pattern = "prod_bin_base"), ~ vroom::vroom(here::here('output', region, .)))
+      names(base_bin) <- list.files(here::here('output', region), pattern = "prod_bin_base") %>% 
+        stringr::str_replace(., '.csv', "")
+      base <- c(base, base_bin)
+      resamp_bin <- purrr::map(list.files(here::here('output', region), pattern = "prod_bin_resampled"), ~ vroom::vroom(here::here('output', region, .)))
+      resamp <- c(resamp, resamp_bin)
+      comps_bin <- purrr::map(1:length(base_bin), ~ get_comps(base_bin[[.]], resamp_bin[[.]], ., length(base_bin), region))
+      names(comps_bin) <- list.files(here::here('output', region), pattern = "prod_bin_base") %>% 
+        stringr::str_replace(., '.csv', "") %>% 
+        stringr::str_replace(., 'base', "comp")
+      comps <- c(comps, comps_bin)
+    }
+  }
+  # goa
+  if(region == 'goa'){
+    if(length(list.files(here::here('output', region), pattern = "prod_bin")) > 0){
+      base_bin <- purrr::map(list.files(here::here('output', region), pattern = "prod_bin_base"), ~ vroom::vroom(here::here('output', region, .)))
+      names(base_bin) <- list.files(here::here('output', region), pattern = "prod_bin_base") %>% 
+        stringr::str_replace(., '.csv', "")
+      base_bin2 <- purrr::map(list.files(here::here('output', region), pattern = "prod_bin2_base"), ~ vroom::vroom(here::here('output', region, .)))
+      names(base_bin2) <- list.files(here::here('output', region), pattern = "prod_bin2_base") %>% 
+        stringr::str_replace(., '.csv', "")
+      base_bin5 <- purrr::map(list.files(here::here('output', region), pattern = "prod_bin5_base"), ~ vroom::vroom(here::here('output', region, .)))
+      names(base_bin5) <- list.files(here::here('output', region), pattern = "prod_bin5_base") %>% 
+        stringr::str_replace(., '.csv', "")
+      base <- c(base, base_bin, base_bin2, base_bin5)
+      resamp_bin <- purrr::map(list.files(here::here('output', region), pattern = "prod_bin_resampled"), ~ vroom::vroom(here::here('output', region, .)))
+      resamp_bin2 <- purrr::map(list.files(here::here('output', region), pattern = "prod_bin2_resampled"), ~ vroom::vroom(here::here('output', region, .)))
+      resamp_bin5 <- purrr::map(list.files(here::here('output', region), pattern = "prod_bin5_resampled"), ~ vroom::vroom(here::here('output', region, .)))
+      resamp <- c(resamp, resamp_bin, resamp_bin2, resamp_bin5)
+      comps_bin <- purrr::map(1:length(base_bin), ~ get_comps(base_bin[[.]], resamp_bin[[.]], ., length(base_bin), region))
+      names(comps_bin) <- list.files(here::here('output', region), pattern = "prod_bin_base") %>% 
+        stringr::str_replace(., '.csv', "") %>% 
+        stringr::str_replace(., 'base', "comp")
+      comps_bin2 <- purrr::map(1:length(base_bin2), ~ get_comps(base_bin2[[.]], resamp_bin2[[.]], ., length(base_bin2), region))
+      names(comps_bin2) <- list.files(here::here('output', region), pattern = "prod_bin2_base") %>% 
+        stringr::str_replace(., '.csv', "") %>% 
+        stringr::str_replace(., 'base', "comp")
+      comps_bin5 <- purrr::map(1:length(base_bin5), ~ get_comps(base_bin5[[.]], resamp_bin5[[.]], ., length(base_bin5), region))
+      names(comps_bin5) <- list.files(here::here('output', region), pattern = "prod_bin5_base") %>% 
+        stringr::str_replace(., '.csv', "") %>% 
+        stringr::str_replace(., 'base', "comp")
+      comps <- c(comps, comps_bin, comps_bin2, comps_bin5)
+    }
   }
 
   # bias results ----
@@ -79,15 +114,39 @@ get_surveyISS <- function(region){
   names(iss) <- list.files(here::here('output', region), pattern = "prod_iss") %>% 
     stringr::str_replace(., '.csv', "")
   ## alt bin results ----
-  if(length(list.files(here::here('output', region), pattern = "prod_bin_iss")) > 0){
-    iss1_bin <- purrr::map(list.files(here::here('output', region), pattern = "prod_bin_iss"), ~ vroom::vroom(here::here('output', region, .)))
-    rss_bin <- purrr::map(list.files(here::here('output', region), pattern = "prod_bin_iter_rss"), ~ vroom::vroom(here::here('output', region, .)))
-    iss_bin <- purrr::map(1:length(iss1_bin), ~ iss_stats(iss1_bin[[.]], rss_bin[[.]], ., length(iss1_bin), region))
-    names(iss_bin) <- list.files(here::here('output', region), pattern = "prod_bin_iss") %>% 
-      stringr::str_replace(., '.csv', "")
-    iss <- c(iss, iss_bin)
+  # nebs
+  if(region == 'nebs'){
+    if(length(list.files(here::here('output', region), pattern = "prod_bin_iss")) > 0){
+      iss1_bin <- purrr::map(list.files(here::here('output', region), pattern = "prod_bin_iss"), ~ vroom::vroom(here::here('output', region, .)))
+      rss_bin <- purrr::map(list.files(here::here('output', region), pattern = "prod_bin_iter_rss"), ~ vroom::vroom(here::here('output', region, .)))
+      iss_bin <- purrr::map(1:length(iss1_bin), ~ iss_stats(iss1_bin[[.]], rss_bin[[.]], ., length(iss1_bin), region))
+      names(iss_bin) <- list.files(here::here('output', region), pattern = "prod_bin_iss") %>% 
+        stringr::str_replace(., '.csv', "")
+      iss <- c(iss, iss_bin)
+    }
   }
-
+  # goa
+  if(region == 'goa'){
+    if(length(list.files(here::here('output', region), pattern = "prod_bin_iss")) > 0){
+      iss1_bin <- purrr::map(list.files(here::here('output', region), pattern = "prod_bin_iss"), ~ vroom::vroom(here::here('output', region, .)))
+      rss_bin <- purrr::map(list.files(here::here('output', region), pattern = "prod_bin_iter_rss"), ~ vroom::vroom(here::here('output', region, .)))
+      iss_bin <- purrr::map(1:length(iss1_bin), ~ iss_stats(iss1_bin[[.]], rss_bin[[.]], ., length(iss1_bin), region))
+      names(iss_bin) <- list.files(here::here('output', region), pattern = "prod_bin_iss") %>% 
+        stringr::str_replace(., '.csv', "")
+      iss1_bin2 <- purrr::map(list.files(here::here('output', region), pattern = "prod_bin2_iss"), ~ vroom::vroom(here::here('output', region, .)))
+      rss_bin2 <- purrr::map(list.files(here::here('output', region), pattern = "prod_bin2_iter_rss"), ~ vroom::vroom(here::here('output', region, .)))
+      iss_bin2 <- purrr::map(1:length(iss1_bin2), ~ iss_stats(iss1_bin2[[.]], rss_bin2[[.]], ., length(iss1_bin2), region))
+      names(iss_bin2) <- list.files(here::here('output', region), pattern = "prod_bin2_iss") %>% 
+        stringr::str_replace(., '.csv', "")
+      iss1_bin5 <- purrr::map(list.files(here::here('output', region), pattern = "prod_bin5_iss"), ~ vroom::vroom(here::here('output', region, .)))
+      rss_bin5 <- purrr::map(list.files(here::here('output', region), pattern = "prod_bin5_iter_rss"), ~ vroom::vroom(here::here('output', region, .)))
+      iss_bin5 <- purrr::map(1:length(iss1_bin5), ~ iss_stats(iss1_bin5[[.]], rss_bin5[[.]], ., length(iss1_bin5), region))
+      names(iss_bin5) <- list.files(here::here('output', region), pattern = "prod_bin5_iss") %>% 
+        stringr::str_replace(., '.csv', "")
+      iss <- c(iss, iss_bin, iss_bin2, iss_bin5)
+    }
+  }
+  
   c(base, comps, bias, iss)
 
 }
