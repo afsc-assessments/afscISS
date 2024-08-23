@@ -92,7 +92,7 @@ strata_data <- data_goa$strata
 ## 2cm bins ----
 bin_width <- 2
 min_size <- 0.5
-max_size <- 100.5  # less than 1% of the fish in each year are 105 cm or larger (max less than 0.6%)
+max_size <- 104.5  # less than 1% of the fish in each year are 105 cm or larger (max less than 0.6%)
 bin2 <- seq(min_size, max_size, bin_width)
 
 # age/length
@@ -133,7 +133,7 @@ surveyISS::srvy_iss_caal(iters = iters,
 ## 5cm bins ----
 bin_width <- 5
 min_size <- 0.5
-max_size <- 100.5  # less than 1% of the fish in each year are 105 cm or larger (max less than 0.6%)
+max_size <- 105.5  # less than 1% of the fish in each year are 105 cm or larger (max less than 0.6%)
 bin5 <- seq(min_size, max_size, bin_width)
 
 # age/length
