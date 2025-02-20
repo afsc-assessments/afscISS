@@ -73,7 +73,7 @@ surveyISS::srvy_iss_goa_w_c_e_caal(iters = iters,
                                    al_var_ann = TRUE,
                                    age_err = TRUE,
                                    region = 'goa',
-                                   save_interm = FALSE,
+                                   save_interm = TRUE,
                                    save_stats = TRUE,
                                    save = 'prod')
 
@@ -106,7 +106,7 @@ surveyISS::srvy_iss_goa_wc_e_caal(iters = iters,
                                   al_var_ann = TRUE,
                                   age_err = TRUE,
                                   region = 'goa',
-                                  save_interm = FALSE,
+                                  save_interm = TRUE,
                                   save_stats = TRUE,
                                   save = 'prod')
 
