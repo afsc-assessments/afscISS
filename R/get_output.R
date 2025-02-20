@@ -91,6 +91,17 @@ get_ISS <- function(species = 21720,
             tidytable::filter(sex == sex_cat) -> res
         }
       }
+      if(spec_case %in% c('w_c_egoa', 'wc_egoa')){
+        tidytable::as_tidytable(data_iss[[region]][[paste0('prod_iss_caal_', spec_case)]]) %>%
+          tidytable::filter(species_code %in% species) -> res1
+        if(sex_cat %in% c(0, 4)){
+          res1 %>% 
+            tidytable::filter(sex == 0) -> res
+        } else{
+          res1 %>% 
+            tidytable::filter(sex == sex_cat) -> res
+        }
+      }
     }
   }
   
@@ -265,6 +276,17 @@ get_comp <- function(species = 21720,
             tidytable::filter(sex == sex_cat) -> res
         }
       }
+      if(spec_case %in% c('w_c_egoa', 'wc_egoa')){
+        tidytable::as_tidytable(data_iss[[region]][[paste0('prod_comp_caal_', spec_case)]]) %>%
+          tidytable::filter(species_code %in% species) -> res1
+        if(sex_cat %in% c(0, 4)){
+          res1 %>% 
+            tidytable::filter(sex == 0) -> res
+        } else{
+          res1 %>% 
+            tidytable::filter(sex == sex_cat) -> res
+        }
+      }
     }
   }
   
@@ -356,6 +378,17 @@ get_bias <- function(species = 21720,
     } else{
       if(spec_case %in% c('bin', 'bin2', 'bin5')){
         tidytable::as_tidytable(data_iss[[region]][[paste0('prod_', spec_case, '_bias_caal')]]) %>%
+          tidytable::filter(species_code %in% species) -> res1
+        if(sex_cat %in% c(0, 4)){
+          res1 %>% 
+            tidytable::filter(sex == 0) -> res
+        } else{
+          res1 %>% 
+            tidytable::filter(sex == sex_cat) -> res
+        }
+      }
+      if(spec_case %in% c('w_c_egoa', 'wc_egoa')){
+        tidytable::as_tidytable(data_iss[[region]][[paste0('prod_bias_caal_', spec_case)]]) %>%
           tidytable::filter(species_code %in% species) -> res1
         if(sex_cat %in% c(0, 4)){
           res1 %>% 
