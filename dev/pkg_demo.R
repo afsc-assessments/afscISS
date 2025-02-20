@@ -5,7 +5,45 @@
 # devtools::install_github("afsc-assessments/afscISS", force = TRUE)
 library(afscISS)
 
-# set inputs ----
+# get comp data ----
+## age comps ----
+afscISS::get_comp(species = 10200,
+                  region = 'goa',
+                  comp = 'age',
+                  sex_cat = 12,
+                  spec_case = 'wc_egoa')
+## length comps ----
+afscISS::get_comp(species = 10200,
+                  region = 'goa',
+                  comp = 'length',
+                  sex_cat = 12,
+                  spec_case = 'wc_egoa')
+
+# get iss ----
+## age comps ----
+afscISS::get_ISS(species = 10200,
+                 region = 'goa',
+                 comp = 'age',
+                 sex_cat = 12,
+                 spec_case = 'wc_egoa')
+## length comps ----
+afscISS::get_ISS(species = 10200,
+                 region = 'goa',
+                 comp = 'length',
+                 sex_cat = 12,
+                 spec_case = 'wc_egoa')
+
+## caal ----
+afscISS::get_ISS(species = 10200,
+                 region = 'goa',
+                 comp = 'caal',
+                 sex_cat = 1,
+                 spec_case = 'wc_egoa')
+
+
+
+
+
 
 # cod bin example
 afscISS::get_ISS(species = 21720,
