@@ -469,6 +469,27 @@ get_comps <- function(base_data, res_data, iter, tot, reg){
   
     # for caal
     if('caal' %in% colnames(res_data)){
+      
+      # with subregion case
+      if('region' %in% colnames(res_data)){
+        # get bs stats
+        summ <- get_comp_stats(data = res_data,
+                               grp = c('year', 'region', 'species_code', 'sex', 'length', 'age'),
+                               column = caal,
+                               dgts = 4)
+        # join comp data with simulation intervals
+        base_data %>% 
+          tidytable::left_join(summ) %>% 
+          # shift by bs bias
+          tidytable::mutate(q2_5th = q2_5th + (caal - bs_mean),
+                            q97_5th = q97_5th + (caal - bs_mean)) %>% 
+          # replace lci < 0 with 0 and uci > 1 with 1
+          tidytable::mutate(q2_5th = tidytable::case_when(q2_5th < 0 ~ 0,
+                                                          .default = q2_5th),
+                            q97_5th = tidytable::case_when(q97_5th > 1 ~ 1,
+                                                           .default = q97_5th)) %>% 
+          tidytable::select(-bs_mean) -> comps
+      } else{ # without subregion case
       # get bs stats
       summ <- get_comp_stats(data = res_data,
                              grp = c('year', 'species_code', 'sex', 'length', 'age'),
@@ -486,6 +507,7 @@ get_comps <- function(base_data, res_data, iter, tot, reg){
                           q97_5th = tidytable::case_when(q97_5th > 1 ~ 1,
                                                         .default = q97_5th)) %>% 
         tidytable::select(-bs_mean) -> comps
+      }
       
     }
 
@@ -541,6 +563,21 @@ iss_stats <- function(iss_data, rss_data, iter, tot, reg){
   }
   # for caal
   if('length' %in% colnames(iss_data)){
+    # with subregion case
+    if('region' %in% colnames(iss_data)){
+      iss_data %>% 
+        tidytable::left_join(rss_data %>% 
+                               tidytable::filter(rss != 0) %>% 
+                               tidytable::summarise(v = var(1 / rss),
+                                                    n = length(rss),
+                                                    m = 1 / length(rss) * sum(1 / rss),
+                                                    .by = c(year, region, species_code, sex, sex_desc, length)) %>% 
+                               tidytable::mutate(sd_iss = sqrt(1 / n * v / m ^ 4)) %>% 
+                               tidytable::select(year, region, species_code, sex, sex_desc, length, sd_iss)) %>% 
+        tidytable::mutate(iss = round(iss, digits = 2),
+                          sd_iss = round(sd_iss, digits = 3)) %>% 
+        tidytable::select(year, region, species_code, sex, sex_desc, length, iss, sd_iss, nss, nhls) -> iss
+    } else{ # without subregion case
     iss_data %>% 
       tidytable::left_join(rss_data %>% 
                              tidytable::filter(rss != 0) %>% 
@@ -553,7 +590,7 @@ iss_stats <- function(iss_data, rss_data, iter, tot, reg){
       tidytable::mutate(iss = round(iss, digits = 2),
                         sd_iss = round(sd_iss, digits = 3)) %>% 
       tidytable::select(year, species_code, sex, sex_desc, length, iss, sd_iss, nss, nhls) -> iss
-    
+    }
   }
   
   cat(crayon::yellow(iter), "of", crayon::green(tot), crayon::blue$bold$underline(toupper(reg)), "iss objects summarized", crayon::green$bold("\u2713"), "\n")
