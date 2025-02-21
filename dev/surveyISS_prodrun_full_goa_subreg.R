@@ -45,22 +45,22 @@ data_goa$specimen %>%
 strata_data <- data_goa$strata
 
 ## run w-c-e goa ----
-# surveyISS::srvy_iss_goa_w_c_e(iters = iters,
-#                               lfreq_data = .lfreq,
-#                               specimen_data = .specimen,
-#                               cpue_data = .cpue,
-#                               strata_data = strata_data,
-#                               yrs = 1990,
-#                               boot_hauls = TRUE,
-#                               boot_lengths = TRUE,
-#                               boot_ages = TRUE,
-#                               al_var = TRUE,
-#                               al_var_ann = TRUE,
-#                               age_err = TRUE,
-#                               region = 'goa',
-#                               save_interm = TRUE,
-#                               save_stats = TRUE,
-#                               save = 'prod')
+surveyISS::srvy_iss_goa_w_c_e(iters = iters,
+                              lfreq_data = .lfreq,
+                              specimen_data = .specimen,
+                              cpue_data = .cpue,
+                              strata_data = strata_data,
+                              yrs = 1990,
+                              boot_hauls = TRUE,
+                              boot_lengths = TRUE,
+                              boot_ages = TRUE,
+                              al_var = TRUE,
+                              al_var_ann = TRUE,
+                              age_err = TRUE,
+                              region = 'goa',
+                              save_interm = TRUE,
+                              save_stats = TRUE,
+                              save = 'prod')
 
 ## run w-c-e goa caal ----
 surveyISS::srvy_iss_goa_w_c_e_caal(iters = iters,
@@ -78,22 +78,22 @@ surveyISS::srvy_iss_goa_w_c_e_caal(iters = iters,
                                    save = 'prod')
 
 ## run wc-e goa ----
-# surveyISS::srvy_iss_goa_wc_e(iters = iters,
-#                              lfreq_data = .lfreq,
-#                              specimen_data = .specimen,
-#                              cpue_data = .cpue,
-#                              strata_data = strata_data,
-#                              yrs = 1990,
-#                              boot_hauls = TRUE,
-#                              boot_lengths = TRUE,
-#                              boot_ages = TRUE,
-#                              al_var = TRUE,
-#                              al_var_ann = TRUE,
-#                              age_err = TRUE,
-#                              region = 'goa',
-#                              save_interm = TRUE,
-#                              save_stats = TRUE,
-#                              save = 'prod')
+surveyISS::srvy_iss_goa_wc_e(iters = iters,
+                             lfreq_data = .lfreq,
+                             specimen_data = .specimen,
+                             cpue_data = .cpue,
+                             strata_data = strata_data,
+                             yrs = 1990,
+                             boot_hauls = TRUE,
+                             boot_lengths = TRUE,
+                             boot_ages = TRUE,
+                             al_var = TRUE,
+                             al_var_ann = TRUE,
+                             age_err = TRUE,
+                             region = 'goa',
+                             save_interm = TRUE,
+                             save_stats = TRUE,
+                             save = 'prod')
 
 ## run w-c-e goa caal ----
 surveyISS::srvy_iss_goa_wc_e_caal(iters = iters,

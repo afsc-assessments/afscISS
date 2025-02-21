@@ -18,6 +18,15 @@ afscISS::get_comp(species = 10200,
                   comp = 'length',
                   sex_cat = 12,
                   spec_case = 'wc_egoa')
+## caal ----
+afscISS::get_comp(species = 10200,
+                  region = 'goa',
+                  comp = 'caal',
+                  sex_cat = 2,
+                  spec_case = 'wc_egoa')
+
+
+
 
 # get iss ----
 ## age comps ----
@@ -37,7 +46,7 @@ afscISS::get_ISS(species = 10200,
 afscISS::get_ISS(species = 10200,
                  region = 'goa',
                  comp = 'caal',
-                 sex_cat = 1,
+                 sex_cat = 2,
                  spec_case = 'wc_egoa')
 
 
