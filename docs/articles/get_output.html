@@ -188,11 +188,46 @@ as it is equivalent to sex category 0.</td>
 <p>Finally, the <code>spec_case</code> argument in the
 <code><a href="../reference/get_ISS.html">afscISS::get_ISS()</a></code> function specifies whether you desire
 ISS for a special case function within the <code>surveyISS</code>
-package. Note (1) that these special cases only pertain the the AI and
-GOA survey regions (so, if you’re getting output for the EBS, EBS slope,
-for NEBS you don’t put anything here), and (2), that these special cases
-do not pertain to conditional age-at-length results. There are currently
-7 special cases, described in the following table:</p>
+package. There are three general categories of special cases: (1) stock
+complex special cases, (2) spatially-explicit special cases, and (3)
+length binning special case (note that the first two special cases only
+pertain the the AI and GOA survey regions). The stock complex special
+cases include:</p>
+<table class="table">
+<colgroup>
+<col width="10%">
+<col width="89%">
+</colgroup>
+<thead><tr class="header">
+<th>spec_case</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>bsre</td>
+<td>Provides output for the AI Blackspotted-Rougheye stock complex
+(where length pop’n computed for each individual species but age pop’n
+computed for the complex as a whole).</td>
+</tr>
+<tr class="even">
+<td>dr</td>
+<td>Provides output for the GOA dusky rockfish stock.</td>
+</tr>
+<tr class="odd">
+<td>rebs</td>
+<td>Provides output for the GOA Rougheye-Blackspotted stock complex
+(where length and age pop’n are computed for each individual species and
+summed post-expansion).</td>
+</tr>
+</tbody>
+</table>
+<p>Note that for the <code>bsre</code>, <code>dr</code>, and
+<code>rebs</code> special cases, the <code>species</code> argument is
+not needed (so you can either leave this argument out or define it as
+NULL), as a special species code has already been defined (as an
+agglomeration of the individual species codes). Also note for that these
+stock complex special cases are not included in the spatially-explicit
+special cases. The spatially-explicit special cases are as follows:</p>
 <table class="table">
 <colgroup>
 <col width="10%">
@@ -205,55 +240,38 @@ do not pertain to conditional age-at-length results. There are currently
 <tbody>
 <tr class="odd">
 <td>ai_subreg</td>
-<td>Provides output for age/length composition computed at the
-sub-region scale within the AI survey region (and will also provide
-output for the combined values at the overall AI region).</td>
-</tr>
-<tr class="even">
-<td>bsre</td>
-<td>Provides output for the AI Blackspotted-Rougheye stock complex
-(where length pop’n computed for each individual species but age pop’n
-computed for the complex as a whole).</td>
-</tr>
-<tr class="odd">
-<td>dr</td>
-<td>Provides output for the GOA dusky rockfish stock.</td>
-</tr>
-<tr class="even">
-<td>rebs</td>
-<td>Provides output for the GOA Rougheye-Blackspotted stock complex
-(where length and age pop’n are computed for each individual species and
-summed post-expansion).</td>
-</tr>
-<tr class="odd">
-<td>w_c_egoa</td>
-<td>Provides output for age/length composition computed for the Western,
-Central, and Eastern GOA survey regions (and will also provide output
-for the combined values at the overall GOA region).</td>
+<td>Provides output for age/length composition (but not caal) computed
+at the sub-region scale within the AI survey region (and will also
+provide output for the combined values at the overall AI region).</td>
 </tr>
 <tr class="even">
 <td>w140</td>
-<td>Provides output for age/length composition computed for the GOA
-survey region west of
+<td>Provides output for age/length composition (but not caal) computed
+for the GOA survey region west of
 140<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi></mi><mo>∘</mo></msup><annotation encoding="application/x-tex">^\circ</annotation></semantics></math>
 longitude (currently only computed for the GOA walleye pollock
 stock).</td>
 </tr>
 <tr class="odd">
+<td>w_c_egoa</td>
+<td>Provides output computed for the Western, Central, and Eastern GOA
+survey regions (and will also provide output for the combined values at
+the overall GOA region).</td>
+</tr>
+<tr class="even">
 <td>wc_egoa</td>
-<td>Provides output for age/length composition computed for the
-Western-Central GOA (combined), and Eastern GOA survey regions (and will
-also provide output for the combined values at the overall GOA
-region).</td>
+<td>Provides output computed for the Western-Central GOA (combined), and
+Eastern GOA survey regions (and will also provide output for the
+combined values at the overall GOA region).</td>
 </tr>
 </tbody>
 </table>
-<p>Note that for the <code>bsre</code>, <code>dr</code>, and
-<code>rebs</code> special cases, the <code>species</code> argument is
-not needed, as a special species code has already been defined (as an
-agglomeration of the individual species codes). Also note for that these
-stock complex special cases are not included in the spatial special
-cases.</p>
+<p>Finally, the length binning special case allows for custom length
+bins other than at 1 cm (which is the default setting). Note that
+providing output for this case is still under construction (in terms of
+providing standard output from this package) and if you want to explore
+alternative length bins please contact us and we’ll set up custom output
+for you.</p>
 <p>The output that will return from the <code><a href="../reference/get_ISS.html">afscISS::get_ISS()</a></code>
 function will include the following columns:</p>
 <table class="table">
@@ -292,7 +310,7 @@ function will include the following columns:</p>
 harmonic mean using the delta method).</td>
 </tr>
 <tr class="odd">
-<td>nss</td>
+<td>nss*</td>
 <td>Nominal sample size (the number of age/length samples
 collected).</td>
 </tr>
@@ -302,6 +320,19 @@ collected).</td>
 </tr>
 </tbody>
 </table>
+<p>*in the eastern bering sea survey region there is a juvenile/adult
+expansion that occurs within the length frequency data prior to the
+design-based expansion (further details can be found in this gapindex <a href="https://github.com/afsc-gap-products/gapindex/issues/68#issuecomment-2675557545" class="external-link">issue</a>),
+thus, the nominal sample size in some cases (e.g., pollock) reported in
+this output will not be the actual numbers of fish lengthed, but will be
+much larger. We note that this will have minimal (if any) impact on the
+resulting input sample size as previous experiments (<a href="https://cdnsciencepub.com/doi/10.1139/cjfas-2023-0164" class="external-link">Hulson et
+al. 2024</a>) have shown that (1) length samples greater than 250 per
+haul have little influence on the resulting length composition input
+sample size (i.e., reducing from 10k expanded length samples to 500
+actual samples withing a haul will have negligible impact), and (2) age
+composition input sample size was stable across a range of lengths
+sampled within a haul.</p>
 </div>
 <div class="section level2">
 <h2 id="afscissget_popn">afscISS::get_popn()<a class="anchor" aria-label="anchor" href="#afscissget_popn"></a>
@@ -556,7 +587,7 @@ that the only <code>sex_cat</code> arguments available for
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
       </footer>
