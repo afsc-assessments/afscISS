@@ -89,46 +89,6 @@ data_goa$specimen %>%
   tidytable::filter(species_code == 21720) -> .specimen
 strata_data <- data_goa$strata
 
-## 2cm bins ----
-bin_width <- 2
-min_size <- 0.5
-max_size <- 104.5  # less than 1% of the fish in each year are 105 cm or larger (max less than 0.6%)
-bin2 <- seq(min_size, max_size, bin_width)
-
-# age/length
-surveyISS::srvy_iss(iters = iters,
-                    lfreq_data = .lfreq,
-                    specimen_data = .specimen,
-                    cpue_data = .cpue,
-                    strata_data = strata_data,
-                    yrs = 1990,
-                    bin = bin2,
-                    boot_hauls = TRUE,
-                    boot_lengths = TRUE,
-                    boot_ages = TRUE,
-                    al_var = TRUE,
-                    al_var_ann = TRUE,
-                    age_err = TRUE,
-                    region = 'goa',
-                    save_interm = TRUE,
-                    save_stats = TRUE,
-                    save = 'prod_bin2')
-
-# caal
-surveyISS::srvy_iss_caal(iters = iters, 
-                         specimen_data = .specimen, 
-                         cpue_data = .cpue, 
-                         yrs = 1990,
-                         bin = bin2,
-                         boot_hauls = TRUE, 
-                         boot_ages = TRUE,
-                         al_var = TRUE, 
-                         al_var_ann = TRUE, 
-                         age_err = TRUE,
-                         region = 'goa', 
-                         save_interm = TRUE,
-                         save_stats = TRUE,
-                         save = 'prod_bin2')
 
 ## 5cm bins ----
 bin_width <- 5
