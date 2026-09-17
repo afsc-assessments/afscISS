@@ -95,7 +95,7 @@ surveyISS::srvy_iss_goa_wc_e(iters = iters,
                              save_stats = TRUE,
                              save = 'prod')
 
-## run w-c-e goa caal ----
+## run wc-e goa caal ----
 surveyISS::srvy_iss_goa_wc_e_caal(iters = iters,
                                   specimen_data = .specimen,
                                   cpue_data = .cpue,

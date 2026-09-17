@@ -163,6 +163,50 @@ surveyISS::srvy_iss(iters = iters,
                     save = 'turb_bin')
 
 
+# goa rex sole ----
+
+# wc-e goa age/length
+surveyISS::srvy_iss_goa_wc_e(iters = iters,
+                             lfreq_data = data$data_goa$lfreq %>% 
+                               tidytable::filter(species_code == 10200),
+                             specimen_data = data$data_goa$specimen %>% 
+                               tidytable::filter(species_code == 10200),
+                             cpue_data = data$data_goa$cpue %>% 
+                               tidytable::filter(species_code == 10200),
+                             strata_data = data$data_goa$strata,
+                             yrs = 1993,
+                             bin = seq(from = 9, to = 65, by = 2), 
+                             boot_hauls = TRUE,
+                             boot_lengths = TRUE,
+                             boot_ages = TRUE,
+                             al_var = TRUE,
+                             al_var_ann = TRUE,
+                             age_err = TRUE,
+                             region = 'goa',
+                             save_interm = TRUE,
+                             save_stats = TRUE,
+                             save = 'rex_bin')
+
+# wc-e goa caal
+surveyISS::srvy_iss_goa_wc_e_caal(iters = iters,
+                                  specimen_data = data$data_goa$specimen %>% 
+                                    tidytable::filter(species_code == 10200),
+                                  cpue_data = data$data_goa$cpue %>% 
+                                    tidytable::filter(species_code == 10200),
+                                  yrs = 1993,
+                                  bin = seq(from = 9, to = 65, by = 2), 
+                                  boot_hauls = TRUE,
+                                  boot_ages = TRUE,
+                                  al_var = TRUE,
+                                  al_var_ann = TRUE,
+                                  age_err = TRUE,
+                                  region = 'goa',
+                                  save_interm = TRUE,
+                                  save_stats = TRUE,
+                                  save = 'rex_bin')
+
+
+
 # stop run time test ----
 if(iters < iters_full){
   end <- tictoc::toc(quiet = TRUE)
