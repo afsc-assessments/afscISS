@@ -11,7 +11,7 @@ library(surveyISS)
 # first, is this a full run?
 full_run = FALSE
 # set number of desired bootstrap iterations for full run
-iters_full = 500
+iters_full = 1000
 # set number of iterations for testing run time
 iters_test = 5
 # set number of iters for this run
@@ -66,6 +66,7 @@ surveyISS::srvy_iss_goa_w_c_e(iters = iters,
 surveyISS::srvy_iss_goa_w_c_e_caal(iters = iters,
                                    specimen_data = .specimen,
                                    cpue_data = .cpue,
+                                   strata_data = strata_data,
                                    yrs = 1990,
                                    boot_hauls = TRUE,
                                    boot_ages = TRUE,
@@ -99,6 +100,7 @@ surveyISS::srvy_iss_goa_wc_e(iters = iters,
 surveyISS::srvy_iss_goa_wc_e_caal(iters = iters,
                                   specimen_data = .specimen,
                                   cpue_data = .cpue,
+                                  strata_data = strata_data,
                                   yrs = 1990,
                                   boot_hauls = TRUE,
                                   boot_ages = TRUE,
