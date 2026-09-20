@@ -1,8 +1,8 @@
 # script to obtain age/length input sample size from production run
 
 # load packages ----
-# devtools::unload('afscISS')
-devtools::install_github("afsc-assessments/afscISS", force = TRUE)
+devtools::unload('afscISS')
+pak::pak("afsc-assessments/afscISS")
 library(afscISS)
 
 # get comp data ----
@@ -12,6 +12,8 @@ afscISS::get_comp(species = 10200,
                   comp = 'age',
                   sex_cat = 12,
                   spec_case = 'wc_egoa')
+
+
 ## length comps ----
 afscISS::get_comp(species = 10200,
                   region = 'goa',
@@ -32,8 +34,7 @@ afscISS::get_comp(species = 10200,
 ## age comps ----
 afscISS::get_ISS(species = 21720,
                  region = 'nebs',
-                 comp = 'age',
-                 sex_cat = 12)
+                 comp = 'age')
 
 
 
@@ -82,12 +83,35 @@ afscISS::get_ISS(species = 10200,
 
 
 # cod bin example
+afscISS::get_ISS(species = 10115,
+                 region = 'ebs',
+                 comp = 'caal',
+                 sex_cat = 12,
+                 spec_case = 'turb_bin')
+
+
+# nebs cod
 afscISS::get_ISS(species = 21720,
                  region = 'nebs',
-                 comp = 'caal',
-                 sex_cat = 0,
-                 spec_case = 'bin')
+                 comp = 'age',
+                 sex_cat = 4,
+                 spec_case = 'pcod_bin') 
 
+
+
+# ebs turbot
+afscISS::get_ISS(species = 10115,
+                 region = 'ebs',
+                 comp = 'age',
+                 sex_cat = 12,
+                 spec_case = 'turb_bin')
+
+# ebs slope turbot
+afscISS::get_ISS(species = 10115,
+                 region = 'ebs_slope',
+                 comp = 'age',
+                 sex_cat = 12,
+                 spec_case = 'turb_bin')
 
 afscISS::get_comp(species = 21720,
                   region = 'nebs',
