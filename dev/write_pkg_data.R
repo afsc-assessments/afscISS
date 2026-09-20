@@ -1,8 +1,8 @@
 # script to build afscISS package data
 
 # load packages ----
-# devtools::unload('afscISS')
-# devtools::install_github("afsc-assessments/afscISS", force = TRUE)
+# pkgload::unload('afscISS')
+# pak::pak("afsc-assessments/afscISS")
 library(afscISS)
 library(tidyverse)
 # compare previous run to current run ----

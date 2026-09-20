@@ -86,7 +86,7 @@ get_surveyISS <- function(region){
       names(base_bin2) <- list.files(here::here('output', region), pattern = "rex_bin_base") %>% 
         stringr::str_replace(., '.csv', "")
       base <- c(base, base_bin, base_bin2)
-      resamp_bin <- purrr::map(list.files(here::here('output', region), pattern = "prod_bin_resampled"), ~ vroom::vroom(here::here('output', region, .)))
+      resamp_bin <- purrr::map(list.files(here::here('output', region), pattern = "pcod_bin_resampled"), ~ vroom::vroom(here::here('output', region, .)))
       resamp_bin2 <- purrr::map(list.files(here::here('output', region), pattern = "rex_bin_resampled"), ~ vroom::vroom(here::here('output', region, .)))
       resamp <- c(resamp, resamp_bin, resamp_bin2)
       comps_bin <- purrr::map(1:length(base_bin), ~ get_comps(base_bin[[.]], resamp_bin[[.]], ., length(base_bin), region))
